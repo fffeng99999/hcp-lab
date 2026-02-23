@@ -1,0 +1,317 @@
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.23)  23 FEB 2026 17:57
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**report.tex
+(./report.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-01-21>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count181
+\c@section=\count182
+\c@subsection=\count183
+\c@subsubsection=\count184
+\c@paragraph=\count185
+\c@subparagraph=\count186
+\c@figure=\count187
+\c@table=\count188
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 107.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def
+File: xetex.def 2021/03/18 v5.0k Graphics/color driver for xetex
+))
+\Gin@req@height=\dimen139
+\Gin@req@width=\dimen140
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
+
+
+Package inputenc Warning: inputenc package ignored with utf8 based engines.
+
+) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
+File: l3backend-xetex.def 2022-01-12 L3 backend support: XeTeX
+
+(|extractbb --version)
+\c__kernel_sys_dvipdfmx_version_int=\count189
+\l__color_backend_stack_int=\count190
+\g__color_backend_stack_int=\count191
+\g__graphics_track_int=\count192
+\l__pdf_internal_box=\box50
+\g__pdf_backend_object_int=\count193
+\g__pdf_backend_annotation_int=\count194
+\g__pdf_backend_link_int=\count195
+) (./report.aux)
+\openout1 = `report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 6.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 6
+.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+
+Missing character: There is no 实 (U+5B9E) in font [lmroman17-regular]:mapping=t
+ex-text;!
+Missing character: There is no 验 (U+9A8C) in font [lmroman17-regular]:mapping=t
+ex-text;!
+Missing character: There is no 报 (U+62A5) in font [lmroman17-regular]:mapping=t
+ex-text;!
+Missing character: There is no 告 (U+544A) in font [lmroman17-regular]:mapping=t
+ex-text;!
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 7.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 7.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 7.
+
+LaTeX Warning: No \author given.
+
+Missing character: There is no 摘 (U+6458) in font [lmroman12-bold]:mapping=tex-
+text;!
+Missing character: There is no 要 (U+8981) in font [lmroman12-bold]:mapping=tex-
+text;!
+Missing character: There is no 实 (U+5B9E) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 验 (U+9A8C) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 点 (U+70B9) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 数 (U+6570) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 平 (U+5E73) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 均 (U+5747) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 完 (U+5B8C) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 成 (U+6210) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 时 (U+65F6) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 间 (U+95F4) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 平 (U+5E73) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 均 (U+5747) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 延 (U+5EF6) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 迟 (U+8FDF) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 平 (U+5E73) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 均 (U+5747) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 延 (U+5EF6) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 迟 (U+8FDF) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 平 (U+5E73) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 均 (U+5747) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 使 (U+4F7F) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 用 (U+7528) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 率 (U+7387) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 平 (U+5E73) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 均 (U+5747) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 网 (U+7F51) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 络 (U+7EDC) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 带 (U+5E26) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 宽 (U+5BBD) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 平 (U+5E73) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 均 (U+5747) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 写 (U+5199) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 延 (U+5EF6) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 迟 (U+8FDF) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 写 (U+5199) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 放 (U+653E) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 大 (U+5927) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 估 (U+4F30) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 计 (U+8BA1) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 明 (U+660E) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 细 (U+7EC6) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 节 (U+8282) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 点 (U+70B9) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 交 (U+4EA4) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 易 (U+6613) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 数 (U+6570) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 完 (U+5B8C) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 成 (U+6210) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 时 (U+65F6) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 间 (U+95F4) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 平 (U+5E73) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 均 (U+5747) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 延 (U+5EF6) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 迟 (U+8FDF) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 节 (U+8282) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 点 (U+70B9) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 交 (U+4EA4) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 易 (U+6613) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 数 (U+6570) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 完 (U+5B8C) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 成 (U+6210) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 时 (U+65F6) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 间 (U+95F4) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 平 (U+5E73) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 均 (U+5747) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 延 (U+5EF6) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 迟 (U+8FDF) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 节 (U+8282) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 点 (U+70B9) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 交 (U+4EA4) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 易 (U+6613) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 数 (U+6570) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 完 (U+5B8C) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 成 (U+6210) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 时 (U+65F6) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 间 (U+95F4) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 平 (U+5E73) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 均 (U+5747) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 延 (U+5EF6) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no 迟 (U+8FDF) in font [lmroman10-regular]:mapping=t
+ex-text;!
+
+Overfull \hbox (23.92004pt too wide) in paragraph at lines 9--21
+\TU/lmr/m/n/10 实验点数: 3 平均完成时间(s): 2.503961 平均延迟(ms): 4.741995 平均P99延迟(ms): 38.7
+72333 平均CPU使用率(平均网络带宽(Mbps):
+ []
+
+
+Overfull \hbox (11.86505pt too wide) in paragraph at lines 9--21
+\TU/lmr/m/n/10 0.887321 平均RocksDB写延迟(ms): 80.787302 写放大估计: 1137665.00 明细: 节点:4 
+交易数:100 完成时间(s):2.407645
+ []
+
+
+Overfull \hbox (15.6pt too wide) in paragraph at lines 9--21
+\TU/lmr/m/n/10 平均延迟(ms):2.146561 P99(ms):8.959000 CPU(节点:8 交易数:100 完成时间(s):2.40
+1339 平均延迟(ms):7.809439
+ []
+
+
+Overfull \hbox (36.21pt too wide) in paragraph at lines 9--21
+\TU/lmr/m/n/10 P99(ms):76.799000 CPU(节点:16 交易数:100 完成时间(s):2.702900 平均延迟(ms):4.
+269985 P99(ms):30.559000
+ []
+
+Missing character: There is no 图 (U+56FE) in font [lmroman12-bold]:mapping=tex-
+text;!
+Missing character: There is no 表 (U+8868) in font [lmroman12-bold]:mapping=tex-
+text;!
+[1
+
+] (./report.aux) ) 
+Here is how much of TeX's memory you used:
+ 971 strings out of 478179
+ 17528 string characters out of 5854280
+ 308470 words of memory out of 5000000
+ 21619 multiletter control sequences out of 15000+600000
+ 472035 words of font info for 42 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 55i,6n,62p,210b,197s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on report.pdf (1 page).

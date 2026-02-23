@@ -1,4 +1,5 @@
 import argparse
+import os
 from pathlib import Path
 from typing import List
 
@@ -7,7 +8,7 @@ from controller.param_matrix import build_matrix, load_matrix
 from analysis.latency import percentiles
 from analysis.tps import compute_tps
 from analysis.storage_model import write_amplification
-from report.exporter import export_pdf
+from report.exporter import export_markdown, export_pdf
 
 
 def parse_list(value: str) -> List[int]:
@@ -23,10 +24,17 @@ def main() -> None:
     parser.add_argument("--loadgen-args", type=str, default="")
     args = parser.parse_args()
 
-    project_root = Path("/home/hcp-dev/hcp-project")
-    output_dir = project_root / "hcp-lab" / args.out
+    project_root = Path(__file__).resolve().parents[1]
+    lab_root = project_root / "hcp-lab"
+    out_path = Path(args.out)
+    output_dir = out_path if out_path.is_absolute() else lab_root / out_path
     output_dir.mkdir(parents=True, exist_ok=True)
-    artifact_root = output_dir / "artifacts"
+    artifact_override = os.environ.get("EXP_ARTIFACT_ROOT")
+    if artifact_override:
+        artifact_path = Path(artifact_override)
+        artifact_root = artifact_path if artifact_path.is_absolute() else project_root / artifact_path
+    else:
+        artifact_root = output_dir / "artifacts"
     data_root = artifact_root / "data"
     log_root = artifact_root / "logs"
     data_root.mkdir(parents=True, exist_ok=True)
@@ -100,11 +108,16 @@ def main() -> None:
         )
     summary = "\n".join(summary_lines)
     export_pdf(
-        template_path=project_root / "hcp-lab" / "report" / "template.tex",
+        template_path=lab_root / "report" / "template.tex",
         output_dir=output_dir,
         title="HCP 实验报告",
         summary=summary,
         figures=[],
+    )
+    export_markdown(
+        output_dir=output_dir,
+        title="HCP 实验报告",
+        summary=summary,
     )
 
 

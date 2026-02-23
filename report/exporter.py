@@ -1,3 +1,4 @@
+import shutil
 import subprocess
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -13,6 +14,18 @@ def render_tex(template: str, title: str, summary: str, figures: List[str]) -> s
     return content
 
 
+def export_markdown(
+    output_dir: Path,
+    title: str,
+    summary: str,
+) -> Dict[str, Optional[str]]:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    md_path = output_dir / "report.md"
+    md_content = f"# {title}\n\n## 摘要\n{summary}\n"
+    md_path.write_text(md_content, encoding="utf-8")
+    return {"md": str(md_path)}
+
+
 def export_pdf(
     template_path: Path,
     output_dir: Path,
@@ -26,9 +39,10 @@ def export_pdf(
     tex_path = output_dir / "report.tex"
     tex_path.write_text(tex_content, encoding="utf-8")
     pdf_path = output_dir / "report.pdf"
+    engine = "xelatex" if shutil.which("xelatex") else "pdflatex"
     try:
         subprocess.run(
-            ["pdflatex", "-interaction=nonstopmode", tex_path.name],
+            [engine, "-interaction=nonstopmode", tex_path.name],
             cwd=str(output_dir),
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
