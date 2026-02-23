@@ -5,5 +5,5 @@
 <line x1="60" y1="60" x2="60" y2="420" stroke="#333"/>
 <text x="400.0" y="465" font-size="12" text-anchor="middle">负载</text>
 <text x="20" y="240.0" font-size="12" text-anchor="middle" transform="rotate(-90 20 240.0)">TPS</text>
-<polyline fill="none" stroke="#2f78ff" stroke-width="2" points="60.00,410.97 60.00,60.00 60.00,420.00 157.14,415.68 157.14,397.18 157.14,420.00 351.43,419.59 351.43,414.15 351.43,420.00 740.00,418.98 740.00,412.11 740.00,420.00"/>
+<polyline fill="none" stroke="#2f78ff" stroke-width="2" points="60.00,420.00"/>
 </svg>

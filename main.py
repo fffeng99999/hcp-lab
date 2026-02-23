@@ -56,7 +56,9 @@ def main() -> None:
     for point in result.points:
         tx_count = int(point.params.get("tx", 0))
         duration_s = point.metrics.get("duration_s", 0.0)
-        point.metrics["tps"] = compute_tps(tx_count, duration_s)
+        tps = point.metrics.get("tps", 0.0)
+        if tps <= 0.0 and tx_count > 0 and duration_s > 0.0:
+            point.metrics["tps"] = compute_tps(tx_count, duration_s)
 
     result_path = output_dir / "result.json"
     runner.save_result(result_path, result)
