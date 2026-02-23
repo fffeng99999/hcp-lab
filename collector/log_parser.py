@@ -13,6 +13,10 @@ CONFIRM_PATTERNS = [
     re.compile(r"tx\s+confirm[:=]\s*([\d.]+)\s*ms", re.IGNORECASE),
 ]
 
+ROCKSDB_PATTERNS = [
+    re.compile(r"rocksdb_write.*duration_ms[=:]\s*([\d.]+)", re.IGNORECASE),
+]
+
 
 def parse_block_times(log_dir: Path) -> List[float]:
     return _parse_patterns(log_dir, BLOCK_PATTERNS)
@@ -20,6 +24,10 @@ def parse_block_times(log_dir: Path) -> List[float]:
 
 def parse_confirm_times(log_dir: Path) -> List[float]:
     return _parse_patterns(log_dir, CONFIRM_PATTERNS)
+
+
+def parse_rocksdb_times(log_dir: Path) -> List[float]:
+    return _parse_patterns(log_dir, ROCKSDB_PATTERNS)
 
 
 def _parse_patterns(log_dir: Path, patterns: List[re.Pattern]) -> List[float]:

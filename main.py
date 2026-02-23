@@ -84,8 +84,16 @@ def main() -> None:
     )
     plot_security([(float(x), y) for x, y in security_points], output_dir / "security.svg")
 
+    rocksdb_all = [
+        p.metrics.get("rocksdb_write_avg_ms", 0.0)
+        for p in result.points
+        if "rocksdb_write_avg_ms" in p.metrics
+    ]
+    avg_rocksdb = sum(rocksdb_all) / len(rocksdb_all) if rocksdb_all else 0.0
+
     summary_lines = [
         f"实验点数: {len(result.points)}",
+        f"平均 RocksDB 写延迟: {avg_rocksdb:.2f} ms",
         f"写放大估计: {write_amplification(4096, 4 * 1024 * 1024):.2f}",
     ]
     summary = "\n".join(summary_lines)

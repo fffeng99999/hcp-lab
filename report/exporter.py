@@ -4,8 +4,13 @@ from typing import Dict, List, Optional
 
 
 def render_tex(template: str, title: str, summary: str, figures: List[str]) -> str:
-    figure_block = "\n".join([f"\\includegraphics[width=0.9\\linewidth]{{{f}}}" for f in figures])
-    return template.format(title=title, summary=summary, figures=figure_block)
+    figure_block = "\n".join(
+        [f"\\includegraphics[width=0.9\\linewidth]{{{f}}}" for f in figures]
+    )
+    content = template.replace("{title}", title)
+    content = content.replace("{summary}", summary)
+    content = content.replace("{figures}", figure_block)
+    return content
 
 
 def export_pdf(

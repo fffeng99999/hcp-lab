@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional
 
 from controller.node_manager import NodeManager
-from collector.log_parser import parse_block_times, parse_confirm_times
+from collector.log_parser import parse_block_times, parse_confirm_times, parse_rocksdb_times
 from collector.system_monitor import SystemMonitor
 from analysis.latency import percentiles
 
@@ -55,15 +55,25 @@ class ExperimentRunner:
             monitor = SystemMonitor()
             monitor.start()
 
-            duration_s = self.trigger_loadgen(loadgen_args)
+            expanded_args: List[str] = []
+            for arg in loadgen_args:
+                value = arg
+                for key, val in params.items():
+                    value = value.replace(f"{{{key}}}", str(val))
+                expanded_args.append(value)
 
-            cpu_percent, mem_bytes = monitor.stop()
+            duration_s = self.trigger_loadgen(expanded_args)
+
+            cpu_percent, mem_bytes, net_mbps = monitor.stop()
 
             block_times = parse_block_times(log_dir)
             confirm_times = parse_confirm_times(log_dir)
+            rocksdb_times = parse_rocksdb_times(log_dir)
             avg_block = sum(block_times) / len(block_times) if block_times else 0.0
             avg_confirm = sum(confirm_times) / len(confirm_times) if confirm_times else 0.0
-            latency_stats = percentiles(confirm_times, [50, 95, 99])
+            latency_stats = percentiles(confirm_times, [50, 95, 99]) if confirm_times else {}
+            rocksdb_stats = percentiles(rocksdb_times, [50, 95, 99]) if rocksdb_times else {}
+            avg_rocksdb = sum(rocksdb_times) / len(rocksdb_times) if rocksdb_times else 0.0
 
             metrics = {
                 "duration_s": duration_s,
@@ -72,8 +82,13 @@ class ExperimentRunner:
                 "p50_ms": latency_stats.get(50, 0.0),
                 "p95_ms": latency_stats.get(95, 0.0),
                 "p99_ms": latency_stats.get(99, 0.0),
+                "rocksdb_write_avg_ms": avg_rocksdb,
+                "rocksdb_write_p50_ms": rocksdb_stats.get(50, 0.0),
+                "rocksdb_write_p95_ms": rocksdb_stats.get(95, 0.0),
+                "rocksdb_write_p99_ms": rocksdb_stats.get(99, 0.0),
                 "cpu_percent": cpu_percent,
                 "mem_bytes": mem_bytes,
+                "net_mbps": net_mbps,
             }
             points.append(ExperimentPoint(params=params, metrics=metrics))
 

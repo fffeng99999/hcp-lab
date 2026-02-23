@@ -10,6 +10,8 @@ class SystemMonitor:
         self._cpu_samples = []
         self._mem_samples = []
         self._thread: threading.Thread | None = None
+        self._net_start = 0.0
+        self._loop_start = 0.0
 
     def start(self) -> None:
         self._running = True
@@ -17,16 +19,24 @@ class SystemMonitor:
         self._mem_samples = []
         self._last_cpu = read_cpu_times()
         self._loop_start = time.time()
+        self._net_start = read_net_bytes()
         self._thread = threading.Thread(target=self._run, daemon=True)
         self._thread.start()
 
-    def stop(self) -> Tuple[float, float]:
+    def stop(self) -> Tuple[float, float, float]:
         self._running = False
         if self._thread:
             self._thread.join(timeout=self.interval * 2)
         cpu = self._cpu_samples[-1] if self._cpu_samples else 0.0
         mem = self._mem_samples[-1] if self._mem_samples else 0.0
-        return cpu, mem
+        elapsed = max(time.time() - self._loop_start, self.interval) if self._loop_start else self.interval
+        try:
+            net_now = read_net_bytes()
+            net_bytes = max(net_now - self._net_start, 0.0)
+        except Exception:
+            net_bytes = 0.0
+        net_mbps = net_bytes * 8.0 / (elapsed * 1024.0 * 1024.0) if elapsed > 0 else 0.0
+        return cpu, mem, net_mbps
 
     def sample(self) -> None:
         if not self._running:
@@ -74,3 +84,22 @@ def read_mem_bytes() -> float:
         elif line.startswith("MemAvailable:"):
             mem_available = float(line.split()[1]) * 1024.0
     return max(mem_total - mem_available, 0.0)
+
+
+def read_net_bytes() -> float:
+    total = 0.0
+    with open("/proc/net/dev", "r", encoding="utf-8") as f:
+        lines = f.read().splitlines()[2:]
+    for line in lines:
+        if ":" not in line:
+            continue
+        iface, data = line.split(":", 1)
+        iface = iface.strip()
+        if iface == "lo":
+            continue
+        parts = data.split()
+        if len(parts) >= 16:
+            rx = float(parts[0])
+            tx = float(parts[8])
+            total += rx + tx
+    return total
