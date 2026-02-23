@@ -8,20 +8,20 @@
         "tx": 100
       },
       "metrics": {
-        "duration_s": 0.001067512,
-        "avg_block_time_ms": 0.0,
-        "avg_confirm_time_ms": 0.0,
-        "p50_ms": 0.0,
-        "p95_ms": 0.0,
-        "p99_ms": 0.0,
-        "rocksdb_write_avg_ms": 0.0,
-        "rocksdb_write_p50_ms": 0.0,
-        "rocksdb_write_p95_ms": 0.0,
-        "rocksdb_write_p99_ms": 0.0,
-        "cpu_percent": 0.0,
-        "mem_bytes": 0.0,
-        "net_mbps": 0.09532197895641951,
-        "tps": 93675.76195864777
+        "duration_s": "0.0012559730000000",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "cpu_percent": "0.0000000000000000",
+        "mem_bytes": "0.0000000000000000",
+        "net_mbps": "0.6904194128619437",
+        "tps": "79619.5459615771978861"
       }
     },
     {
@@ -30,20 +30,20 @@
         "tx": 500
       },
       "metrics": {
-        "duration_s": 0.000135182,
-        "avg_block_time_ms": 0.0,
-        "avg_confirm_time_ms": 0.0,
-        "p50_ms": 0.0,
-        "p95_ms": 0.0,
-        "p99_ms": 0.0,
-        "rocksdb_write_avg_ms": 0.0,
-        "rocksdb_write_p50_ms": 0.0,
-        "rocksdb_write_p95_ms": 0.0,
-        "rocksdb_write_p99_ms": 0.0,
-        "cpu_percent": 0.0,
-        "mem_bytes": 0.0,
-        "net_mbps": 0.6762862578673516,
-        "tps": 3698717.2848456157
+        "duration_s": "0.0012088340000000",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "cpu_percent": "0.0000000000000000",
+        "mem_bytes": "0.0000000000000000",
+        "net_mbps": "0.6297840015192859",
+        "tps": "413621.7214274251018651"
       }
     },
     {
@@ -52,20 +52,20 @@
         "tx": 1000
       },
       "metrics": {
-        "duration_s": 1.001108029,
-        "avg_block_time_ms": 0.0,
-        "avg_confirm_time_ms": 0.0,
-        "p50_ms": 0.0,
-        "p95_ms": 0.0,
-        "p99_ms": 0.0,
-        "rocksdb_write_avg_ms": 0.0,
-        "rocksdb_write_p50_ms": 0.0,
-        "rocksdb_write_p95_ms": 0.0,
-        "rocksdb_write_p99_ms": 0.0,
-        "cpu_percent": 3.79,
-        "mem_bytes": 7315582976.0,
-        "net_mbps": 0.5348811762653765,
-        "tps": 998.893197369412
+        "duration_s": "1.0011650379999999",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "cpu_percent": "3.9100000000000001",
+        "mem_bytes": "7339204608.0000000000000000",
+        "net_mbps": "0.4633059170613838",
+        "tps": "998.8363177340598895"
       }
     },
     {
@@ -74,20 +74,20 @@
         "tx": 100
       },
       "metrics": {
-        "duration_s": 0.002205739,
-        "avg_block_time_ms": 0.0,
-        "avg_confirm_time_ms": 0.0,
-        "p50_ms": 0.0,
-        "p95_ms": 0.0,
-        "p99_ms": 0.0,
-        "rocksdb_write_avg_ms": 0.0,
-        "rocksdb_write_p50_ms": 0.0,
-        "rocksdb_write_p95_ms": 0.0,
-        "rocksdb_write_p99_ms": 0.0,
-        "cpu_percent": 0.0,
-        "mem_bytes": 0.0,
-        "net_mbps": 0.5998529455127931,
-        "tps": 45336.279587022764
+        "duration_s": "0.0007817280000000",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "cpu_percent": "0.0000000000000000",
+        "mem_bytes": "0.0000000000000000",
+        "net_mbps": "0.5916810201265642",
+        "tps": "127921.7323672684142366"
       }
     },
     {
@@ -96,20 +96,20 @@
         "tx": 500
       },
       "metrics": {
-        "duration_s": 0.002124023,
-        "avg_block_time_ms": 0.0,
-        "avg_confirm_time_ms": 0.0,
-        "p50_ms": 0.0,
-        "p95_ms": 0.0,
-        "p99_ms": 0.0,
-        "rocksdb_write_avg_ms": 0.0,
-        "rocksdb_write_p50_ms": 0.0,
-        "rocksdb_write_p95_ms": 0.0,
-        "rocksdb_write_p99_ms": 0.0,
-        "cpu_percent": 0.0,
-        "mem_bytes": 0.0,
-        "net_mbps": 0.6297575090028136,
-        "tps": 235402.3473380467
+        "duration_s": "0.0009928920000000",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "cpu_percent": "0.0000000000000000",
+        "mem_bytes": "0.0000000000000000",
+        "net_mbps": "0.0528427288178591",
+        "tps": "503579.4426785592222586"
       }
     },
     {
@@ -118,20 +118,20 @@
         "tx": 1000
       },
       "metrics": {
-        "duration_s": 1.001039753,
-        "avg_block_time_ms": 0.0,
-        "avg_confirm_time_ms": 0.0,
-        "p50_ms": 0.0,
-        "p95_ms": 0.0,
-        "p99_ms": 0.0,
-        "rocksdb_write_avg_ms": 0.0,
-        "rocksdb_write_p50_ms": 0.0,
-        "rocksdb_write_p95_ms": 0.0,
-        "rocksdb_write_p99_ms": 0.0,
-        "cpu_percent": 3.8,
-        "mem_bytes": 7377039360.0,
-        "net_mbps": 0.37245722951146754,
-        "tps": 998.9613269634059
+        "duration_s": "1.0004818550000001",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "cpu_percent": "3.9199999999999999",
+        "mem_bytes": "7388258304.0000000000000000",
+        "net_mbps": "0.4047427878593927",
+        "tps": "999.5183770724156602"
       }
     },
     {
@@ -140,20 +140,20 @@
         "tx": 100
       },
       "metrics": {
-        "duration_s": 0.019430333,
-        "avg_block_time_ms": 0.0,
-        "avg_confirm_time_ms": 0.0,
-        "p50_ms": 0.0,
-        "p95_ms": 0.0,
-        "p99_ms": 0.0,
-        "rocksdb_write_avg_ms": 0.0,
-        "rocksdb_write_p50_ms": 0.0,
-        "rocksdb_write_p95_ms": 0.0,
-        "rocksdb_write_p99_ms": 0.0,
-        "cpu_percent": 0.0,
-        "mem_bytes": 0.0,
-        "net_mbps": 0.7259698507555967,
-        "tps": 5146.592186556967
+        "duration_s": "0.0081273820000000",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "cpu_percent": "0.0000000000000000",
+        "mem_bytes": "0.0000000000000000",
+        "net_mbps": "0.7199050645252948",
+        "tps": "12304.0851285198586993"
       }
     },
     {
@@ -162,20 +162,20 @@
         "tx": 500
       },
       "metrics": {
-        "duration_s": 0.008189708,
-        "avg_block_time_ms": 0.0,
-        "avg_confirm_time_ms": 0.0,
-        "p50_ms": 0.0,
-        "p95_ms": 0.0,
-        "p99_ms": 0.0,
-        "rocksdb_write_avg_ms": 0.0,
-        "rocksdb_write_p50_ms": 0.0,
-        "rocksdb_write_p95_ms": 0.0,
-        "rocksdb_write_p99_ms": 0.0,
-        "cpu_percent": 0.0,
-        "mem_bytes": 0.0,
-        "net_mbps": 0.739902030784043,
-        "tps": 61052.237759881056
+        "duration_s": "0.0021483170000000",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "cpu_percent": "0.0000000000000000",
+        "mem_bytes": "0.0000000000000000",
+        "net_mbps": "1.0770842339242002",
+        "tps": "232740.3264974396442994"
       }
     },
     {
@@ -184,20 +184,20 @@
         "tx": 1000
       },
       "metrics": {
-        "duration_s": 1.009015211,
-        "avg_block_time_ms": 0.0,
-        "avg_confirm_time_ms": 0.0,
-        "p50_ms": 0.0,
-        "p95_ms": 0.0,
-        "p99_ms": 0.0,
-        "rocksdb_write_avg_ms": 0.0,
-        "rocksdb_write_p50_ms": 0.0,
-        "rocksdb_write_p95_ms": 0.0,
-        "rocksdb_write_p99_ms": 0.0,
-        "cpu_percent": 3.82,
-        "mem_bytes": 7570853888.0,
-        "net_mbps": 0.4572604339868346,
-        "tps": 991.0653368733012
+        "duration_s": "1.0012024680000000",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "cpu_percent": "3.9399999999999999",
+        "mem_bytes": "7576330240.0000000000000000",
+        "net_mbps": "0.4572849479998176",
+        "tps": "998.7989761926954770"
       }
     },
     {
@@ -206,20 +206,20 @@
         "tx": 100
       },
       "metrics": {
-        "duration_s": 0.00874833,
-        "avg_block_time_ms": 0.0,
-        "avg_confirm_time_ms": 0.0,
-        "p50_ms": 0.0,
-        "p95_ms": 0.0,
-        "p99_ms": 0.0,
-        "rocksdb_write_avg_ms": 0.0,
-        "rocksdb_write_p50_ms": 0.0,
-        "rocksdb_write_p95_ms": 0.0,
-        "rocksdb_write_p99_ms": 0.0,
-        "cpu_percent": 0.0,
-        "mem_bytes": 0.0,
-        "net_mbps": 0.6145162060408303,
-        "tps": 11430.753069442968
+        "duration_s": "0.0009565790000000",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "cpu_percent": "0.0000000000000000",
+        "mem_bytes": "0.0000000000000000",
+        "net_mbps": "0.6560509114633833",
+        "tps": "104539.1964490125683369"
       }
     },
     {
@@ -228,20 +228,20 @@
         "tx": 500
       },
       "metrics": {
-        "duration_s": 0.006096842,
-        "avg_block_time_ms": 0.0,
-        "avg_confirm_time_ms": 0.0,
-        "p50_ms": 0.0,
-        "p95_ms": 0.0,
-        "p99_ms": 0.0,
-        "rocksdb_write_avg_ms": 0.0,
-        "rocksdb_write_p50_ms": 0.0,
-        "rocksdb_write_p95_ms": 0.0,
-        "rocksdb_write_p99_ms": 0.0,
-        "cpu_percent": 0.0,
-        "mem_bytes": 0.0,
-        "net_mbps": 0.6843681036785066,
-        "tps": 82009.6699242001
+        "duration_s": "0.0196079720000000",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "cpu_percent": "0.0000000000000000",
+        "mem_bytes": "0.0000000000000000",
+        "net_mbps": "0.6556980516977021",
+        "tps": "25499.8324151013657684"
       }
     },
     {
@@ -250,20 +250,20 @@
         "tx": 1000
       },
       "metrics": {
-        "duration_s": 1.026345073,
-        "avg_block_time_ms": 0.0,
-        "avg_confirm_time_ms": 0.0,
-        "p50_ms": 0.0,
-        "p95_ms": 0.0,
-        "p99_ms": 0.0,
-        "rocksdb_write_avg_ms": 0.0,
-        "rocksdb_write_p50_ms": 0.0,
-        "rocksdb_write_p95_ms": 0.0,
-        "rocksdb_write_p99_ms": 0.0,
-        "cpu_percent": 53.86,
-        "mem_bytes": 8045961216.0,
-        "net_mbps": 0.373692854038075,
-        "tps": 974.3311740923609
+        "duration_s": "1.0145245519999999",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "cpu_percent": "3.9700000000000002",
+        "mem_bytes": "8054784000.0000000000000000",
+        "net_mbps": "0.9550620907537125",
+        "tps": "985.6833903414493534"
       }
     }
   ],
