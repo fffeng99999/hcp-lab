@@ -5,5 +5,5 @@
 <line x1="60" y1="60" x2="60" y2="420" stroke="#333"/>
 <text x="400.0" y="465" font-size="12" text-anchor="middle">节点数</text>
 <text x="20" y="240.0" font-size="12" text-anchor="middle" transform="rotate(-90 20 240.0)">加速比</text>
-<polyline fill="none" stroke="#00b894" stroke-width="2" points="60.00,420.00"/>
+<polyline fill="none" stroke="#00b894" stroke-width="2" points="60.00,419.87 60.00,418.04 60.00,60.00 157.14,385.58 157.14,418.05 157.14,417.87 351.43,419.74 351.43,417.98 351.43,417.95 740.00,420.00 740.00,418.57 740.00,418.44"/>
 </svg>

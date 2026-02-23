@@ -1,0 +1,271 @@
+{
+  "name": "HCP 实验",
+  "description": "自动化实验矩阵",
+  "points": [
+    {
+      "params": {
+        "nodes": 4,
+        "tx": 100
+      },
+      "metrics": {
+        "duration_s": 0.15386223793029785,
+        "avg_block_time_ms": 0.0,
+        "avg_confirm_time_ms": 0.0,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "rocksdb_write_avg_ms": 0.0,
+        "rocksdb_write_p50_ms": 0.0,
+        "rocksdb_write_p95_ms": 0.0,
+        "rocksdb_write_p99_ms": 0.0,
+        "cpu_percent": 0.0,
+        "mem_bytes": 7335579648.0,
+        "net_mbps": 1.0110704179448537,
+        "tps": 649.9320518482363
+      }
+    },
+    {
+      "params": {
+        "nodes": 4,
+        "tx": 500
+      },
+      "metrics": {
+        "duration_s": 0.5247318744659424,
+        "avg_block_time_ms": 0.0,
+        "avg_confirm_time_ms": 0.0,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "rocksdb_write_avg_ms": 0.0,
+        "rocksdb_write_p50_ms": 0.0,
+        "rocksdb_write_p95_ms": 0.0,
+        "rocksdb_write_p99_ms": 0.0,
+        "cpu_percent": 0.0,
+        "mem_bytes": 7332237312.0,
+        "net_mbps": 0.5722980535111998,
+        "tps": 952.8675964441577
+      }
+    },
+    {
+      "params": {
+        "nodes": 4,
+        "tx": 1000
+      },
+      "metrics": {
+        "duration_s": 0.016607046127319336,
+        "avg_block_time_ms": 0.0,
+        "avg_confirm_time_ms": 0.0,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "rocksdb_write_avg_ms": 0.0,
+        "rocksdb_write_p50_ms": 0.0,
+        "rocksdb_write_p95_ms": 0.0,
+        "rocksdb_write_p99_ms": 0.0,
+        "cpu_percent": 100.0,
+        "mem_bytes": 7321665536.0,
+        "net_mbps": 0.08695407916230047,
+        "tps": 60215.40449357548
+      }
+    },
+    {
+      "params": {
+        "nodes": 8,
+        "tx": 100
+      },
+      "metrics": {
+        "duration_s": 0.015806198120117188,
+        "avg_block_time_ms": 0.0,
+        "avg_confirm_time_ms": 0.0,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "rocksdb_write_avg_ms": 0.0,
+        "rocksdb_write_p50_ms": 0.0,
+        "rocksdb_write_p95_ms": 0.0,
+        "rocksdb_write_p99_ms": 0.0,
+        "cpu_percent": 0.0,
+        "mem_bytes": 7403585536.0,
+        "net_mbps": 0.1099461234501067,
+        "tps": 6326.6320743332935
+      }
+    },
+    {
+      "params": {
+        "nodes": 8,
+        "tx": 500
+      },
+      "metrics": {
+        "duration_s": 0.5258610248565674,
+        "avg_block_time_ms": 0.0,
+        "avg_confirm_time_ms": 0.0,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "rocksdb_write_avg_ms": 0.0,
+        "rocksdb_write_p50_ms": 0.0,
+        "rocksdb_write_p95_ms": 0.0,
+        "rocksdb_write_p99_ms": 0.0,
+        "cpu_percent": 0.0,
+        "mem_bytes": 7391014912.0,
+        "net_mbps": 0.5959135347231959,
+        "tps": 950.8215600050961
+      }
+    },
+    {
+      "params": {
+        "nodes": 8,
+        "tx": 1000
+      },
+      "metrics": {
+        "duration_s": 1.0184009075164795,
+        "avg_block_time_ms": 0.0,
+        "avg_confirm_time_ms": 0.0,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "rocksdb_write_avg_ms": 0.0,
+        "rocksdb_write_p50_ms": 0.0,
+        "rocksdb_write_p95_ms": 0.0,
+        "rocksdb_write_p99_ms": 0.0,
+        "cpu_percent": 36.17291799109981,
+        "mem_bytes": 7403786240.0,
+        "net_mbps": 0.38990731320128014,
+        "tps": 981.9315680291833
+      }
+    },
+    {
+      "params": {
+        "nodes": 16,
+        "tx": 100
+      },
+      "metrics": {
+        "duration_s": 0.14893293380737305,
+        "avg_block_time_ms": 0.0,
+        "avg_confirm_time_ms": 0.0,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "rocksdb_write_avg_ms": 0.0,
+        "rocksdb_write_p50_ms": 0.0,
+        "rocksdb_write_p95_ms": 0.0,
+        "rocksdb_write_p99_ms": 0.0,
+        "cpu_percent": 100.0,
+        "mem_bytes": 7600111616.0,
+        "net_mbps": 0.9663113254131931,
+        "tps": 671.4431619895305
+      }
+    },
+    {
+      "params": {
+        "nodes": 16,
+        "tx": 500
+      },
+      "metrics": {
+        "duration_s": 0.5192153453826904,
+        "avg_block_time_ms": 0.0,
+        "avg_confirm_time_ms": 0.0,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "rocksdb_write_avg_ms": 0.0,
+        "rocksdb_write_p50_ms": 0.0,
+        "rocksdb_write_p95_ms": 0.0,
+        "rocksdb_write_p99_ms": 0.0,
+        "cpu_percent": 33.333333333333336,
+        "mem_bytes": 7529021440.0,
+        "net_mbps": 0.6862936096471979,
+        "tps": 962.9915688094163
+      }
+    },
+    {
+      "params": {
+        "nodes": 16,
+        "tx": 1000
+      },
+      "metrics": {
+        "duration_s": 1.0327532291412354,
+        "avg_block_time_ms": 0.0,
+        "avg_confirm_time_ms": 0.0,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "rocksdb_write_avg_ms": 0.0,
+        "rocksdb_write_p50_ms": 0.0,
+        "rocksdb_write_p95_ms": 0.0,
+        "rocksdb_write_p99_ms": 0.0,
+        "cpu_percent": 75.72692793931732,
+        "mem_bytes": 7528931328.0,
+        "net_mbps": 0.44560228861856394,
+        "tps": 968.2855224103529
+      }
+    },
+    {
+      "params": {
+        "nodes": 32,
+        "tx": 100
+      },
+      "metrics": {
+        "duration_s": 0.15902423858642578,
+        "avg_block_time_ms": 0.0,
+        "avg_confirm_time_ms": 0.0,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "rocksdb_write_avg_ms": 0.0,
+        "rocksdb_write_p50_ms": 0.0,
+        "rocksdb_write_p95_ms": 0.0,
+        "rocksdb_write_p99_ms": 0.0,
+        "cpu_percent": 100.0,
+        "mem_bytes": 7925334016.0,
+        "net_mbps": 0.6156953104075151,
+        "tps": 628.8349555319672
+      }
+    },
+    {
+      "params": {
+        "nodes": 32,
+        "tx": 500
+      },
+      "metrics": {
+        "duration_s": 0.5775032043457031,
+        "avg_block_time_ms": 0.0,
+        "avg_confirm_time_ms": 0.0,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "rocksdb_write_avg_ms": 0.0,
+        "rocksdb_write_p50_ms": 0.0,
+        "rocksdb_write_p95_ms": 0.0,
+        "rocksdb_write_p99_ms": 0.0,
+        "cpu_percent": 100.0,
+        "mem_bytes": 7883669504.0,
+        "net_mbps": 0.6400060791977683,
+        "tps": 865.7960618010555
+      }
+    },
+    {
+      "params": {
+        "nodes": 32,
+        "tx": 1000
+      },
+      "metrics": {
+        "duration_s": 1.127082347869873,
+        "avg_block_time_ms": 0.0,
+        "avg_confirm_time_ms": 0.0,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "rocksdb_write_avg_ms": 0.0,
+        "rocksdb_write_p50_ms": 0.0,
+        "rocksdb_write_p95_ms": 0.0,
+        "rocksdb_write_p99_ms": 0.0,
+        "cpu_percent": 100.0,
+        "mem_bytes": 8048132096.0,
+        "net_mbps": 0.5656024550637341,
+        "tps": 887.2466167977415
+      }
+    }
+  ],
+  "metadata": {}
+}
