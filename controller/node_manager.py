@@ -1,3 +1,4 @@
+import json
 import os
 import signal
 import subprocess
@@ -34,7 +35,8 @@ class NodeManager:
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
         )
-        if not wait_for_rpc(26657, timeout=timeout):
+        port_offset = int(env.get("PORT_OFFSET", "0"))
+        if not wait_for_rpc(26657 + port_offset, timeout=timeout):
             self.stop_nodes()
             raise RuntimeError("节点启动超时")
         return self.process
@@ -46,8 +48,10 @@ class NodeManager:
                 self.process.wait(timeout=10)
             except subprocess.TimeoutExpired:
                 self.process.kill()
+        binary = os.environ.get("HCPD_BINARY")
+        pattern = f"{binary} start" if binary else "hcpd start"
         subprocess.run(
-            ["pkill", "-f", "hcpd"],
+            ["pkill", "-f", pattern],
             cwd=str(self.hcp_dir),
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
@@ -60,7 +64,24 @@ def wait_for_rpc(port: int, timeout: int = 60) -> bool:
     while time.time() - start < timeout:
         try:
             with urllib.request.urlopen(url, timeout=2) as resp:
-                if resp.status == 200:
+                if resp.status != 200:
+                    continue
+                payload = resp.read()
+                try:
+                    data = json.loads(payload)
+                except json.JSONDecodeError:
+                    time.sleep(1)
+                    continue
+                height_raw = (
+                    data.get("result", {})
+                    .get("sync_info", {})
+                    .get("latest_block_height", "0")
+                )
+                try:
+                    height = int(height_raw)
+                except (TypeError, ValueError):
+                    height = 0
+                if height > 0:
                     return True
         except Exception:
             time.sleep(1)

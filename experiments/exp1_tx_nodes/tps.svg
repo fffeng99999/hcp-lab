@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480">
-<rect width="100%" height="100%" fill="white"/>
-<text x="400.0" y="30" font-size="18" text-anchor="middle">TPS</text>
-<line x1="60" y1="420" x2="740" y2="420" stroke="#333"/>
-<line x1="60" y1="60" x2="60" y2="420" stroke="#333"/>
-<text x="400.0" y="465" font-size="12" text-anchor="middle">负载</text>
-<text x="20" y="240.0" font-size="12" text-anchor="middle" transform="rotate(-90 20 240.0)">TPS</text>
-<polyline fill="none" stroke="#2f78ff" stroke-width="2" points="60.00,363.68 60.00,124.44 60.00,419.99 157.14,329.08 157.14,60.00 157.14,419.99 351.43,411.89 351.43,254.00 351.43,419.99 740.00,345.83 740.00,402.44 740.00,420.00"/>
-</svg>

@@ -1,9 +1,12 @@
+import csv
 import json
+import socket
 import subprocess
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Any, Optional
+from urllib.parse import urlparse
 
 from controller.node_manager import NodeManager
 from collector.log_parser import parse_block_times, parse_confirm_times, parse_rocksdb_times
@@ -62,6 +65,8 @@ class ExperimentRunner:
                     value = value.replace(f"{{{key}}}", str(val))
                 expanded_args.append(value)
 
+            self.wait_for_endpoint(expanded_args)
+
             duration_s, loadgen_snapshot = self.trigger_loadgen(expanded_args)
 
             cpu_percent, mem_bytes, net_mbps = monitor.stop()
@@ -116,6 +121,32 @@ class ExperimentRunner:
             time.sleep(2)
         return ExperimentResult(name=name, description=description, points=points)
 
+    def wait_for_endpoint(self, args: List[str], timeout: int = 120) -> None:
+        endpoint = self.extract_endpoint(args)
+        if not endpoint:
+            return
+        parsed = urlparse(endpoint)
+        host = parsed.hostname or "127.0.0.1"
+        port = parsed.port
+        if port is None:
+            return
+        start = time.time()
+        while time.time() - start < timeout:
+            try:
+                with socket.create_connection((host, port), timeout=2):
+                    return
+            except OSError:
+                time.sleep(1)
+        raise RuntimeError("等待负载生成端点超时")
+
+    def extract_endpoint(self, args: List[str]) -> Optional[str]:
+        for key in ("--grpc-endpoint", "--http-endpoint"):
+            if key in args:
+                index = args.index(key)
+                if index + 1 < len(args):
+                    return args[index + 1]
+        return None
+
     def trigger_loadgen(self, extra_args: List[str]) -> (float, Optional[Dict[str, Any]]):
         if not self.loadgen_bin.exists():
             raise RuntimeError("未找到 loadgen 可执行文件")
@@ -141,7 +172,38 @@ class ExperimentRunner:
                 if isinstance(data, dict) and "actual_tps" in data:
                     last_snapshot = data
         process.wait()
+        if last_snapshot is None:
+            csv_path = self.extract_csv_path(extra_args)
+            if csv_path:
+                last_snapshot = self.read_csv_snapshot(Path(csv_path))
         return time.time() - start, last_snapshot
+
+    def extract_csv_path(self, args: List[str]) -> Optional[str]:
+        if "--csv-path" in args:
+            index = args.index("--csv-path")
+            if index + 1 < len(args):
+                return args[index + 1]
+        return None
+
+    def read_csv_snapshot(self, path: Path) -> Optional[Dict[str, Any]]:
+        if not path.exists():
+            return None
+        last_row: Optional[Dict[str, str]] = None
+        with path.open("r", encoding="utf-8") as handle:
+            reader = csv.DictReader(handle)
+            for row in reader:
+                last_row = row
+        if not last_row:
+            return None
+        parsed: Dict[str, Any] = {}
+        for key, value in last_row.items():
+            if value is None or value == "":
+                continue
+            if key in {"sent", "success", "reject", "mem_bytes"}:
+                parsed[key] = float(value)
+            else:
+                parsed[key] = float(value)
+        return parsed
 
     def save_result(self, path: Path, result: ExperimentResult) -> None:
         def _format_floats(obj: Any) -> Any:
