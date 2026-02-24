@@ -48,8 +48,14 @@ class ExperimentRunner:
         loadgen_args: List[str],
     ) -> ExperimentResult:
         points: List[ExperimentPoint] = []
-        for params in matrix:
+        total_points = len(matrix)
+        print(f"实验开始: {name}", flush=True)
+        print(f"实验描述: {description}", flush=True)
+        print(f"实验点数: {total_points}", flush=True)
+        for index, params in enumerate(matrix, start=1):
             num_nodes = int(params.get("nodes", 4))
+            tx_count = int(params.get("tx", 0))
+            print(f"[进度 {index}/{total_points}] 启动节点: {num_nodes}, 交易数: {tx_count}", flush=True)
             log_dir = log_root / f"nodes_{num_nodes}"
             data_dir = data_root / f"nodes_{num_nodes}"
             log_dir.mkdir(parents=True, exist_ok=True)
@@ -65,9 +71,12 @@ class ExperimentRunner:
                     value = value.replace(f"{{{key}}}", str(val))
                 expanded_args.append(value)
 
+            print(f"[进度 {index}/{total_points}] 等待负载端点可用...", flush=True)
             self.wait_for_endpoint(expanded_args)
 
+            print(f"[进度 {index}/{total_points}] 开始负载生成...", flush=True)
             duration_s, loadgen_snapshot = self.trigger_loadgen(expanded_args)
+            print(f"[进度 {index}/{total_points}] 负载生成完成, 耗时: {duration_s:.2f}s", flush=True)
 
             cpu_percent, mem_bytes, net_mbps = monitor.stop()
 
@@ -117,8 +126,14 @@ class ExperimentRunner:
 
             points.append(ExperimentPoint(params=params, metrics=metrics))
 
+            print(
+                f"[进度 {index}/{total_points}] 采集完成: 节点={num_nodes} 交易={tx_count} "
+                f"TPS={metrics.get('tps', 0.0):.2f} P99(ms)={metrics.get('p99_ms', 0.0):.2f}",
+                flush=True,
+            )
             self.node_manager.stop_nodes()
             time.sleep(2)
+        print("实验完成", flush=True)
         return ExperimentResult(name=name, description=description, points=points)
 
     def wait_for_endpoint(self, args: List[str], timeout: int = 120) -> None:

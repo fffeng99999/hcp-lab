@@ -38,6 +38,9 @@ def main() -> None:
     log_root = artifact_root / "logs"
     data_root.mkdir(parents=True, exist_ok=True)
     log_root.mkdir(parents=True, exist_ok=True)
+    print(f"输出目录: {output_dir}", flush=True)
+    print(f"实验数据目录: {data_root}", flush=True)
+    print(f"实验日志目录: {log_root}", flush=True)
 
     if args.matrix:
         matrix = load_matrix(Path(args.matrix))
@@ -50,6 +53,7 @@ def main() -> None:
         )
 
     loadgen_args = [item for item in args.loadgen_args.split(" ") if item]
+    print(f"实验矩阵: {matrix}", flush=True)
     runner = ExperimentRunner(project_root=project_root)
     result = runner.run(
         name="实验一：交易量 × 节点规模",
@@ -68,6 +72,7 @@ def main() -> None:
 
     result_path = output_dir / "result.json"
     runner.save_result(result_path, result)
+    print(f"结果已保存: {result_path}", flush=True)
 
     durations = [p.metrics.get("duration_s", 0.0) for p in result.points]
     avg_latencies = [p.metrics.get("avg_confirm_time_ms", 0.0) for p in result.points]
@@ -118,6 +123,7 @@ def main() -> None:
         title="实验一报告",
         summary=summary,
     )
+    print(f"报告已生成: {output_dir}", flush=True)
 
 
 if __name__ == "__main__":

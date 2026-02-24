@@ -16,11 +16,21 @@ RPC_PORT=$((26657 + PORT_OFFSET))
 export PORT_OFFSET
 export HCPD_BINARY
 
+echo "开始实验1：交易量 × 节点规模"
+echo "节点列表: $NODES_LIST"
+echo "交易列表: $TX_LIST"
+echo "端口偏移: $PORT_OFFSET (gRPC=$GRPC_PORT, RPC=$RPC_PORT)"
+echo "实验数据目录: $EXP_DIR"
+echo "报告输出目录: $REPORT_OUT"
+
 cd "$PROJECT_ROOT/hcp-loadgen"
+echo "构建 hcp-loadgen..."
 cargo build --release
 
 cd "$PROJECT_ROOT/hcp-lab"
 export EXP_ARTIFACT_ROOT="$EXP_DIR"
+export PYTHONPATH="$PROJECT_ROOT/hcp-lab:${PYTHONPATH}"
+echo "启动实验执行器..."
 python3 experiments/exp1_tx_nodes/run_exp1.py \
   --nodes "$NODES_LIST" \
   --tx "$TX_LIST" \
