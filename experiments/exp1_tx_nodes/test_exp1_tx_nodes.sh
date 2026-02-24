@@ -21,7 +21,7 @@ cargo build --release
 
 cd "$PROJECT_ROOT/hcp-lab"
 export EXP_ARTIFACT_ROOT="$EXP_DIR"
-python3 main.py \
+python3 experiments/exp1_tx_nodes/run_exp1.py \
   --nodes "$NODES_LIST" \
   --tx "$TX_LIST" \
   --out "$REPORT_OUT" \
