@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.23)  25 FEB 2026 04:23
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.23)  25 FEB 2026 06:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -339,7 +339,7 @@ LaTeX Warning: No \author given.
 <inserted text> 
                 $
 l.11 交易数:1000 k:1 T_
-                    block(ms):0.5750 Speedup:1.0000 Efficiency:1.0000 CPU(%)...
+                    block(ms):0.6137 Speedup:1.0000 Efficiency:1.0000 CPU(%)...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
@@ -430,18 +430,18 @@ andolSong-Regular(0)/m/n/10.53937 节 点 数\TU/lmr/m/n/10.53937 : 1 \TU/Fandol
 Regular(0)/m/n/10.53937 明 细\TU/lmr/m/n/10.53937 : \TU/FandolSong-Regular(0)/m/n
 /10.53937 交 易 数\TU/lmr/m/n/10.53937 :1000 k:1 T$[]\OML/cmm/m/it/10.53937 lock\O
 T1/cmr/m/n/10.53937 (\OML/cmm/m/it/10.53937 ms\OT1/cmr/m/n/10.53937 ) : 0\OML/c
-mm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 5750\OML/cmm/m/it/10.53937 Speedup \OT1
+mm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 6137\OML/cmm/m/it/10.53937 Speedup \OT1
 /cmr/m/n/10.53937 :
  []
 
 
 Overfull \hbox (3.62009pt too wide) in paragraph at lines 8--23
-\OT1/cmr/m/n/10.53937 1\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 2192\OML/c
+\OT1/cmr/m/n/10.53937 0\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 7651\OML/c
 mm/m/it/10.53937 Efficiency \OT1/cmr/m/n/10.53937 : 0\OML/cmm/m/it/10.53937 :\O
-T1/cmr/m/n/10.53937 1524\OML/cmm/m/it/10.53937 CPU\OT1/cmr/m/n/10.53937 ([][][]
+T1/cmr/m/n/10.53937 0956\OML/cmm/m/it/10.53937 CPU\OT1/cmr/m/n/10.53937 ([][][]
  : 10000\OML/cmm/m/it/10.53937 k \OT1/cmr/m/n/10.53937 : 1\OML/cmm/m/it/10.5393
 7 T[]lock\OT1/cmr/m/n/10.53937 (\OML/cmm/m/it/10.53937 ms\OT1/cmr/m/n/10.53937 
-) : 1\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 4682\OML/cmm/m/it/10.53937 S
+) : 1\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 7096\OML/cmm/m/it/10.53937 S
 peedup \OT1/cmr/m/n/10.53937 :
  []
 
@@ -452,29 +452,29 @@ mm/m/it/10.53937 Efficiency \OT1/cmr/m/n/10.53937 : 1\OML/cmm/m/it/10.53937 :\O
 T1/cmr/m/n/10.53937 0000\OML/cmm/m/it/10.53937 CPU\OT1/cmr/m/n/10.53937 ([][][]
  : 10000\OML/cmm/m/it/10.53937 k \OT1/cmr/m/n/10.53937 : 2\OML/cmm/m/it/10.5393
 7 T[]lock\OT1/cmr/m/n/10.53937 (\OML/cmm/m/it/10.53937 ms\OT1/cmr/m/n/10.53937 
-) : 1\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 7861\OML/cmm/m/it/10.53937 S
+) : 2\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 7361\OML/cmm/m/it/10.53937 S
 peedup \OT1/cmr/m/n/10.53937 :
  []
 
 
 Overfull \hbox (3.62009pt too wide) in paragraph at lines 8--23
-\OT1/cmr/m/n/10.53937 0\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 8221\OML/c
+\OT1/cmr/m/n/10.53937 0\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 6248\OML/c
 mm/m/it/10.53937 Efficiency \OT1/cmr/m/n/10.53937 : 0\OML/cmm/m/it/10.53937 :\O
-T1/cmr/m/n/10.53937 4110\OML/cmm/m/it/10.53937 CPU\OT1/cmr/m/n/10.53937 ([][][]
+T1/cmr/m/n/10.53937 3124\OML/cmm/m/it/10.53937 CPU\OT1/cmr/m/n/10.53937 ([][][]
  : 10000\OML/cmm/m/it/10.53937 k \OT1/cmr/m/n/10.53937 : 4\OML/cmm/m/it/10.5393
 7 T[]lock\OT1/cmr/m/n/10.53937 (\OML/cmm/m/it/10.53937 ms\OT1/cmr/m/n/10.53937 
-) : 2\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 4293\OML/cmm/m/it/10.53937 S
+) : 3\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 4029\OML/cmm/m/it/10.53937 S
 peedup \OT1/cmr/m/n/10.53937 :
  []
 
 
 Overfull \hbox (3.62009pt too wide) in paragraph at lines 8--23
-\OT1/cmr/m/n/10.53937 0\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 6044\OML/c
+\OT1/cmr/m/n/10.53937 0\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 5024\OML/c
 mm/m/it/10.53937 Efficiency \OT1/cmr/m/n/10.53937 : 0\OML/cmm/m/it/10.53937 :\O
-T1/cmr/m/n/10.53937 1511\OML/cmm/m/it/10.53937 CPU\OT1/cmr/m/n/10.53937 ([][][]
+T1/cmr/m/n/10.53937 1256\OML/cmm/m/it/10.53937 CPU\OT1/cmr/m/n/10.53937 ([][][]
  : 10000\OML/cmm/m/it/10.53937 k \OT1/cmr/m/n/10.53937 : 8\OML/cmm/m/it/10.5393
 7 T[]lock\OT1/cmr/m/n/10.53937 (\OML/cmm/m/it/10.53937 ms\OT1/cmr/m/n/10.53937 
-) : 3\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 9779\OML/cmm/m/it/10.53937 S
+) : 3\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 5094\OML/cmm/m/it/10.53937 S
 peedup \OT1/cmr/m/n/10.53937 :
  []
 

@@ -1,3 +1,4 @@
+import os
 import shutil
 import subprocess
 import threading
@@ -93,6 +94,7 @@ def read_mem_bytes() -> float:
 
 def read_net_bytes() -> float:
     total = 0.0
+    include_loopback = os.environ.get("INCLUDE_LOOPBACK", "").lower() in ("1", "true", "yes")
     with open("/proc/net/dev", "r", encoding="utf-8") as f:
         lines = f.read().splitlines()[2:]
     for line in lines:
@@ -100,7 +102,7 @@ def read_net_bytes() -> float:
             continue
         iface, data = line.split(":", 1)
         iface = iface.strip()
-        if iface == "lo":
+        if iface == "lo" and not include_loopback:
             continue
         parts = data.split()
         if len(parts) >= 16:

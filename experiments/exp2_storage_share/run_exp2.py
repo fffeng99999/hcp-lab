@@ -1,5 +1,6 @@
 import argparse
 import os
+import shlex
 from pathlib import Path
 from typing import Dict, List
 
@@ -58,7 +59,7 @@ def main() -> None:
 
     share_sizes = parse_list(args.shares)
     runner = ExperimentRunner(project_root=project_root)
-    base_loadgen_args = [item for item in args.loadgen_args.split(" ") if item]
+    base_loadgen_args = shlex.split(args.loadgen_args)
 
     aggregated: Dict[int, Dict[str, float]] = {}
     for share_size in share_sizes:

@@ -11,14 +11,15 @@ TX_COUNT="${TX_COUNT:-10000}"
 REPEAT="${REPEAT:-3}"
 PORT_OFFSET="${PORT_OFFSET:-2000}"
 CHAIN_ID="${CHAIN_ID:-hcp-exp2}"
-HCPD_BINARY="../tests/exp2_storage_share/bin/hcpd"
-CLI_BINARY="tests/exp2_storage_share/bin/hcpd"
+HCPD_BINARY="../$EXP_DIR/bin/hcpd"
+CLI_BINARY="$EXP_DIR/bin/hcpd"
 GRPC_PORT=$((9090 + PORT_OFFSET))
 RPC_PORT=$((26657 + PORT_OFFSET))
 
 export PORT_OFFSET
 export HCPD_BINARY
 export CHAIN_ID
+export EXTRA_ACCOUNT_COUNT=100
 
 echo "开始实验2：共享存储规模变化对共识吞吐的影响"
 echo "共享规模: $SHARES"

@@ -4,18 +4,18 @@
 重复次数: 30
 节点数: 1
 明细:
-交易数:1000 k:1 T_block(ms):0.5750 Speedup:1.0000 Efficiency:1.0000 CPU(%):87.80 Mem(bytes):7970799616
-交易数:1000 k:2 T_block(ms):0.5970 Speedup:0.9631 Efficiency:0.4816 CPU(%):86.87 Mem(bytes):7920918528
-交易数:1000 k:4 T_block(ms):0.9445 Speedup:0.6088 Efficiency:0.1522 CPU(%):91.06 Mem(bytes):7922024448
-交易数:1000 k:8 T_block(ms):3.1110 Speedup:0.1848 Efficiency:0.0231 CPU(%):85.69 Mem(bytes):8037142528
-交易数:5000 k:1 T_block(ms):2.7696 Speedup:1.0000 Efficiency:1.0000 CPU(%):93.26 Mem(bytes):8011923456
-交易数:5000 k:2 T_block(ms):1.1418 Speedup:2.4257 Efficiency:1.2128 CPU(%):87.86 Mem(bytes):7985799168
-交易数:5000 k:4 T_block(ms):1.6646 Speedup:1.6638 Efficiency:0.4160 CPU(%):88.84 Mem(bytes):7931953152
-交易数:5000 k:8 T_block(ms):2.2716 Speedup:1.2192 Efficiency:0.1524 CPU(%):86.54 Mem(bytes):8008822784
-交易数:10000 k:1 T_block(ms):1.4682 Speedup:1.0000 Efficiency:1.0000 CPU(%):94.17 Mem(bytes):8035803136
-交易数:10000 k:2 T_block(ms):1.7861 Speedup:0.8221 Efficiency:0.4110 CPU(%):85.96 Mem(bytes):8010895360
-交易数:10000 k:4 T_block(ms):2.4293 Speedup:0.6044 Efficiency:0.1511 CPU(%):96.53 Mem(bytes):8041869312
-交易数:10000 k:8 T_block(ms):3.9779 Speedup:0.3691 Efficiency:0.0461 CPU(%):94.19 Mem(bytes):7722328064
+交易数:1000 k:1 T_block(ms):0.6137 Speedup:1.0000 Efficiency:1.0000 CPU(%):88.20 Mem(bytes):8099352576
+交易数:1000 k:2 T_block(ms):1.8900 Speedup:0.3247 Efficiency:0.1623 CPU(%):87.01 Mem(bytes):8028618752
+交易数:1000 k:4 T_block(ms):0.6683 Speedup:0.9182 Efficiency:0.2296 CPU(%):85.85 Mem(bytes):8085245952
+交易数:1000 k:8 T_block(ms):0.7420 Speedup:0.8270 Efficiency:0.1034 CPU(%):86.77 Mem(bytes):8065572864
+交易数:5000 k:1 T_block(ms):2.3839 Speedup:1.0000 Efficiency:1.0000 CPU(%):84.81 Mem(bytes):7984832512
+交易数:5000 k:2 T_block(ms):1.1827 Speedup:2.0156 Efficiency:1.0078 CPU(%):94.96 Mem(bytes):7938949120
+交易数:5000 k:4 T_block(ms):2.9430 Speedup:0.8100 Efficiency:0.2025 CPU(%):83.60 Mem(bytes):8003907584
+交易数:5000 k:8 T_block(ms):3.1158 Speedup:0.7651 Efficiency:0.0956 CPU(%):84.65 Mem(bytes):7881478144
+交易数:10000 k:1 T_block(ms):1.7096 Speedup:1.0000 Efficiency:1.0000 CPU(%):85.68 Mem(bytes):8106553344
+交易数:10000 k:2 T_block(ms):2.7361 Speedup:0.6248 Efficiency:0.3124 CPU(%):86.00 Mem(bytes):8163983360
+交易数:10000 k:4 T_block(ms):3.4029 Speedup:0.5024 Efficiency:0.1256 CPU(%):87.09 Mem(bytes):7860948992
+交易数:10000 k:8 T_block(ms):3.5094 Speedup:0.4871 Efficiency:0.0609 CPU(%):96.19 Mem(bytes):7982149632
 
 ## 图表
 

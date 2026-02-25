@@ -1,0 +1,55 @@
+{
+  "name": "实验四：分层共识通信复杂度与高频负载边界",
+  "description": "验证分层共识通信复杂度与高频负载性能边界",
+  "points": [
+    {
+      "params": {
+        "g": 32,
+        "s": 1,
+        "nodes": 32
+      },
+      "metrics": {
+        "duration_s": "0.3009606180000000",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "56.8709677419354804",
+        "rocksdb_write_p50_ms": "56.0000000000000000",
+        "rocksdb_write_p95_ms": "88.0000000000000000",
+        "rocksdb_write_p99_ms": "92.4999999999999858",
+        "rocksdb_write_amplification": "0.0000000000000000",
+        "rocksdb_compaction_ms": "0.0000000000000000",
+        "rocksdb_level0_files": "0.0000000000000000",
+        "rocksdb_stall_ms": "0.0000000000000000",
+        "rocksdb_wal_synced": "0.0000000000000000",
+        "rocksdb_wal_bytes": "0.0000000000000000",
+        "rocksdb_wal_file_bytes": "0.0000000000000000",
+        "cpu_percent": "29.9400000000000013",
+        "mem_bytes": "9602625536.0000000000000000",
+        "net_mbps": "123.7084658705524447",
+        "io_util": "0.0000000000000000",
+        "io_await": "0.0000000000000000",
+        "io_read_s": "0.0000000000000000",
+        "io_write_s": "0.0000000000000000",
+        "consensus_failures": "1.0000000000000000",
+        "tps": "0.0000000000000000",
+        "pre_prepare_ms": "1.0000000000000000",
+        "prepare_ms": "32.0000000000000000",
+        "commit_ms": "1024.0000000000000000",
+        "comm_bytes_per_block": "270336.0000000000000000",
+        "net_bytes_total": "4879990.9596670689061284"
+      }
+    }
+  ],
+  "metadata": {
+    "groups": [
+      32
+    ],
+    "nodes": 32,
+    "tx": 10,
+    "repeat": 1,
+    "message_bytes": 256
+  }
+}

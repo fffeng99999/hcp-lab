@@ -20,6 +20,7 @@ class NodeManager:
         data_root: Path,
         log_dir: Path,
         use_cpu_affinity: bool = True,
+        storage_group_size: Optional[int] = None,
         timeout: int = 120,
     ) -> subprocess.Popen:
         env = os.environ.copy()
@@ -27,6 +28,8 @@ class NodeManager:
         env["LOG_DIR"] = str(log_dir)
         if use_cpu_affinity:
             env["USE_CPU_AFFINITY"] = "true"
+        if storage_group_size is not None:
+            env["STORAGE_GROUP_SIZE"] = str(storage_group_size)
         cmd = ["bash", "start_nodes.sh", str(num_nodes)]
         self.process = subprocess.Popen(
             cmd,

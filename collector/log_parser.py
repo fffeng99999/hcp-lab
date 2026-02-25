@@ -19,6 +19,11 @@ CONSENSUS_FAIL_PATTERNS = [
     re.compile(r"panic", re.IGNORECASE),
 ]
 
+HIERARCHICAL_METRICS_PATTERN = re.compile(
+    r"hierarchical_metrics\s+pre_prepare_ms=([\d.]+)\s+prepare_ms=([\d.]+)\s+commit_ms=([\d.]+)\s+comm_bytes=([\d.]+)",
+    re.IGNORECASE,
+)
+
 ROCKSDB_PATTERNS = [
     re.compile(r"rocksdb_write.*duration_ms[=:]\s*([\d.]+)", re.IGNORECASE),
     re.compile(r"rocksdb_write.*duration_ms\s*([\d.]+)", re.IGNORECASE),
@@ -83,6 +88,28 @@ def parse_rocksdb_wal_file_bytes(log_dir: Path) -> List[float]:
 
 def parse_consensus_failures(log_dir: Path) -> int:
     return _count_patterns(log_dir, CONSENSUS_FAIL_PATTERNS)
+
+def parse_hierarchical_metrics(log_dir: Path) -> Dict[str, List[float]]:
+    pre_values: List[float] = []
+    prepare_values: List[float] = []
+    commit_values: List[float] = []
+    comm_values: List[float] = []
+    ansi_pattern = re.compile(r"\x1b\[[0-9;]*m")
+    for log_file in log_dir.glob("**/*.log"):
+        for line in log_file.read_text(encoding="utf-8", errors="ignore").splitlines():
+            clean_line = ansi_pattern.sub("", line)
+            match = HIERARCHICAL_METRICS_PATTERN.search(clean_line)
+            if match:
+                pre_values.append(float(match.group(1)))
+                prepare_values.append(float(match.group(2)))
+                commit_values.append(float(match.group(3)))
+                comm_values.append(float(match.group(4)))
+    return {
+        "pre_prepare_ms": pre_values,
+        "prepare_ms": prepare_values,
+        "commit_ms": commit_values,
+        "comm_bytes": comm_values,
+    }
 
 
 def _parse_patterns(log_dir: Path, patterns: List[re.Pattern]) -> List[float]:

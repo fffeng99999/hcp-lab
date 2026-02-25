@@ -1,0 +1,13 @@
+#!/bin/bash
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+export K_LIST="${K_LIST:-1,2,4,8}"
+export TX_LIST="${TX_LIST:-1000,5000,10000}"
+export REPEAT="${REPEAT:-30}"
+export NODE_COUNT="${NODE_COUNT:-1}"
+export PORT_OFFSET="${PORT_OFFSET:-3000}"
+export CHAIN_ID="${CHAIN_ID:-hcp-exp3}"
+
+bash "$SCRIPT_DIR/test_exp3_tpbft_parallel_block.sh"

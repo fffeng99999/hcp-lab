@@ -1,5 +1,6 @@
 import argparse
 import os
+import shlex
 from pathlib import Path
 from typing import List
 
@@ -52,7 +53,7 @@ def main() -> None:
             }
         )
 
-    loadgen_args = [item for item in args.loadgen_args.split(" ") if item]
+    loadgen_args = [arg.replace("{data_root}", str(data_root)) for arg in shlex.split(args.loadgen_args)]
     print(f"实验矩阵: {matrix}", flush=True)
     runner = ExperimentRunner(project_root=project_root)
     result = runner.run(
