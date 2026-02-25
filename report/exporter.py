@@ -18,10 +18,15 @@ def export_markdown(
     output_dir: Path,
     title: str,
     summary: str,
+    figures: Optional[List[str]] = None,
 ) -> Dict[str, Optional[str]]:
     output_dir.mkdir(parents=True, exist_ok=True)
     md_path = output_dir / "report.md"
     md_content = f"# {title}\n\n## 摘要\n{summary}\n"
+    if figures:
+        md_content += "\n## 图表\n"
+        for fig in figures:
+            md_content += f"\n![]({fig})\n"
     md_path.write_text(md_content, encoding="utf-8")
     return {"md": str(md_path)}
 
