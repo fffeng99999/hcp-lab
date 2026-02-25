@@ -112,6 +112,47 @@ def parse_hierarchical_metrics(log_dir: Path) -> Dict[str, List[float]]:
     }
 
 
+def parse_hierarchical_tpbft_metrics(log_dir: Path) -> Dict[str, List[float]]:
+    metrics = {
+        "pre_prepare_ms": [],
+        "prepare_ms": [],
+        "commit_ms": [],
+        "comm_bytes": [],
+        "total_messages": [],
+        "sig_gen_count": [],
+        "sig_verify_count": [],
+        "sig_gen_time_ms": [],
+        "sig_verify_time_ms": [],
+        "aggregation_time_ms": [],
+        "verify_time_ms": [],
+        "sig_per_node": [],
+        "sig_ops_per_tx": [],
+        "batch_size": [],
+        "batch_verify": [],
+        "verify_gain": [],
+        "sig_gen_parallelism": [],
+        "sig_verify_parallelism": [],
+        "sig_agg_parallelism": [],
+    }
+    ansi_pattern = re.compile(r"\x1b\[[0-9;]*m")
+    for log_file in log_dir.glob("**/*.log"):
+        for line in log_file.read_text(encoding="utf-8", errors="ignore").splitlines():
+            clean_line = ansi_pattern.sub("", line)
+            if "hierarchical_tpbft_metrics" not in clean_line:
+                continue
+            for part in clean_line.split():
+                if "=" not in part:
+                    continue
+                key, value = part.split("=", 1)
+                if key not in metrics:
+                    continue
+                try:
+                    metrics[key].append(float(value))
+                except ValueError:
+                    continue
+    return metrics
+
+
 def _parse_patterns(log_dir: Path, patterns: List[re.Pattern]) -> List[float]:
     values: List[float] = []
     ansi_pattern = re.compile(r"\x1b\[[0-9;]*m")

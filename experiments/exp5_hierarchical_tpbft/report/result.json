@@ -1,0 +1,18 @@
+{
+  "name": "实验五：分层 TPBFT",
+  "description": "验证分层 TPBFT 通信复杂度与签名瓶颈迁移",
+  "points": [],
+  "metadata": {
+    "groups": [],
+    "nodes": 32,
+    "tx": 100,
+    "repeat": 0,
+    "sig_algos": [
+      "bls",
+      "ed25519"
+    ],
+    "outer_mode": "ed25519",
+    "batch_verify": true,
+    "batch_size": 200
+  }
+}

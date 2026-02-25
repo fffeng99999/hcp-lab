@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.23)  25 FEB 2026 12:43
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.23)  25 FEB 2026 13:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -335,13 +335,19 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 LaTeX Warning: No \author given.
 
+
+Overfull \hbox (18.0073pt too wide) in paragraph at lines 8--16
+\TU/lmr/m/n/10.53937 Util(\TU/FandolSong-Regular(0)/m/n/10.53937 共 享 规 模\TU/lmr
+/m/n/10.53937 :16 TPS:0.48 Commit(ms):10.37 WA:0.0000 Compaction(ms):0.00
+ []
+
 [1
 
 ] (./report.aux) ) 
 Here is how much of TeX's memory you used:
  7004 strings out of 478179
  203569 string characters out of 5854280
- 532056 words of memory out of 5000000
+ 534056 words of memory out of 5000000
  27555 multiletter control sequences out of 15000+600000
  473789 words of font info for 58 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191

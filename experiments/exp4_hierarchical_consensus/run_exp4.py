@@ -88,7 +88,12 @@ def main() -> None:
     project_root = Path(__file__).resolve().parents[3]
     lab_root = project_root / "hcp-lab"
     out_path = Path(args.out)
-    output_dir = out_path if out_path.is_absolute() else lab_root / out_path
+    if not out_path.is_absolute():
+        if out_path.parts and out_path.parts[0] == "hcp-lab":
+            out_path = Path(*out_path.parts[1:])
+        output_dir = lab_root / out_path
+    else:
+        output_dir = out_path
     output_dir.mkdir(parents=True, exist_ok=True)
     artifact_override = os.environ.get("EXP_ARTIFACT_ROOT")
     if artifact_override:
