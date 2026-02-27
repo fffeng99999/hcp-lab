@@ -1,0 +1,2 @@
+g,s,tps_avg,tps_std,avg_latency_avg,avg_latency_std,p99_avg,p99_std,comm_bytes_avg,comm_bytes_std,pre_prepare_avg,prepare_avg,commit_avg,cpu_avg,net_bytes_total_avg,consensus_failures_avg
+32,1,23.497130876959986,0.0,9.432287234042553,0.0,90.815,0.0,270336.0,0.0,1.0,32.0,1024.0,89.46,72661182.25941016,1.0

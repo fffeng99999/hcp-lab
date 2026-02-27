@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.23)  25 FEB 2026 12:43
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.23)  26 FEB 2026 12:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -335,15 +335,37 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 LaTeX Warning: No \author given.
 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.11 交易数:100 k:1 有效重复:0 T_
+                          block(ms):0.0000 Speedup:0.0000 Efficiency:0.0000 ...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.53937> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 11.
+! Missing $ inserted.
+<inserted text> 
+                $
+l.12 \section
+             *{图表}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
 [1
 
 ] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 7004 strings out of 478179
- 203569 string characters out of 5854280
+ 7016 strings out of 478179
+ 203848 string characters out of 5854280
  532056 words of memory out of 5000000
- 27555 multiletter control sequences out of 15000+600000
- 473789 words of font info for 58 fonts, out of 8000000 for 9000
+ 27563 multiletter control sequences out of 15000+600000
+ 474721 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  89i,6n,97p,366b,270s stack positions out of 5000i,500n,10000p,200000b,80000s
 

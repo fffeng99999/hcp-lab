@@ -1,12 +1,36 @@
 {
-  "name": "实验三：子块并行 Merkle Hash",
-  "description": "子块并行计算 Merkle 子树的吞吐与加速比评估",
-  "points": [],
+  "name": "实验三：tPBFT 并行 Merkle Hash（真实交易）",
+  "description": "tPBFT 下真实交易列表的子块并行 Merkle 计算",
+  "points": [
+    {
+      "params": {
+        "tx": 100,
+        "k": 1,
+        "nodes": 1
+      },
+      "metrics": {
+        "block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "duration_s": "2.0392425060272217",
+        "cpu_percent": "73.4248109773172786",
+        "mem_bytes": "6956941312.0000000000000000",
+        "net_mbps": "0.8446040355935599",
+        "io_util": "0.0000000000000000",
+        "tps": "48.4652523284579644",
+        "successful_runs": 0,
+        "speedup": "0.0000000000000000",
+        "efficiency": "0.0000000000000000"
+      }
+    }
+  ],
   "metadata": {
-    "k_list": [],
-    "tx_list": [],
-    "tx_size_bytes": 512,
-    "repeat": 0,
-    "p_estimates": {}
+    "k_list": [
+      1
+    ],
+    "tx_list": [
+      100
+    ],
+    "repeat": 1,
+    "nodes": 1
   }
 }

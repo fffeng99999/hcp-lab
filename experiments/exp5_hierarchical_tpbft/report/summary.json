@@ -1,10 +1,11 @@
 {
-  "groups": [],
+  "groups": [
+    32
+  ],
   "sig_algos": [
-    "bls",
     "ed25519"
   ],
   "nodes": 32,
   "tx": 100,
-  "repeat": 0
+  "repeat": 1
 }

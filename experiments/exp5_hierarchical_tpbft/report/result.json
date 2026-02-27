@@ -1,14 +1,73 @@
 {
   "name": "实验五：分层 TPBFT",
   "description": "验证分层 TPBFT 通信复杂度与签名瓶颈迁移",
-  "points": [],
+  "points": [
+    {
+      "params": {
+        "algo": "ed25519",
+        "g": 32,
+        "s": 1,
+        "nodes": 32
+      },
+      "metrics": {
+        "duration_s": "3.2004946260000002",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "20.1166206896551749",
+        "p50_ms": "5.8150000000000004",
+        "p95_ms": "76.7990000000000066",
+        "p99_ms": "111.5510000000000019",
+        "rocksdb_write_avg_ms": "27.0967741935483879",
+        "rocksdb_write_p50_ms": "23.0000000000000000",
+        "rocksdb_write_p95_ms": "57.5000000000000000",
+        "rocksdb_write_p99_ms": "64.2999999999999829",
+        "rocksdb_write_amplification": "0.0000000000000000",
+        "rocksdb_compaction_ms": "0.0000000000000000",
+        "rocksdb_level0_files": "0.0000000000000000",
+        "rocksdb_stall_ms": "0.0000000000000000",
+        "rocksdb_wal_synced": "0.0000000000000000",
+        "rocksdb_wal_bytes": "0.0000000000000000",
+        "rocksdb_wal_file_bytes": "0.0000000000000000",
+        "cpu_percent": "82.3599999999999994",
+        "mem_bytes": "9047851008.0000000000000000",
+        "net_mbps": "166.9413649404337718",
+        "io_util": "0.0000000000000000",
+        "io_await": "0.0000000000000000",
+        "io_read_s": "0.0000000000000000",
+        "io_write_s": "0.0000000000000000",
+        "consensus_failures": "1.0000000000000000",
+        "tps": "27.1832982605982956",
+        "pre_prepare_ms": "1.0000000000000000",
+        "prepare_ms": "1.0000000000000000",
+        "commit_ms": "32.0000000000000000",
+        "comm_bytes_per_block": "16384.0000000000000000",
+        "total_messages": "64.0000000000000000",
+        "sig_gen_count": "33.0000000000000000",
+        "sig_verify_count": "33.0000000000000000",
+        "sig_gen_time_ms": "5.7750000000000030",
+        "sig_verify_time_ms": "3.5750000000000020",
+        "aggregation_time_ms": "1.6000000000000008",
+        "verify_time_ms": "3.5750000000000020",
+        "sig_per_node": "2.0625000000000000",
+        "sig_ops_per_tx": "0.3350000000000002",
+        "batch_size": "200.0000000000000000",
+        "batch_verify": "1.0000000000000000",
+        "verify_gain": "3.0000000000000000",
+        "sig_gen_parallelism": "2.0000000000000000",
+        "sig_verify_parallelism": "2.0000000000000000",
+        "sig_agg_parallelism": "1.0000000000000000",
+        "sig_total_time_ms": "10.9500000000000064",
+        "net_bytes_total": "70031106.5524912923574448"
+      }
+    }
+  ],
   "metadata": {
-    "groups": [],
+    "groups": [
+      32
+    ],
     "nodes": 32,
     "tx": 100,
-    "repeat": 0,
+    "repeat": 1,
     "sig_algos": [
-      "bls",
       "ed25519"
     ],
     "outer_mode": "ed25519",
