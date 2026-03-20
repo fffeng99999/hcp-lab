@@ -5,6 +5,7 @@ import time
 from pathlib import Path
 from typing import List, Optional, Tuple
 
+from analysis.common_charts import append_tps_vs_tx_by_nodes_chart, parse_bool_flag
 from analysis.svg_chart import line_chart_svg
 from collector.system_monitor import SystemMonitor
 from controller.experiment_runner import ExperimentPoint, ExperimentResult, ExperimentRunner
@@ -50,6 +51,8 @@ def main() -> None:
     parser.add_argument("--repeat", type=int, default=30)
     parser.add_argument("--nodes", type=int, default=1)
     parser.add_argument("--out", type=str, default="experiments/exp3_parallel_merkle/report")
+    parser.add_argument("--line-chart", type=str, default="true")
+    parser.add_argument("--bar-chart", type=str, default="true")
     args = parser.parse_args()
 
     project_root = Path(__file__).resolve().parents[3]
@@ -100,9 +103,10 @@ def main() -> None:
             block_ms = metrics[0] if metrics else 0.0
             sub_ms = metrics[1] if metrics else 0.0
             merge_ms = metrics[2] if metrics else 0.0
+            tps = tx_count * 1000.0 / block_ms if block_ms > 0 else 0.0
             points.append(
                 ExperimentPoint(
-                    params={"tx": tx_count, "k": k, "size_bytes": args.size},
+                    params={"tx": tx_count, "k": k, "size_bytes": args.size, "nodes": args.nodes},
                     metrics={
                         "block_time_ms": block_ms,
                         "subblock_time_ms": sub_ms,
@@ -111,6 +115,7 @@ def main() -> None:
                         "mem_bytes": mem_bytes,
                         "net_mbps": net_mbps,
                         "io_util": io_util,
+                        "tps": tps,
                     },
                 )
             )
@@ -173,6 +178,17 @@ def main() -> None:
             path = figures_dir / filename
             write_svg(path, svg)
             figures.append(str(path.relative_to(output_dir)))
+    append_tps_vs_tx_by_nodes_chart(
+        figures=figures,
+        points=points,
+        output_dir=output_dir,
+        figures_dir=figures_dir,
+        line_figure_name="exp3_tps_vs_tx_by_nodes.svg",
+        bar_figure_name="exp3_tps_vs_tx_by_nodes_bar.svg",
+        title="实验3 性能曲线（TPS）",
+        line_chart=parse_bool_flag(args.line_chart, True),
+        bar_chart=parse_bool_flag(args.bar_chart, True),
+    )
 
     summary_lines = [
         f"交易大小(Bytes): {args.size}",

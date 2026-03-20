@@ -4,6 +4,7 @@ import shlex
 from pathlib import Path
 from typing import List
 
+from analysis.common_charts import append_tps_vs_tx_by_nodes_chart, parse_bool_flag
 from controller.experiment_runner import ExperimentRunner
 from controller.param_matrix import build_matrix, load_matrix
 from analysis.tps import compute_tps
@@ -22,6 +23,8 @@ def main() -> None:
     parser.add_argument("--tx", type=str, default="100")
     parser.add_argument("--out", type=str, default="experiments/exp1_tx_nodes/report")
     parser.add_argument("--loadgen-args", type=str, default="")
+    parser.add_argument("--line-chart", type=str, default="true")
+    parser.add_argument("--bar-chart", type=str, default="true")
     args = parser.parse_args()
 
     project_root = Path(__file__).resolve().parents[3]
@@ -80,6 +83,21 @@ def main() -> None:
     runner.save_result(result_path, result)
     print(f"结果已保存: {result_path}", flush=True)
 
+    figures_dir = output_dir / "figures"
+    figures_dir.mkdir(parents=True, exist_ok=True)
+    figures: List[str] = []
+    append_tps_vs_tx_by_nodes_chart(
+        figures=figures,
+        points=result.points,
+        output_dir=output_dir,
+        figures_dir=figures_dir,
+        line_figure_name="exp1_tps_vs_tx_by_nodes.svg",
+        bar_figure_name="exp1_tps_vs_tx_by_nodes_bar.svg",
+        title="实验1 性能曲线（TPS）",
+        line_chart=parse_bool_flag(args.line_chart, True),
+        bar_chart=parse_bool_flag(args.bar_chart, True),
+    )
+
     durations = [p.metrics.get("duration_s", 0.0) for p in result.points]
     avg_latencies = [p.metrics.get("avg_confirm_time_ms", 0.0) for p in result.points]
     p99_latencies = [p.metrics.get("p99_ms", 0.0) for p in result.points]
@@ -128,6 +146,7 @@ def main() -> None:
         output_dir=output_dir,
         title="实验一报告",
         summary=summary,
+        figures=figures,
     )
     print(f"报告已生成: {output_dir}", flush=True)
 

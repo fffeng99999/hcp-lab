@@ -6,6 +6,7 @@ import shlex
 from pathlib import Path
 from typing import Dict, List, Tuple
 
+from analysis.common_charts import append_tps_vs_tx_by_nodes_chart, parse_bool_flag
 from analysis.svg_chart import multi_line_chart_svg
 from collector.log_parser import parse_votor_metrics
 from controller.experiment_runner import ExperimentPoint, ExperimentResult, ExperimentRunner
@@ -60,6 +61,8 @@ def main() -> None:
     parser.add_argument("--batch-size", type=int, default=200, help="负载每块交易批量")
     parser.add_argument("--loadgen-args", type=str, default=build_default_loadgen_args())
     parser.add_argument("--out", type=str, default="experiments/exp6_alpenglow_votor/report")
+    parser.add_argument("--line-chart", type=str, default="true")
+    parser.add_argument("--bar-chart", type=str, default="true")
     args = parser.parse_args()
 
     project_root = Path(__file__).resolve().parents[3]
@@ -158,7 +161,7 @@ def main() -> None:
             )
             points.append(
                 ExperimentPoint(
-                    params={"nodes": n, "fault_ratio": f_ratio},
+                    params={"nodes": n, "fault_ratio": f_ratio, "tx": args.tx},
                     metrics={k: float(v) for k, v in metrics.items()},
                 )
             )
@@ -179,11 +182,23 @@ def main() -> None:
     result_path = output_dir / "result.json"
     runner.save_result(result_path, exp_result)
 
-    save_and_plot(output_dir, points, figures_dir)
+    save_and_plot(
+        output_dir,
+        points,
+        figures_dir,
+        line_chart=parse_bool_flag(args.line_chart, True),
+        bar_chart=parse_bool_flag(args.bar_chart, True),
+    )
     print(f"实验六报告已生成至: {output_dir}", flush=True)
 
 
-def save_and_plot(output_dir: Path, points: List[ExperimentPoint], figures_dir: Path) -> None:
+def save_and_plot(
+    output_dir: Path,
+    points: List[ExperimentPoint],
+    figures_dir: Path,
+    line_chart: bool = True,
+    bar_chart: bool = True,
+) -> None:
     rows: List[Dict[str, float]] = []
     for p in points:
         nodes = float(p.params.get("nodes", 0))
@@ -261,6 +276,18 @@ def save_and_plot(output_dir: Path, points: List[ExperimentPoint], figures_dir: 
             "tps",
         ),
     )
+    extra_figures: List[str] = []
+    append_tps_vs_tx_by_nodes_chart(
+        figures=extra_figures,
+        points=points,
+        output_dir=output_dir,
+        figures_dir=figures_dir,
+        line_figure_name="exp6_tps_vs_tx_by_nodes.svg",
+        bar_figure_name="exp6_tps_vs_tx_by_nodes_bar.svg",
+        title="实验6 性能曲线（TPS）",
+        line_chart=line_chart,
+        bar_chart=bar_chart,
+    )
 
     summary = {
         "nodes": nodes_sorted,
@@ -268,7 +295,8 @@ def save_and_plot(output_dir: Path, points: List[ExperimentPoint], figures_dir: 
         "figures": [
             "figures/latency_vs_fault_ratio.svg",
             "figures/tps_vs_validator_count.svg",
-        ],
+        ]
+        + extra_figures,
     }
     (output_dir / "summary.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8"
@@ -277,4 +305,3 @@ def save_and_plot(output_dir: Path, points: List[ExperimentPoint], figures_dir: 
 
 if __name__ == "__main__":
     main()
-

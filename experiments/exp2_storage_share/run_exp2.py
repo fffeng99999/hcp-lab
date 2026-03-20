@@ -4,6 +4,7 @@ import shlex
 from pathlib import Path
 from typing import Dict, List
 
+from analysis.common_charts import append_tps_vs_tx_by_nodes_chart, parse_bool_flag
 from analysis.svg_chart import line_chart_svg
 from controller.experiment_runner import ExperimentRunner
 from report.exporter import export_markdown, export_pdf
@@ -41,6 +42,8 @@ def main() -> None:
     parser.add_argument("--repeat", type=int, default=3)
     parser.add_argument("--out", type=str, default="experiments/exp2_storage_share/report")
     parser.add_argument("--loadgen-args", type=str, default="")
+    parser.add_argument("--line-chart", type=str, default="true")
+    parser.add_argument("--bar-chart", type=str, default="true")
     args = parser.parse_args()
 
     project_root = Path(__file__).resolve().parents[3]
@@ -115,6 +118,24 @@ def main() -> None:
         path = figures_dir / filename
         write_svg(path, svg)
         figures.append(str(path.relative_to(output_dir)))
+    chart_points = [
+        {
+            "params": {"nodes": args.nodes, "tx": args.tx, "share_size": share_size},
+            "metrics": {"tps": aggregated[share_size].get("tps", 0.0)},
+        }
+        for share_size in share_sizes_sorted
+    ]
+    append_tps_vs_tx_by_nodes_chart(
+        figures=figures,
+        points=chart_points,
+        output_dir=output_dir,
+        figures_dir=figures_dir,
+        line_figure_name="exp2_tps_vs_tx_by_nodes.svg",
+        bar_figure_name="exp2_tps_vs_tx_by_nodes_bar.svg",
+        title="实验2 性能曲线（TPS）",
+        line_chart=parse_bool_flag(args.line_chart, True),
+        bar_chart=parse_bool_flag(args.bar_chart, True),
+    )
 
     summary_lines = [
         f"总节点数: {args.nodes}",

@@ -8,6 +8,7 @@ from multiprocessing import current_process, get_context
 from pathlib import Path
 from typing import Dict, List, Tuple
 
+from analysis.common_charts import append_tps_vs_tx_by_nodes_chart, parse_bool_flag
 from analysis.svg_chart import line_chart_svg
 from collector.system_monitor import SystemMonitor
 from controller.cpu_affinity import available_cores
@@ -135,6 +136,8 @@ def main() -> None:
     parser.add_argument("--size", type=int, default=512)
     parser.add_argument("--repeat", type=int, default=30)
     parser.add_argument("--out", type=str, default="experiments/exp3_parallel_merkle/report")
+    parser.add_argument("--line-chart", type=str, default="true")
+    parser.add_argument("--bar-chart", type=str, default="true")
     args = parser.parse_args()
 
     project_root = Path(__file__).resolve().parents[3]
@@ -206,7 +209,7 @@ def main() -> None:
             sub_by_k[k] = avg_sub
             points.append(
                 ExperimentPoint(
-                    params={"tx": tx_count, "k": k, "size_bytes": args.size},
+                    params={"tx": tx_count, "k": k, "size_bytes": args.size, "nodes": 1},
                     metrics={
                         "block_time_avg_ms": avg_total,
                         "block_time_std_ms": std_total,
@@ -217,6 +220,7 @@ def main() -> None:
                         "cpu_percent": avg_cpu,
                         "mem_bytes": avg_mem,
                         "io_util": avg_io,
+                        "tps": tx_count * 1000.0 / avg_total if avg_total > 0 else 0.0,
                     },
                 )
             )
@@ -297,6 +301,17 @@ def main() -> None:
             path = figures_dir / filename
             write_svg(path, svg)
             figures.append(str(path.relative_to(output_dir)))
+    append_tps_vs_tx_by_nodes_chart(
+        figures=figures,
+        points=points,
+        output_dir=output_dir,
+        figures_dir=figures_dir,
+        line_figure_name="exp3_tps_vs_tx_by_nodes.svg",
+        bar_figure_name="exp3_tps_vs_tx_by_nodes_bar.svg",
+        title="实验3 性能曲线（TPS）",
+        line_chart=parse_bool_flag(args.line_chart, True),
+        bar_chart=parse_bool_flag(args.bar_chart, True),
+    )
 
     summary_lines = [
         f"交易大小(Bytes): {args.size}",

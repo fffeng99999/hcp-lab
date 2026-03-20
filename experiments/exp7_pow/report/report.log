@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.23)  20 MAR 2026 10:35
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.23)  20 MAR 2026 11:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -249,7 +249,7 @@ File: xetex.def 2021/03/18 v5.0k Graphics/color driver for xetex
 \Gin@req@height=\dimen174
 \Gin@req@width=\dimen175
 )
-(./report.aux)
+No file report.aux.
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
@@ -332,61 +332,40 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 6.
 
-
 LaTeX Warning: No \author given.
 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.16 nodes=4 TPS=45.23 latency=7.20ms block_
+                                            interval=12109.92ms orphan=0.000...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
-Overfull \hbox (7.215pt too wide) in paragraph at lines 8--37
-\TU/FandolSong-Regular(0)/m/n/10.53937 易 数\TU/lmr/m/n/10.53937 :750 \TU/FandolS
-ong-Regular(0)/m/n/10.53937 完 成 时 间 \TU/lmr/m/n/10.53937 (s):18.700994 \TU/Fand
-olSong-Regular(0)/m/n/10.53937 平 均 延 迟 \TU/lmr/m/n/10.53937 (ms):10.369332 P99(
-ms):90.879000
- []
-
-
-Overfull \hbox (1.9453pt too wide) in paragraph at lines 8--37
-\TU/FandolSong-Regular(0)/m/n/10.53937 数\TU/lmr/m/n/10.53937 :500 \TU/FandolSon
-g-Regular(0)/m/n/10.53937 完 成 时 间 \TU/lmr/m/n/10.53937 (s):12.400442 \TU/Fandol
-Song-Regular(0)/m/n/10.53937 平 均 延 迟 \TU/lmr/m/n/10.53937 (ms):23.776796 P99(ms
-):142.079000
- []
-
-
-Overfull \hbox (7.21497pt too wide) in paragraph at lines 8--37
-\TU/FandolSong-Regular(0)/m/n/10.53937 易 数\TU/lmr/m/n/10.53937 :250 \TU/FandolS
-ong-Regular(0)/m/n/10.53937 完 成 时 间 \TU/lmr/m/n/10.53937 (s):6.701180 \TU/Fando
-lSong-Regular(0)/m/n/10.53937 平 均 延 迟 \TU/lmr/m/n/10.53937 (ms):42.066623 P99(m
-s):206.207000
- []
-
-
-Overfull \hbox (49.37247pt too wide) in paragraph at lines 8--37
-\TU/FandolSong-Regular(0)/m/n/10.53937 点\TU/lmr/m/n/10.53937 :32 \TU/FandolSong
--Regular(0)/m/n/10.53937 交 易 数\TU/lmr/m/n/10.53937 :100 \TU/FandolSong-Regular(
-0)/m/n/10.53937 完 成 时 间 \TU/lmr/m/n/10.53937 (s):3.901625 \TU/FandolSong-Regula
-r(0)/m/n/10.53937 平 均 延 迟 \TU/lmr/m/n/10.53937 (ms):133.843923 P99(ms):431.1030
-00
- []
-
-
-Overfull \hbox (54.64215pt too wide) in paragraph at lines 8--37
-\TU/FandolSong-Regular(0)/m/n/10.53937 点\TU/lmr/m/n/10.53937 :32 \TU/FandolSong
--Regular(0)/m/n/10.53937 交 易 数\TU/lmr/m/n/10.53937 :1000 \TU/FandolSong-Regular
-(0)/m/n/10.53937 完 成 时 间 \TU/lmr/m/n/10.53937 (s):32.000233 \TU/FandolSong-Regu
-lar(0)/m/n/10.53937 平 均 延 迟 \TU/lmr/m/n/10.53937 (ms):98.761450 P99(ms):574.975
-000
- []
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.53937> on input line 16.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 16.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 16.
+! Missing $ inserted.
+<inserted text> 
+                $
+l.18 \section
+             *{图表}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
 [1
 
-] [2] (./report.aux) ) 
+] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 7007 strings out of 478179
- 203673 string characters out of 5854280
- 546056 words of memory out of 5000000
- 27556 multiletter control sequences out of 15000+600000
- 473797 words of font info for 59 fonts, out of 8000000 for 9000
+ 7025 strings out of 478179
+ 204693 string characters out of 5854280
+ 534056 words of memory out of 5000000
+ 27574 multiletter control sequences out of 15000+600000
+ 474721 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  89i,6n,97p,366b,270s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report.pdf (2 pages).
+Output written on report.pdf (1 page).

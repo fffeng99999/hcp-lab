@@ -289,6 +289,56 @@ def parse_votor_metrics(log_dir: Path) -> Dict[str, float]:
     return metrics
 
 
+def parse_pow_metrics(log_dir: Path) -> Dict[str, float]:
+    ansi_pattern = re.compile(r"\x1b\[[0-9;]*m")
+    key_values: Dict[str, List[float]] = {
+        "block_interval_ms": [],
+        "tx_latency_ms": [],
+        "orphan_rate": [],
+        "orphan_flag": [],
+        "difficulty": [],
+        "tx_per_block": [],
+        "hash_attempts": [],
+        "height": [],
+    }
+    for log_file in log_dir.glob("**/*.log"):
+        for line in log_file.read_text(encoding="utf-8", errors="ignore").splitlines():
+            clean_line = ansi_pattern.sub("", line)
+            if "pow_metrics" not in clean_line.lower():
+                continue
+            for part in clean_line.split():
+                if "=" not in part:
+                    continue
+                key, value = part.split("=", 1)
+                key = key.strip().lower()
+                if key not in key_values:
+                    continue
+                try:
+                    key_values[key].append(float(value.strip().lower()))
+                except ValueError:
+                    continue
+
+    def avg(values: List[float]) -> float:
+        return sum(values) / len(values) if values else 0.0
+
+    block_count = float(len(key_values["block_interval_ms"]))
+    orphan_blocks = float(sum(key_values["orphan_flag"]))
+    orphan_rate_observed = orphan_blocks / block_count if block_count > 0 else 0.0
+    metrics: Dict[str, float] = {
+        "pow_block_interval_avg_ms": avg(key_values["block_interval_ms"]),
+        "pow_tx_latency_avg_ms": avg(key_values["tx_latency_ms"]),
+        "pow_orphan_rate_avg": avg(key_values["orphan_rate"]),
+        "pow_orphan_rate_observed": orphan_rate_observed,
+        "pow_orphan_blocks": orphan_blocks,
+        "pow_block_count": block_count,
+        "pow_difficulty_avg": avg(key_values["difficulty"]),
+        "pow_tx_per_block_avg": avg(key_values["tx_per_block"]),
+        "pow_hash_attempts_avg": avg(key_values["hash_attempts"]),
+        "pow_latest_height": max(key_values["height"]) if key_values["height"] else 0.0,
+    }
+    return metrics
+
+
 def _parse_patterns(log_dir: Path, patterns: List[re.Pattern]) -> List[float]:
     values: List[float] = []
     ansi_pattern = re.compile(r"\x1b\[[0-9;]*m")

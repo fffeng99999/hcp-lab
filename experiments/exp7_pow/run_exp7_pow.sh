@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+export NODE_LIST="${NODE_LIST:-4,8}"
+export DURATION="${DURATION:-300}"
+export REPEAT="${REPEAT:-1}"
+export DIFFICULTY="${DIFFICULTY:-12}"
+export TARGET_BLOCK_MS="${TARGET_BLOCK_MS:-12000}"
+export TX_PER_BLOCK="${TX_PER_BLOCK:-1000}"
+export TARGET_TPS="${TARGET_TPS:-200}"
+export BATCH_SIZE="${BATCH_SIZE:-200}"
+export ORPHAN_BASE_RATE="${ORPHAN_BASE_RATE:-0.01}"
+export PORT_OFFSET="${PORT_OFFSET:-7000}"
+export CHAIN_ID="${CHAIN_ID:-hcp-exp7}"
+
+bash "$SCRIPT_DIR/test_exp7_pow.sh"

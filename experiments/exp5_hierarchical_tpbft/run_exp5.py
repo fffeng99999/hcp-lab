@@ -7,6 +7,7 @@ import statistics
 from pathlib import Path
 from typing import Dict, List
 
+from analysis.common_charts import append_tps_vs_tx_by_nodes_chart, parse_bool_flag
 from analysis.svg_chart import line_chart_svg
 from collector.log_parser import parse_hierarchical_tpbft_metrics
 from controller.experiment_runner import ExperimentPoint, ExperimentResult, ExperimentRunner
@@ -87,6 +88,8 @@ def main() -> None:
     parser.add_argument("--sig-agg-parallelism", type=float, default=1.0)
     parser.add_argument("--batch-size", type=int, default=200)
     parser.add_argument("--loadgen-args", type=str, default=build_default_loadgen_args())
+    parser.add_argument("--line-chart", type=str, default="true")
+    parser.add_argument("--bar-chart", type=str, default="true")
     args = parser.parse_args()
 
     project_root = Path(__file__).resolve().parents[3]
@@ -288,7 +291,7 @@ def main() -> None:
             aggregated_std[algo][g] = agg_std
             points.append(
                 ExperimentPoint(
-                    params={"algo": algo, "g": g, "s": s, "nodes": args.nodes},
+                    params={"algo": algo, "g": g, "s": s, "nodes": args.nodes, "tx": args.tx},
                     metrics=agg,
                 )
             )
@@ -395,6 +398,18 @@ def main() -> None:
                 [float(g) for g in g_sorted], cpu_values, f"CPU 使用率 vs g ({algo})", "g", "cpu(%)"
             ),
         )
+    extra_figures: List[str] = []
+    append_tps_vs_tx_by_nodes_chart(
+        figures=extra_figures,
+        points=points,
+        output_dir=output_dir,
+        figures_dir=figures_dir,
+        line_figure_name="exp5_tps_vs_tx_by_nodes.svg",
+        bar_figure_name="exp5_tps_vs_tx_by_nodes_bar.svg",
+        title="实验5 性能曲线（TPS）",
+        line_chart=parse_bool_flag(args.line_chart, True),
+        bar_chart=parse_bool_flag(args.bar_chart, True),
+    )
 
     summary = {
         "groups": groups,
