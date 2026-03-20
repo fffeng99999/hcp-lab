@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520">
+  <rect x="0" y="0" width="900" height="520" fill="white" stroke="none"/>
+  <text x="450.0" y="28" font-size="16" text-anchor="middle">TPS vs Validator Count</text>
+  <line x1="80" y1="60" x2="80" y2="450" stroke="#333" />
+  <line x1="80" y1="450" x2="730" y2="450" stroke="#333" />
+  <polyline fill="none" stroke="#1976d2" stroke-width="2" points="80.00,244.02 172.86,60.00 358.57,272.04 730.00,424.70" /><polyline fill="none" stroke="#d32f2f" stroke-width="2" points="80.00,219.17 172.86,186.81 358.57,303.58 730.00,373.48" /><polyline fill="none" stroke="#388e3c" stroke-width="2" points="80.00,178.84 172.86,208.97 358.57,173.52 730.00,450.00" />
+  <text x="80.00" y="474" font-size="12" text-anchor="middle">4.00</text><text x="210.00" y="474" font-size="12" text-anchor="middle">9.60</text><text x="340.00" y="474" font-size="12" text-anchor="middle">15.20</text><text x="470.00" y="474" font-size="12" text-anchor="middle">20.80</text><text x="600.00" y="474" font-size="12" text-anchor="middle">26.40</text><text x="730.00" y="474" font-size="12" text-anchor="middle">32.00</text><text x="68" y="454.00" font-size="12" text-anchor="end">20.47</text><text x="68" y="376.00" font-size="12" text-anchor="end">21.50</text><text x="68" y="298.00" font-size="12" text-anchor="end">22.54</text><text x="68" y="220.00" font-size="12" text-anchor="end">23.58</text><text x="68" y="142.00" font-size="12" text-anchor="end">24.62</text><text x="68" y="64.00" font-size="12" text-anchor="end">25.65</text>
+  <text x="450.0" y="506" font-size="12" text-anchor="middle">validators</text>
+  <text x="18" y="260.0" font-size="12" text-anchor="middle" transform="rotate(-90 18 260.0)">tps</text>
+  <rect x="750" y="60" width="12" height="12" fill="#1976d2" /><text x="768" y="70" font-size="12" text-anchor="start">f=0.00</text><rect x="750" y="78" width="12" height="12" fill="#d32f2f" /><text x="768" y="88" font-size="12" text-anchor="start">f=0.10</text><rect x="750" y="96" width="12" height="12" fill="#388e3c" /><text x="768" y="106" font-size="12" text-anchor="start">f=0.20</text>
+</svg>

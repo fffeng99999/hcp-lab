@@ -153,6 +153,142 @@ def parse_hierarchical_tpbft_metrics(log_dir: Path) -> Dict[str, List[float]]:
     return metrics
 
 
+def parse_votor_metrics(log_dir: Path) -> Dict[str, float]:
+    ansi_pattern = re.compile(r"\x1b\[[0-9;]*m")
+    key_values: Dict[str, List[float]] = {
+        "notarize_latency_ms": [],
+        "finalize_latency_ms": [],
+        "bls_agg_ms": [],
+        "p2p_vote_bytes": [],
+        "gossip_vote_bytes": [],
+        "certificate_bytes": [],
+    }
+    path_counts: Dict[str, int] = {"fast": 0, "slow": 0, "fail": 0}
+
+    notarize_patterns = [
+        re.compile(r"notarize[_\s]?latency(?:_ms)?[:=]\s*([\d.]+)\s*ms", re.IGNORECASE),
+        re.compile(r"notarization[_\s]?latency(?:_ms)?[:=]\s*([\d.]+)\s*ms", re.IGNORECASE),
+    ]
+    finalize_patterns = [
+        re.compile(r"finalize[_\s]?latency(?:_ms)?[:=]\s*([\d.]+)\s*ms", re.IGNORECASE),
+        re.compile(r"finality[_\s]?latency(?:_ms)?[:=]\s*([\d.]+)\s*ms", re.IGNORECASE),
+    ]
+    bls_patterns = [
+        re.compile(r"bls[_\s]?(?:agg|aggregate|aggregation)[_\s]?ms[:=]\s*([\d.]+)", re.IGNORECASE),
+        re.compile(r"certificate[_\s]?gen(?:_ms)?[:=]\s*([\d.]+)\s*ms", re.IGNORECASE),
+    ]
+
+    for log_file in log_dir.glob("**/*.log"):
+        for line in log_file.read_text(encoding="utf-8", errors="ignore").splitlines():
+            clean_line = ansi_pattern.sub("", line)
+
+            if "votor_metrics" in clean_line.lower():
+                for part in clean_line.split():
+                    if "=" not in part:
+                        continue
+                    key, value = part.split("=", 1)
+                    key = key.strip().lower()
+                    value = value.strip().lower()
+                    if key in {"path", "path_type"}:
+                        if value in path_counts:
+                            path_counts[value] += 1
+                        continue
+                    if key in key_values:
+                        try:
+                            key_values[key].append(float(value))
+                        except ValueError:
+                            continue
+                continue
+
+            lower = clean_line.lower()
+            if "votor" not in lower and "finality" not in lower and "notar" not in lower:
+                continue
+
+            for pattern in notarize_patterns:
+                match = pattern.search(clean_line)
+                if match:
+                    key_values["notarize_latency_ms"].append(float(match.group(1)))
+                    break
+            for pattern in finalize_patterns:
+                match = pattern.search(clean_line)
+                if match:
+                    key_values["finalize_latency_ms"].append(float(match.group(1)))
+                    break
+            for pattern in bls_patterns:
+                match = pattern.search(clean_line)
+                if match:
+                    key_values["bls_agg_ms"].append(float(match.group(1)))
+                    break
+
+            if "fast-path" in lower or "fast_path" in lower or "path=fast" in lower:
+                path_counts["fast"] += 1
+            elif "slow-path" in lower or "slow_path" in lower or "path=slow" in lower:
+                path_counts["slow"] += 1
+            elif "path=fail" in lower or "votor_fail" in lower:
+                path_counts["fail"] += 1
+
+    def avg(values: List[float]) -> float:
+        return sum(values) / len(values) if values else 0.0
+
+    def percentile(values: List[float], p: float) -> float:
+        if not values:
+            return 0.0
+        if p <= 0:
+            return min(values)
+        if p >= 100:
+            return max(values)
+        values_sorted = sorted(values)
+        k = (len(values_sorted) - 1) * (p / 100.0)
+        f = int(k)
+        c = min(f + 1, len(values_sorted) - 1)
+        if f == c:
+            return values_sorted[f]
+        d0 = values_sorted[f] * (c - k)
+        d1 = values_sorted[c] * (k - f)
+        return d0 + d1
+
+    notarize = key_values["notarize_latency_ms"]
+    finalize = key_values["finalize_latency_ms"]
+    bls_agg = key_values["bls_agg_ms"]
+    p2p_bytes = key_values["p2p_vote_bytes"]
+    gossip_bytes = key_values["gossip_vote_bytes"]
+    cert_bytes = key_values["certificate_bytes"]
+
+    total_paths = sum(path_counts.values())
+    fast_ratio = float(path_counts["fast"]) / total_paths if total_paths else 0.0
+    slow_ratio = float(path_counts["slow"]) / total_paths if total_paths else 0.0
+    fail_ratio = float(path_counts["fail"]) / total_paths if total_paths else 0.0
+
+    metrics: Dict[str, float] = {
+        "votor_notarize_avg_ms": avg(notarize),
+        "votor_notarize_p50_ms": percentile(notarize, 50),
+        "votor_notarize_p95_ms": percentile(notarize, 95),
+        "votor_notarize_p99_ms": percentile(notarize, 99),
+        "votor_finalize_avg_ms": avg(finalize),
+        "votor_finalize_p50_ms": percentile(finalize, 50),
+        "votor_finalize_p95_ms": percentile(finalize, 95),
+        "votor_finalize_p99_ms": percentile(finalize, 99),
+        "votor_bls_agg_avg_ms": avg(bls_agg),
+        "votor_bls_agg_p95_ms": percentile(bls_agg, 95),
+        "votor_p2p_vote_bytes_avg": avg(p2p_bytes),
+        "votor_gossip_vote_bytes_avg": avg(gossip_bytes),
+        "votor_certificate_bytes_avg": avg(cert_bytes),
+        "votor_path_fast_ratio": fast_ratio,
+        "votor_path_slow_ratio": slow_ratio,
+        "votor_path_fail_ratio": fail_ratio,
+        "votor_path_fast_count": float(path_counts["fast"]),
+        "votor_path_slow_count": float(path_counts["slow"]),
+        "votor_path_fail_count": float(path_counts["fail"]),
+    }
+    if metrics["votor_gossip_vote_bytes_avg"] > 0:
+        metrics["votor_p2p_over_gossip_bytes_ratio"] = (
+            metrics["votor_p2p_vote_bytes_avg"] / metrics["votor_gossip_vote_bytes_avg"]
+        )
+    else:
+        metrics["votor_p2p_over_gossip_bytes_ratio"] = 0.0
+    return metrics
+
+
 def _parse_patterns(log_dir: Path, patterns: List[re.Pattern]) -> List[float]:
     values: List[float] = []
     ansi_pattern = re.compile(r"\x1b\[[0-9;]*m")
