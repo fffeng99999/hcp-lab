@@ -153,6 +153,74 @@ def parse_hierarchical_tpbft_metrics(log_dir: Path) -> Dict[str, List[float]]:
     return metrics
 
 
+def parse_ibft_metrics(log_dir: Path) -> Dict[str, float]:
+    ansi_pattern = re.compile(r"\x1b\[[0-9;]*m")
+    key_values: Dict[str, List[float]] = {
+        "block_time_ms": [],
+        "pre_prepare_ms": [],
+        "prepare_ms": [],
+        "commit_ms": [],
+        "round_changes": [],
+        "total_messages": [],
+        "comm_bytes": [],
+    }
+    for log_file in log_dir.glob("**/*.log"):
+        for line in log_file.read_text(encoding="utf-8", errors="ignore").splitlines():
+            clean_line = ansi_pattern.sub("", line)
+            if "ibft_metrics" not in clean_line.lower():
+                continue
+            for part in clean_line.split():
+                if "=" not in part:
+                    continue
+                key, value = part.split("=", 1)
+                key = key.strip().lower()
+                if key not in key_values:
+                    continue
+                try:
+                    key_values[key].append(float(value))
+                except ValueError:
+                    continue
+
+    def avg(values: List[float]) -> float:
+        return sum(values) / len(values) if values else 0.0
+
+    def percentile(values: List[float], p: float) -> float:
+        if not values:
+            return 0.0
+        if p <= 0:
+            return min(values)
+        if p >= 100:
+            return max(values)
+        values_sorted = sorted(values)
+        k = (len(values_sorted) - 1) * (p / 100.0)
+        f = int(k)
+        c = min(f + 1, len(values_sorted) - 1)
+        if f == c:
+            return values_sorted[f]
+        d0 = values_sorted[f] * (c - k)
+        d1 = values_sorted[c] * (k - f)
+        return d0 + d1
+
+    block_times = key_values["block_time_ms"]
+    pre_prepare = key_values["pre_prepare_ms"]
+    prepare = key_values["prepare_ms"]
+    commit = key_values["commit_ms"]
+    round_changes = key_values["round_changes"]
+    total_messages = key_values["total_messages"]
+    comm_bytes = key_values["comm_bytes"]
+
+    return {
+        "ibft_block_avg_ms": avg(block_times),
+        "ibft_block_p99_ms": percentile(block_times, 99),
+        "ibft_pre_prepare_avg_ms": avg(pre_prepare),
+        "ibft_prepare_avg_ms": avg(prepare),
+        "ibft_commit_avg_ms": avg(commit),
+        "ibft_round_changes_avg": avg(round_changes),
+        "ibft_total_messages_avg": avg(total_messages),
+        "ibft_comm_bytes_avg": avg(comm_bytes),
+    }
+
+
 def parse_votor_metrics(log_dir: Path) -> Dict[str, float]:
     ansi_pattern = re.compile(r"\x1b\[[0-9;]*m")
     key_values: Dict[str, List[float]] = {

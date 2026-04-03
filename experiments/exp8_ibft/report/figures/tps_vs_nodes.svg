@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520">
+  <rect x="0" y="0" width="900" height="520" fill="white" stroke="none"/>
+  <text x="450.0" y="28" font-size="16" text-anchor="middle">TPS vs 节点数</text>
+  <line x1="80" y1="60" x2="80" y2="450" stroke="#333" />
+  <line x1="80" y1="450" x2="730" y2="450" stroke="#333" />
+  <polyline fill="none" stroke="#1976d2" stroke-width="2" points="405.00,255.00" />
+  <text x="80.00" y="474" font-size="12" text-anchor="middle">3.00</text><text x="210.00" y="474" font-size="12" text-anchor="middle">3.40</text><text x="340.00" y="474" font-size="12" text-anchor="middle">3.80</text><text x="470.00" y="474" font-size="12" text-anchor="middle">4.20</text><text x="600.00" y="474" font-size="12" text-anchor="middle">4.60</text><text x="730.00" y="474" font-size="12" text-anchor="middle">5.00</text><text x="68" y="454.00" font-size="12" text-anchor="end">33.95</text><text x="68" y="376.00" font-size="12" text-anchor="end">34.35</text><text x="68" y="298.00" font-size="12" text-anchor="end">34.75</text><text x="68" y="220.00" font-size="12" text-anchor="end">35.15</text><text x="68" y="142.00" font-size="12" text-anchor="end">35.55</text><text x="68" y="64.00" font-size="12" text-anchor="end">35.95</text>
+  <text x="450.0" y="506" font-size="12" text-anchor="middle">节点数</text>
+  <text x="18" y="260.0" font-size="12" text-anchor="middle" transform="rotate(-90 18 260.0)">TPS</text>
+  <rect x="750" y="60" width="12" height="12" fill="#1976d2" /><text x="768" y="70" font-size="12" text-anchor="start">target_tps=50</text>
+</svg>

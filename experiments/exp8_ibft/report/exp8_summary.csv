@@ -1,0 +1,2 @@
+nodes,target_tps,fault_ratio,tx,tps,p99_ms,avg_confirm_time_ms,ibft_block_avg_ms,ibft_block_p99_ms,ibft_round_changes_avg,ibft_total_messages_avg,ibft_comm_bytes_avg
+4.0,50.0,0.0,50.0,34.951873681619695,13.039,2.8826,10.306749666666668,14.293671020000001,0.0,21.0,5376.0
