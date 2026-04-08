@@ -1,5 +1,6 @@
 import csv
 import json
+import re
 import socket
 import subprocess
 import time
@@ -92,6 +93,7 @@ class ExperimentRunner:
                 for key, val in params.items():
                     value = value.replace(f"{{{key}}}", str(val))
                 expanded_args.append(value)
+            expanded_args = self.inject_schema_isolation_args(name, params, index, expanded_args)
 
             print(f"[进度 {index}/{total_points}] 等待负载端点可用...", flush=True)
             self.wait_for_endpoint(expanded_args)
@@ -186,6 +188,38 @@ class ExperimentRunner:
             time.sleep(2)
         print("实验完成", flush=True)
         return ExperimentResult(name=name, description=description, points=points)
+
+    def inject_schema_isolation_args(
+        self,
+        experiment_name: str,
+        params: Dict[str, Any],
+        point_index: int,
+        args: List[str],
+    ) -> List[str]:
+        if "--db-schema" in args:
+            return args
+        schema = self.build_schema_name(experiment_name, params, point_index)
+        isolated = list(args)
+        isolated.extend(["--db-schema", schema, "--reset-schema-on-start", "true"])
+        print(f"[隔离] 使用数据库 schema: {schema}", flush=True)
+        return isolated
+
+    def build_schema_name(self, experiment_name: str, params: Dict[str, Any], point_index: int) -> str:
+        normalized = re.sub(r"[^a-z0-9_]+", "_", experiment_name.lower())
+        normalized = normalized.strip("_")
+        key_parts = []
+        for key in sorted(params.keys()):
+            value = str(params[key])
+            token = re.sub(r"[^a-z0-9]+", "", value.lower())
+            if not token:
+                continue
+            key_parts.append(f"{key[:2]}{token[:10]}")
+        suffix = "_".join(key_parts[:3])
+        schema = f"lg_{normalized[:24]}_{suffix}_p{point_index}"
+        schema = re.sub(r"_+", "_", schema).strip("_")
+        if schema and schema[0].isdigit():
+            schema = f"lg_{schema}"
+        return schema[:63]
 
     def wait_for_endpoint(self, args: List[str], timeout: int = 120) -> None:
         endpoint = self.extract_endpoint(args)
