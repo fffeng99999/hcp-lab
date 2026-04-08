@@ -9,5 +9,8 @@ export TX_COUNT="${TX_COUNT:-10000}"
 export REPEAT="${REPEAT:-3}"
 export PORT_OFFSET="${PORT_OFFSET:-2000}"
 export CHAIN_ID="${CHAIN_ID:-hcp-exp2}"
+export LOADGEN_DB_ISOLATION="${LOADGEN_DB_ISOLATION:-true}"
+export LOADGEN_DB_RESET="${LOADGEN_DB_RESET:-true}"
+export LOADGEN_DB_SCHEMA_PREFIX="${LOADGEN_DB_SCHEMA_PREFIX:-exp2}"
 
 bash "$SCRIPT_DIR/test_exp2_storage_share.sh"

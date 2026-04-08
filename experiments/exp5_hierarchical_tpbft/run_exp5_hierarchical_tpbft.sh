@@ -10,5 +10,8 @@ export TX_COUNT="${TX_COUNT:-100}"
 export REPEAT="${REPEAT:-5}"
 export PORT_OFFSET="${PORT_OFFSET:-5000}"
 export CHAIN_ID="${CHAIN_ID:-hcp-exp5}"
+export LOADGEN_DB_ISOLATION="${LOADGEN_DB_ISOLATION:-true}"
+export LOADGEN_DB_RESET="${LOADGEN_DB_RESET:-true}"
+export LOADGEN_DB_SCHEMA_PREFIX="${LOADGEN_DB_SCHEMA_PREFIX:-exp5}"
 
 bash "$SCRIPT_DIR/test_exp5_hierarchical_tpbft.sh"

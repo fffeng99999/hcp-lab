@@ -17,6 +17,10 @@ HCPD_BINARY="../$EXP_DIR/bin/hcpd"
 CLI_BINARY="$EXP_DIR/bin/hcpd"
 GRPC_PORT=$((9090 + PORT_OFFSET))
 RPC_PORT=$((26657 + PORT_OFFSET))
+LOADGEN_DB_ISOLATION="${LOADGEN_DB_ISOLATION:-true}"
+LOADGEN_DB_RESET="${LOADGEN_DB_RESET:-true}"
+LOADGEN_DB_SCHEMA_PREFIX="${LOADGEN_DB_SCHEMA_PREFIX:-exp8}"
+LOADGEN_DATABASE_URL="${LOADGEN_DATABASE_URL:-}"
 
 IBFT_BASE_LATENCY_MS="${IBFT_BASE_LATENCY_MS:-1}"
 IBFT_JITTER_MS="${IBFT_JITTER_MS:-50}"
@@ -49,6 +53,10 @@ export IBFT_TIMEOUT_MS
 export IBFT_MESSAGE_BYTES
 export IBFT_MAX_ROUNDS
 export CLI_BINARY
+export LOADGEN_DB_ISOLATION
+export LOADGEN_DB_RESET
+export LOADGEN_DB_SCHEMA_PREFIX
+export LOADGEN_DATABASE_URL
 
 echo "开始实验8：IBFT 性能建模"
 echo "节点列表: $NODES_LIST"
@@ -59,6 +67,7 @@ echo "链ID: $CHAIN_ID"
 echo "端口偏移: $PORT_OFFSET (gRPC=$GRPC_PORT, RPC=$RPC_PORT)"
 echo "负载参数: CONCURRENCY=$CONCURRENCY BATCH_SIZE=$BATCH_SIZE"
 echo "IBFT参数: BASE_LATENCY_MS=$IBFT_BASE_LATENCY_MS JITTER_MS=$IBFT_JITTER_MS TIMEOUT_MS=$IBFT_TIMEOUT_MS MESSAGE_BYTES=$IBFT_MESSAGE_BYTES MAX_ROUNDS=$IBFT_MAX_ROUNDS"
+echo "数据库隔离: ENABLED=$LOADGEN_DB_ISOLATION RESET=$LOADGEN_DB_RESET PREFIX=$LOADGEN_DB_SCHEMA_PREFIX DB_URL_OVERRIDE=${LOADGEN_DATABASE_URL:-<default>}"
 echo "实验数据目录: $EXP_DIR"
 echo "报告输出目录: $REPORT_OUT"
 
@@ -83,4 +92,3 @@ python3 experiments/exp8_ibft/run_exp8.py \
   --max-rounds "$IBFT_MAX_ROUNDS" \
   --out "$REPORT_OUT" \
   --loadgen-args "--protocol grpc --mode sustained --grpc-endpoint http://127.0.0.1:$GRPC_PORT --rpc-endpoint tcp://127.0.0.1:$RPC_PORT --chain-id $CHAIN_ID --keyring-backend test --keyring-home {data_root}/nodes_{nodes}/node1 --account-file {data_root}/nodes_{nodes}/accounts.jsonl --cli-binary $CLI_BINARY --send-amount 1 --fee-amount 1 --denom stake --account-count 100 --initial-nonce 0 --total-txs {tx} --target-tps {tps} --concurrency $CONCURRENCY --batch-size {batch_size} --metrics-interval 100 --json-interval-ms 100 --csv-path {data_root}/loadgen.csv"
-

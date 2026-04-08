@@ -1,5 +1,6 @@
 import csv
 import json
+import os
 import re
 import socket
 import subprocess
@@ -50,6 +51,10 @@ class ExperimentRunner:
         self.project_root = project_root
         self.node_manager = NodeManager(project_root)
         self.loadgen_bin = loadgen_bin or project_root / "hcp-loadgen" / "target" / "release" / "hcp-loadgen"
+        self.db_isolation_enabled = self._env_bool("LOADGEN_DB_ISOLATION", True)
+        self.db_reset_on_start = self._env_bool("LOADGEN_DB_RESET", True)
+        self.db_schema_prefix = self._normalize_prefix(os.environ.get("LOADGEN_DB_SCHEMA_PREFIX", "lg"))
+        self.database_url_override = os.environ.get("LOADGEN_DATABASE_URL", "").strip()
 
     def run(
         self,
@@ -196,12 +201,20 @@ class ExperimentRunner:
         point_index: int,
         args: List[str],
     ) -> List[str]:
+        if not self.db_isolation_enabled:
+            return self.inject_database_url_arg(args)
         if "--db-schema" in args:
-            return args
+            return self.inject_database_url_arg(args)
         schema = self.build_schema_name(experiment_name, params, point_index)
         isolated = list(args)
-        isolated.extend(["--db-schema", schema, "--reset-schema-on-start", "true"])
-        print(f"[隔离] 使用数据库 schema: {schema}", flush=True)
+        isolated.extend(["--db-schema", schema])
+        if self.db_reset_on_start and "--reset-schema-on-start" not in isolated:
+            isolated.extend(["--reset-schema-on-start", "true"])
+        isolated = self.inject_database_url_arg(isolated)
+        print(
+            f"[隔离] schema={schema} reset_on_start={self.db_reset_on_start} db_override={'yes' if self.database_url_override else 'no'}",
+            flush=True,
+        )
         return isolated
 
     def build_schema_name(self, experiment_name: str, params: Dict[str, Any], point_index: int) -> str:
@@ -215,11 +228,32 @@ class ExperimentRunner:
                 continue
             key_parts.append(f"{key[:2]}{token[:10]}")
         suffix = "_".join(key_parts[:3])
-        schema = f"lg_{normalized[:24]}_{suffix}_p{point_index}"
+        schema = f"{self.db_schema_prefix}_{normalized[:24]}_{suffix}_p{point_index}"
         schema = re.sub(r"_+", "_", schema).strip("_")
         if schema and schema[0].isdigit():
-            schema = f"lg_{schema}"
+            schema = f"{self.db_schema_prefix}_{schema}"
         return schema[:63]
+
+    def inject_database_url_arg(self, args: List[str]) -> List[str]:
+        if not self.database_url_override or "--database-url" in args:
+            return args
+        updated = list(args)
+        updated.extend(["--database-url", self.database_url_override])
+        return updated
+
+    def _env_bool(self, name: str, default: bool) -> bool:
+        raw = os.environ.get(name)
+        if raw is None:
+            return default
+        return raw.strip().lower() in {"1", "true", "yes", "on"}
+
+    def _normalize_prefix(self, value: str) -> str:
+        normalized = re.sub(r"[^a-z0-9_]+", "_", value.lower()).strip("_")
+        if not normalized:
+            normalized = "lg"
+        if normalized[0].isdigit():
+            normalized = f"lg_{normalized}"
+        return normalized[:16]
 
     def wait_for_endpoint(self, args: List[str], timeout: int = 120) -> None:
         endpoint = self.extract_endpoint(args)

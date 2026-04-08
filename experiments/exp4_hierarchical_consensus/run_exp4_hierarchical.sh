@@ -9,5 +9,8 @@ export TX_COUNT="${TX_COUNT:-10000}"
 export REPEAT="${REPEAT:-5}"
 export PORT_OFFSET="${PORT_OFFSET:-4000}"
 export CHAIN_ID="${CHAIN_ID:-hcp-exp4}"
+export LOADGEN_DB_ISOLATION="${LOADGEN_DB_ISOLATION:-true}"
+export LOADGEN_DB_RESET="${LOADGEN_DB_RESET:-true}"
+export LOADGEN_DB_SCHEMA_PREFIX="${LOADGEN_DB_SCHEMA_PREFIX:-exp4}"
 
 bash "$SCRIPT_DIR/test_exp4_hierarchical.sh"

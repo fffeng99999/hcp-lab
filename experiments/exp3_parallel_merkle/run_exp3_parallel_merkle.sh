@@ -9,5 +9,8 @@ export REPEAT="${REPEAT:-30}"
 export NODE_COUNT="${NODE_COUNT:-1}"
 export PORT_OFFSET="${PORT_OFFSET:-3000}"
 export CHAIN_ID="${CHAIN_ID:-hcp-exp3}"
+export LOADGEN_DB_ISOLATION="${LOADGEN_DB_ISOLATION:-true}"
+export LOADGEN_DB_RESET="${LOADGEN_DB_RESET:-true}"
+export LOADGEN_DB_SCHEMA_PREFIX="${LOADGEN_DB_SCHEMA_PREFIX:-exp3}"
 
 bash "$SCRIPT_DIR/test_exp3_tpbft_parallel_block.sh"
