@@ -40,6 +40,7 @@ def build_default_loadgen_args() -> str:
         "--protocol grpc "
         "--mode sustained "
         "--duration {duration} "
+        "--total-txs {tx} "
         "--target-tps {target_tps} "
         "--batch-size {batch_size} "
         "--grpc-endpoint http://127.0.0.1:{grpc_port} "
@@ -140,6 +141,7 @@ def main() -> None:
                     arg.replace("{data_root}", str(data_root))
                     .replace("{nodes}", str(node_count))
                     .replace("{duration}", str(args.duration))
+                    .replace("{tx}", str(run_matrix[0]["tx"]))
                     .replace("{target_tps}", str(args.target_tps))
                     .replace("{batch_size}", str(args.batch_size))
                     .replace("{cli_binary}", cli_binary)

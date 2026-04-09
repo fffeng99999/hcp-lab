@@ -1,17 +1,20 @@
 {
   "nodes": [
-    4
+    4,
+    8
   ],
   "repeat": 1,
-  "duration_s": 20,
-  "difficulty": 10,
-  "target_block_ms": 6000.0,
-  "tx_per_block": 300,
-  "target_tps": 60,
+  "duration_s": 100,
+  "difficulty": 8,
+  "target_block_ms": 2000.0,
+  "tx_per_block": 100,
+  "target_tps": 10,
   "figures": [
     "figures/pow_tps_vs_nodes.svg",
     "figures/pow_latency_vs_nodes.svg",
     "figures/pow_block_interval_vs_nodes.svg",
-    "figures/pow_orphan_rate_vs_nodes.svg"
+    "figures/pow_orphan_rate_vs_nodes.svg",
+    "figures/exp7_tps_vs_tx_by_nodes.svg",
+    "figures/exp7_tps_vs_tx_by_nodes_bar.svg"
   ]
 }

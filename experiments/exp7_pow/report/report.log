@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.23)  8 APR 2026 15:02
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.23)  9 APR 2026 06:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -338,8 +338,8 @@ LaTeX Warning: No \author given.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.16 nodes=4 TPS=0.00 latency=0.00ms block_
-                                           interval=6086.26ms orphan=0.0278 ...
+l.16 nodes=4 TPS=14.51 latency=1.11ms block_
+                                            interval=2022.24ms orphan=0.0357...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
@@ -352,7 +352,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.17 \section
+l.18 \section
              *{图表}
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
