@@ -2,15 +2,17 @@
 
 ## 摘要
 实验七：基于 PoW 算法的节点扩展性与性能测试
-节点规模: 4,8
+节点规模: 4,8,16,32
 单节点 CPU: 1 Core
 PoW 难度: 8
 目标出块时间(ms): 2000.00
 每块交易数: 100
 持续时长(s): 100
 目标发送 TPS: 10
-nodes=4 TPS=14.51 latency=1.11ms block_interval=2022.24ms orphan=0.0357 cpu=10.96%
-nodes=8 TPS=14.48 latency=1.33ms block_interval=997.84ms orphan=0.0268 cpu=5.77%
+nodes=4 TPS=14.24 latency=1.16ms block_interval=1985.61ms orphan=0.0000 cpu=13.63%
+nodes=8 TPS=14.09 latency=1.22ms block_interval=1005.55ms orphan=0.0333 cpu=14.81%
+nodes=16 TPS=14.16 latency=1.38ms block_interval=496.95ms orphan=0.0586 cpu=13.14%
+nodes=32 TPS=13.45 latency=2.05ms block_interval=250.03ms orphan=0.1452 cpu=16.41%
 
 ## 图表
 

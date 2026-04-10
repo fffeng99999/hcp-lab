@@ -3,7 +3,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-export NODE_LIST="${NODE_LIST:-4,8}"
+export NODE_LIST="${NODE_LIST:-4,8,16,32}"
 export DURATION="${DURATION:-100}"
 export REPEAT="${REPEAT:-1}"
 export DIFFICULTY="${DIFFICULTY:-8}"

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.23)  9 APR 2026 06:28
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2026.2.23)  10 APR 2026 16:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -338,8 +338,8 @@ LaTeX Warning: No \author given.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.16 nodes=4 TPS=14.51 latency=1.11ms block_
-                                            interval=2022.24ms orphan=0.0357...
+l.16 nodes=4 TPS=14.24 latency=1.16ms block_
+                                            interval=1985.61ms orphan=0.0000...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
@@ -352,10 +352,53 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.18 \section
+l.20 \section
              *{图表}
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (15.6216pt too wide) in paragraph at lines 8--20
+\TU/lmr/m/n/10.53937 tency=1.16ms block$[]\OML/cmm/m/it/10.53937 nterval \OT1/c
+mr/m/n/10.53937 = 1985\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 61\OML/cmm/
+m/it/10.53937 msorphan \OT1/cmr/m/n/10.53937 = 0\OML/cmm/m/it/10.53937 :\OT1/cm
+r/m/n/10.53937 0000\OML/cmm/m/it/10.53937 cpu \OT1/cmr/m/n/10.53937 = 13\OML/cm
+m/m/it/10.53937 :\OT1/cmr/m/n/10.53937 63\OML/cmm/m/it/10.53937 nodes \OT1/cmr/
+m/n/10.53937 =
+ []
+
+
+Overfull \hbox (29.73262pt too wide) in paragraph at lines 8--20
+\OT1/cmr/m/n/10.53937 8\OML/cmm/m/it/10.53937 TPS \OT1/cmr/m/n/10.53937 = 14\OM
+L/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 09\OML/cmm/m/it/10.53937 latency \OT
+1/cmr/m/n/10.53937 = 1\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 22\OML/cmm/
+m/it/10.53937 msblock[]nterval \OT1/cmr/m/n/10.53937 = 1005\OML/cmm/m/it/10.539
+37 :\OT1/cmr/m/n/10.53937 55\OML/cmm/m/it/10.53937 msorphan \OT1/cmr/m/n/10.539
+37 = 0\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 0333\OML/cmm/m/it/10.53937 
+cpu \OT1/cmr/m/n/10.53937 =
+ []
+
+
+Overfull \hbox (35.33409pt too wide) in paragraph at lines 8--20
+\OT1/cmr/m/n/10.53937 14\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 81\OML/cm
+m/m/it/10.53937 nodes \OT1/cmr/m/n/10.53937 = 16\OML/cmm/m/it/10.53937 TPS \OT1
+/cmr/m/n/10.53937 = 14\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 16\OML/cmm/
+m/it/10.53937 latency \OT1/cmr/m/n/10.53937 = 1\OML/cmm/m/it/10.53937 :\OT1/cmr
+/m/n/10.53937 38\OML/cmm/m/it/10.53937 msblock[]nterval \OT1/cmr/m/n/10.53937 =
+ 496\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 95\OML/cmm/m/it/10.53937 msor
+phan \OT1/cmr/m/n/10.53937 =
+ []
+
+
+Overfull \hbox (3.60858pt too wide) in paragraph at lines 8--20
+\OT1/cmr/m/n/10.53937 0\OML/cmm/m/it/10.53937 :\OT1/cmr/m/n/10.53937 0586\OML/c
+mm/m/it/10.53937 cpu \OT1/cmr/m/n/10.53937 = 13\OML/cmm/m/it/10.53937 :\OT1/cmr
+/m/n/10.53937 14\OML/cmm/m/it/10.53937 nodes \OT1/cmr/m/n/10.53937 = 32\OML/cmm
+/m/it/10.53937 TPS \OT1/cmr/m/n/10.53937 = 13\OML/cmm/m/it/10.53937 :\OT1/cmr/m
+/n/10.53937 45\OML/cmm/m/it/10.53937 latency \OT1/cmr/m/n/10.53937 = 2\OML/cmm/
+m/it/10.53937 :\OT1/cmr/m/n/10.53937 05\OML/cmm/m/it/10.53937 msblock[]nterval 
+\OT1/cmr/m/n/10.53937 =
+ []
 
 [1
 
@@ -363,7 +406,7 @@ you left one out. Proceed, with fingers crossed.
 Here is how much of TeX's memory you used:
  7027 strings out of 478179
  204715 string characters out of 5854280
- 534056 words of memory out of 5000000
+ 535056 words of memory out of 5000000
  27574 multiletter control sequences out of 15000+600000
  474721 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191

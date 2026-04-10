@@ -63,7 +63,7 @@ def build_default_loadgen_args() -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="实验七：PoW 节点扩展性与性能测试")
-    parser.add_argument("--nodes", type=str, default="4,8")
+    parser.add_argument("--nodes", type=str, default="4,8,16,32")
     parser.add_argument("--duration", type=int, default=300)
     parser.add_argument("--repeat", type=int, default=1)
     parser.add_argument("--difficulty", type=int, default=12)
@@ -157,7 +157,7 @@ def main() -> None:
             )
             result = runner.run(
                 name="实验七：PoW 节点扩展性与性能测试",
-                description="固定单节点单核算力，比较 4/8 节点在固定难度下的性能",
+                description="固定单节点单核算力，比较 4/8/16/32 节点在固定难度下的性能",
                 matrix=run_matrix,
                 data_root=data_root,
                 log_root=log_root,
@@ -208,7 +208,7 @@ def main() -> None:
         result_points.append(ExperimentPoint(params={"nodes": n}, metrics=row))
     result = ExperimentResult(
         name="实验七：PoW 节点扩展性与性能测试",
-        description="4/8 节点单核 PoW 对比：TPS、延迟、出块间隔与孤块率",
+        description="4/8/16/32 节点单核 PoW 对比：TPS、延迟、出块间隔与孤块率",
         points=result_points,
         metadata={
             "nodes": nodes_sorted,
