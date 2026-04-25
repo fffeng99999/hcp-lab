@@ -1,0 +1,53 @@
+[
+  {
+    "id": "exp1_tx_nodes_1777044059781748039",
+    "exp_id": "exp1_tx_nodes",
+    "exp_name": "实验一：交易量 × 节点规模",
+    "status": "failed",
+    "params": {
+      "nodes": "4",
+      "tx": "10"
+    },
+    "output_dir": "hcp-lab/hcp-lab-server/data/results/exp1_tx_nodes_20260424_152059",
+    "result_files": null,
+    "error_msg": "signal: killed",
+    "created_at": "2026-04-24T15:20:59.781749434Z",
+    "started_at": "2026-04-24T15:20:59.782844867Z",
+    "finished_at": "2026-04-24T15:20:59.783347066Z",
+    "progress": 0
+  },
+  {
+    "id": "exp1_tx_nodes_1777041905484713127",
+    "exp_id": "exp1_tx_nodes",
+    "exp_name": "实验一：交易量 × 节点规模",
+    "status": "failed",
+    "params": {
+      "nodes": "4",
+      "tx": "10"
+    },
+    "output_dir": "hcp-lab-server/data/results/exp1_tx_nodes_20260424_144505",
+    "result_files": null,
+    "error_msg": "signal: killed",
+    "created_at": "2026-04-24T14:45:05.484715999Z",
+    "started_at": "2026-04-24T14:45:05.486041285Z",
+    "finished_at": "2026-04-24T14:45:05.486635462Z",
+    "progress": 0
+  },
+  {
+    "id": "exp1_tx_nodes_1777042722637103714",
+    "exp_id": "exp1_tx_nodes",
+    "exp_name": "实验一：交易量 × 节点规模",
+    "status": "failed",
+    "params": {
+      "nodes": "4",
+      "tx": "10"
+    },
+    "output_dir": "hcp-lab-server/data/results/exp1_tx_nodes_20260424_145842",
+    "result_files": null,
+    "error_msg": "signal: killed",
+    "created_at": "2026-04-24T14:58:42.637106673Z",
+    "started_at": "2026-04-24T14:58:42.638638912Z",
+    "finished_at": "2026-04-24T14:58:42.639244313Z",
+    "progress": 0
+  }
+]
