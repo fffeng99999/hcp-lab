@@ -1,82 +1,28 @@
 [
   {
-    "id": "exp1_tx_nodes_1777101218160194175",
-    "exp_id": "exp1_tx_nodes",
-    "exp_name": "实验一：交易量 × 节点规模",
-    "status": "failed",
-    "params": {
-      "NODES_LIST": "4",
-      "TX_LIST": "10"
-    },
-    "output_dir": "hcp-lab/hcp-lab-server/data/results/exp1_tx_nodes_1777101218160188651",
-    "result_files": null,
-    "error_msg": "signal: killed",
-    "created_at": "2026-04-25T07:13:38.160199149Z",
-    "started_at": "2026-04-25T07:13:38.161374196Z",
-    "finished_at": "2026-04-25T07:13:38.161961563Z",
-    "progress": 0
-  },
-  {
-    "id": "exp1_tx_nodes_1777044059781748039",
-    "exp_id": "exp1_tx_nodes",
-    "exp_name": "实验一：交易量 × 节点规模",
-    "status": "failed",
-    "params": {
-      "nodes": "4",
-      "tx": "10"
-    },
-    "output_dir": "hcp-lab/hcp-lab-server/data/results/exp1_tx_nodes_20260424_152059",
-    "result_files": null,
-    "error_msg": "signal: killed",
-    "created_at": "2026-04-24T15:20:59.781749434Z",
-    "started_at": "2026-04-24T15:20:59.782844867Z",
-    "finished_at": "2026-04-24T15:20:59.783347066Z",
-    "progress": 0
-  },
-  {
-    "id": "exp1_tx_nodes_1777041905484713127",
-    "exp_id": "exp1_tx_nodes",
-    "exp_name": "实验一：交易量 × 节点规模",
-    "status": "failed",
-    "params": {
-      "nodes": "4",
-      "tx": "10"
-    },
-    "output_dir": "hcp-lab-server/data/results/exp1_tx_nodes_20260424_144505",
-    "result_files": null,
-    "error_msg": "signal: killed",
-    "created_at": "2026-04-24T14:45:05.484715999Z",
-    "started_at": "2026-04-24T14:45:05.486041285Z",
-    "finished_at": "2026-04-24T14:45:05.486635462Z",
-    "progress": 0
-  },
-  {
-    "id": "exp1_tx_nodes_1777042722637103714",
-    "exp_id": "exp1_tx_nodes",
-    "exp_name": "实验一：交易量 × 节点规模",
-    "status": "failed",
-    "params": {
-      "nodes": "4",
-      "tx": "10"
-    },
-    "output_dir": "hcp-lab-server/data/results/exp1_tx_nodes_20260424_145842",
-    "result_files": null,
-    "error_msg": "signal: killed",
-    "created_at": "2026-04-24T14:58:42.637106673Z",
-    "started_at": "2026-04-24T14:58:42.638638912Z",
-    "finished_at": "2026-04-24T14:58:42.639244313Z",
-    "progress": 0
-  },
-  {
-    "id": "exp1_tx_nodes_1777101281772983046",
+    "id": "exp1_tx_nodes_1777207940679372361",
     "exp_id": "exp1_tx_nodes",
     "exp_name": "实验一：交易量 × 节点规模",
     "status": "completed",
     "params": {
-      "NODES_LIST": "4",
-      "TX_LIST": "10"
+      "BATCH_SIZE": 8,
+      "CHAIN_ID": "hcp-exp1",
+      "COMET_MEMPOOL_RECHECK": false,
+      "COMET_SKIP_TIMEOUT_COMMIT": true,
+      "COMET_TIMEOUT_COMMIT": "500ms",
+      "COMET_TIMEOUT_PRECOMMIT": "1s",
+      "COMET_TIMEOUT_PREVOTE": "1s",
+      "COMET_TIMEOUT_PROPOSE": "3s",
+      "CONCURRENCY": 128,
+      "LOADGEN_DB_ISOLATION": true,
+      "LOADGEN_DB_RESET": true,
+      "LOADGEN_DB_SCHEMA_PREFIX": "exp1",
+      "NODES_LIST": "4,8,16,32",
+      "PORT_OFFSET": 10,
+      "TARGET_TPS": 300,
+      "TX_LIST": "1000"
     },
-    "output_dir": "hcp-lab/hcp-lab-server/data/results/exp1_tx_nodes_1777101281772967418",
+    "output_dir": "hcp-lab/hcp-lab-server/data/results/exp1_tx_nodes_1777207940679367989",
     "result_files": [
       "exp1_tps_vs_nodes_by_tx.csv",
       "exp1_tps_vs_tx_by_nodes.csv",
@@ -91,6 +37,10 @@
       "result.json"
     ],
     "metrics": {
+      "csv_files": [
+        "exp1_tps_vs_nodes_by_tx.csv",
+        "exp1_tps_vs_tx_by_nodes.csv"
+      ],
       "description": "交易量与节点规模组合实验",
       "metadata": {},
       "name": "实验一：交易量 × 节点规模",
@@ -98,19 +48,19 @@
         {
           "metrics": {
             "avg_block_time_ms": "0.0000000000000000",
-            "avg_confirm_time_ms": "1.7700000000000000",
+            "avg_confirm_time_ms": "1.4862018828451882",
             "consensus_failures": "0.0000000000000000",
-            "cpu_percent": "13.9399999999999995",
-            "duration_s": "0.9024532740000000",
+            "cpu_percent": "12.6300000000000008",
+            "duration_s": "67.2026676389999977",
             "io_await": "0.0000000000000000",
             "io_read_s": "0.0000000000000000",
             "io_util": "0.0000000000000000",
             "io_write_s": "0.0000000000000000",
-            "mem_bytes": "5869346816.0000000000000000",
-            "net_mbps": "0.2247016921547109",
-            "p50_ms": "1.1570000000000000",
-            "p95_ms": "3.7109999999999999",
-            "p99_ms": "3.7109999999999999",
+            "mem_bytes": "7575793664.0000000000000000",
+            "net_mbps": "0.5158442473910845",
+            "p50_ms": "1.0220000000000000",
+            "p95_ms": "1.8149999999999999",
+            "p99_ms": "15.5909999999999993",
             "rocksdb_compaction_ms": "0.0000000000000000",
             "rocksdb_level0_files": "0.0000000000000000",
             "rocksdb_stall_ms": "0.0000000000000000",
@@ -118,39 +68,125 @@
             "rocksdb_wal_file_bytes": "0.0000000000000000",
             "rocksdb_wal_synced": "0.0000000000000000",
             "rocksdb_write_amplification": "0.0000000000000000",
-            "rocksdb_write_avg_ms": "3.0833333333333335",
-            "rocksdb_write_p50_ms": "2.5000000000000000",
-            "rocksdb_write_p95_ms": "5.4499999999999993",
-            "rocksdb_write_p99_ms": "5.8900000000000006",
-            "tps": "8.8647248899005042"
+            "rocksdb_write_avg_ms": "2.4545454545454546",
+            "rocksdb_write_p50_ms": "2.0000000000000000",
+            "rocksdb_write_p95_ms": "4.0000000000000000",
+            "rocksdb_write_p99_ms": "8.0000000000000000",
+            "tps": "14.2256257613976125"
           },
           "params": {
             "nodes": 4,
-            "tx": 10
+            "tx": 1000
+          }
+        },
+        {
+          "metrics": {
+            "avg_block_time_ms": "0.0000000000000000",
+            "avg_confirm_time_ms": "0.0000000000000000",
+            "consensus_failures": "0.0000000000000000",
+            "cpu_percent": "0.0000000000000000",
+            "duration_s": "0.0008015250000000",
+            "io_await": "0.0000000000000000",
+            "io_read_s": "0.0000000000000000",
+            "io_util": "0.0000000000000000",
+            "io_write_s": "0.0000000000000000",
+            "mem_bytes": "0.0000000000000000",
+            "net_mbps": "0.1966223360452656",
+            "p50_ms": "0.0000000000000000",
+            "p95_ms": "0.0000000000000000",
+            "p99_ms": "0.0000000000000000",
+            "rocksdb_compaction_ms": "0.0000000000000000",
+            "rocksdb_level0_files": "0.0000000000000000",
+            "rocksdb_stall_ms": "0.0000000000000000",
+            "rocksdb_wal_bytes": "0.0000000000000000",
+            "rocksdb_wal_file_bytes": "0.0000000000000000",
+            "rocksdb_wal_synced": "0.0000000000000000",
+            "rocksdb_write_amplification": "0.0000000000000000",
+            "rocksdb_write_avg_ms": "0.0000000000000000",
+            "rocksdb_write_p50_ms": "0.0000000000000000",
+            "rocksdb_write_p95_ms": "0.0000000000000000",
+            "rocksdb_write_p99_ms": "0.0000000000000000",
+            "tps": "0.0000000000000000"
+          },
+          "params": {
+            "nodes": 8,
+            "tx": 1000
+          }
+        },
+        {
+          "metrics": {
+            "avg_block_time_ms": "0.0000000000000000",
+            "avg_confirm_time_ms": "0.0000000000000000",
+            "consensus_failures": "0.0000000000000000",
+            "cpu_percent": "0.0000000000000000",
+            "duration_s": "0.0009445760000000",
+            "io_await": "0.0000000000000000",
+            "io_read_s": "0.0000000000000000",
+            "io_util": "0.0000000000000000",
+            "io_write_s": "0.0000000000000000",
+            "mem_bytes": "0.0000000000000000",
+            "net_mbps": "0.1616189278083485",
+            "p50_ms": "0.0000000000000000",
+            "p95_ms": "0.0000000000000000",
+            "p99_ms": "0.0000000000000000",
+            "rocksdb_compaction_ms": "0.0000000000000000",
+            "rocksdb_level0_files": "0.0000000000000000",
+            "rocksdb_stall_ms": "0.0000000000000000",
+            "rocksdb_wal_bytes": "0.0000000000000000",
+            "rocksdb_wal_file_bytes": "0.0000000000000000",
+            "rocksdb_wal_synced": "0.0000000000000000",
+            "rocksdb_write_amplification": "0.0000000000000000",
+            "rocksdb_write_avg_ms": "0.0000000000000000",
+            "rocksdb_write_p50_ms": "0.0000000000000000",
+            "rocksdb_write_p95_ms": "0.0000000000000000",
+            "rocksdb_write_p99_ms": "0.0000000000000000",
+            "tps": "0.0000000000000000"
+          },
+          "params": {
+            "nodes": 16,
+            "tx": 1000
+          }
+        },
+        {
+          "metrics": {
+            "avg_block_time_ms": "0.0000000000000000",
+            "avg_confirm_time_ms": "0.0000000000000000",
+            "consensus_failures": "0.0000000000000000",
+            "cpu_percent": "0.0000000000000000",
+            "duration_s": "0.0019551960000000",
+            "io_await": "0.0000000000000000",
+            "io_read_s": "0.0000000000000000",
+            "io_util": "0.0000000000000000",
+            "io_write_s": "0.0000000000000000",
+            "mem_bytes": "0.0000000000000000",
+            "net_mbps": "0.1466495349783464",
+            "p50_ms": "0.0000000000000000",
+            "p95_ms": "0.0000000000000000",
+            "p99_ms": "0.0000000000000000",
+            "rocksdb_compaction_ms": "0.0000000000000000",
+            "rocksdb_level0_files": "0.0000000000000000",
+            "rocksdb_stall_ms": "0.0000000000000000",
+            "rocksdb_wal_bytes": "0.0000000000000000",
+            "rocksdb_wal_file_bytes": "0.0000000000000000",
+            "rocksdb_wal_synced": "0.0000000000000000",
+            "rocksdb_write_amplification": "0.0000000000000000",
+            "rocksdb_write_avg_ms": "0.0000000000000000",
+            "rocksdb_write_p50_ms": "0.0000000000000000",
+            "rocksdb_write_p95_ms": "0.0000000000000000",
+            "rocksdb_write_p99_ms": "0.0000000000000000",
+            "tps": "0.0000000000000000"
+          },
+          "params": {
+            "nodes": 32,
+            "tx": 1000
           }
         }
-      ]
+      ],
+      "svg_count": 3
     },
-    "created_at": "2026-04-25T07:14:41.772988804Z",
-    "started_at": "2026-04-25T07:14:41.774587571Z",
-    "finished_at": "2026-04-25T07:15:18.962362583Z",
+    "created_at": "2026-04-26T12:52:20.679376003Z",
+    "started_at": "2026-04-26T12:52:20.680495054Z",
+    "finished_at": "2026-04-26T12:54:20.347325244Z",
     "progress": 100
-  },
-  {
-    "id": "exp1_tx_nodes_1777101127165313097",
-    "exp_id": "exp1_tx_nodes",
-    "exp_name": "实验一：交易量 × 节点规模",
-    "status": "failed",
-    "params": {
-      "NODES_LIST": "4",
-      "TX_LIST": "10"
-    },
-    "output_dir": "hcp-lab/hcp-lab-server/data/results/exp1_tx_nodes_1777101127165298059",
-    "result_files": null,
-    "error_msg": "signal: killed",
-    "created_at": "2026-04-25T07:12:07.165322132Z",
-    "started_at": "2026-04-25T07:12:07.166692376Z",
-    "finished_at": "2026-04-25T07:12:07.167167513Z",
-    "progress": 0
   }
 ]

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"flag"
 	"log"
@@ -11,6 +12,7 @@ import (
 	"strings"
 	"time"
 
+	"hcp-lab-server/internal/ai"
 	"hcp-lab-server/internal/experiments"
 	"hcp-lab-server/internal/runner"
 	"hcp-lab-server/internal/store"
@@ -52,6 +54,10 @@ func main() {
 	var (
 		port        = flag.String("port", "9090", "server port")
 		projectRoot = flag.String("root", ".", "project root directory (parent of hcp-lab)")
+		aiAPIURL    = flag.String("ai-url", "https://api.openai.com/v1/chat/completions", "AI API URL")
+		aiAPIKey    = flag.String("ai-key", "", "AI API key")
+		aiModel     = flag.String("ai-model", "gpt-4", "AI model name")
+		aiTimeout   = flag.Int("ai-timeout", 120, "AI API timeout (seconds)")
 	)
 	flag.Parse()
 
@@ -70,6 +76,17 @@ func main() {
 	go hub.Run()
 
 	rnr := runner.New(absRoot, st, hub)
+
+	aiConfig := ai.AIConfig{
+		APIURL:  *aiAPIURL,
+		APIKey:  *aiAPIKey,
+		Model:   *aiModel,
+		Timeout: *aiTimeout,
+	}
+	aiSvc, err := ai.NewService(aiConfig)
+	if err != nil {
+		log.Fatal("ai service init:", err)
+	}
 
 	mux := http.NewServeMux()
 
@@ -132,6 +149,107 @@ func main() {
 		}
 
 		respJSON(w, 200, task)
+	})
+
+	// AI: Generate experiment
+	mux.HandleFunc("/api/ai/generate", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			respError(w, 405, "method not allowed")
+			return
+		}
+
+		var req ai.ExperimentRequest
+		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+			respError(w, 400, "invalid json: "+err.Error())
+			return
+		}
+
+		exp, err := aiSvc.GenerateExperiment(req)
+		if err != nil {
+			respError(w, 500, "generate experiment: "+err.Error())
+			return
+		}
+
+		respJSON(w, 200, exp)
+	})
+
+	// AI: Get config
+	mux.HandleFunc("/api/ai/config", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodGet {
+			respJSON(w, 200, aiSvc.GetConfig())
+		} else if r.Method == http.MethodPut {
+			var config ai.AIConfig
+			if err := json.NewDecoder(r.Body).Decode(&config); err != nil {
+				respError(w, 400, "invalid json: "+err.Error())
+				return
+			}
+			if err := aiSvc.UpdateConfig(config); err != nil {
+				respError(w, 500, "update config: "+err.Error())
+				return
+			}
+			respJSON(w, 200, map[string]bool{"updated": true})
+		} else {
+			respError(w, 405, "method not allowed")
+		}
+	})
+
+	// AI: Test config
+	mux.HandleFunc("/api/ai/test", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			respError(w, 405, "method not allowed")
+			return
+		}
+
+		var config ai.AIConfig
+		if err := json.NewDecoder(r.Body).Decode(&config); err != nil {
+			respError(w, 400, "invalid json: "+err.Error())
+			return
+		}
+
+		// Test the AI configuration
+		testReq := map[string]any{
+			"model": config.Model,
+			"messages": []map[string]string{
+				{
+					"role":    "user",
+					"content": "Hello, please respond with 'OK' if you receive this message.",
+				},
+			},
+			"max_tokens": 10,
+		}
+
+		body, err := json.Marshal(testReq)
+		if err != nil {
+			respError(w, 500, "marshal request: "+err.Error())
+			return
+		}
+
+		httpReq, err := http.NewRequest("POST", config.APIURL, bytes.NewBuffer(body))
+		if err != nil {
+			respError(w, 500, "create request: "+err.Error())
+			return
+		}
+
+		httpReq.Header.Set("Content-Type", "application/json")
+		httpReq.Header.Set("Authorization", "Bearer "+config.APIKey)
+
+		client := &http.Client{
+			Timeout: 30 * time.Second,
+		}
+
+		resp, err := client.Do(httpReq)
+		if err != nil {
+			respError(w, 500, "connection failed: "+err.Error())
+			return
+		}
+		defer resp.Body.Close()
+
+		if resp.StatusCode != http.StatusOK {
+			respError(w, resp.StatusCode, "API returned error: "+resp.Status)
+			return
+		}
+
+		respJSON(w, 200, map[string]string{"status": "ok", "message": "AI API connection successful"})
 	})
 
 	// List tasks

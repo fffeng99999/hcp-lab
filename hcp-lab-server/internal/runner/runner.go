@@ -8,7 +8,9 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"strconv"
+	"strings"
 
 	"hcp-lab-server/internal/experiments"
 	"hcp-lab-server/internal/store"
@@ -31,17 +33,11 @@ func New(projectRoot string, st *store.Store, hub *ws.Hub) *Runner {
 	}
 }
 
-// envVarName returns the uppercase param name as environment variable key.
-func envVarName(paramName string) string {
-	return paramName
-}
-
 // buildEnv converts params map to environment variable slice.
 func buildEnv(baseEnv []string, params map[string]any) []string {
 	env := make([]string, len(baseEnv))
 	copy(env, baseEnv)
 	for k, v := range params {
-		key := envVarName(k)
 		var val string
 		switch vv := v.(type) {
 		case bool:
@@ -55,7 +51,7 @@ func buildEnv(baseEnv []string, params map[string]any) []string {
 		default:
 			val = fmt.Sprintf("%v", v)
 		}
-		env = append(env, key+"="+val)
+		env = append(env, k+"="+val)
 	}
 	return env
 }
@@ -63,7 +59,10 @@ func buildEnv(baseEnv []string, params map[string]any) []string {
 // Start begins an experiment run asynchronously.
 func (r *Runner) Start(task *store.Task, exp experiments.Experiment) error {
 	scriptPath := experiments.ResolveScriptPath(r.projectRoot, exp.RunScript)
-	reportDir := filepath.Join(r.projectRoot, exp.ReportDir)
+
+	if _, err := os.Stat(scriptPath); os.IsNotExist(err) {
+		return fmt.Errorf("script not found: %s", scriptPath)
+	}
 
 	outputDir := filepath.Join(r.projectRoot, "hcp-lab", "hcp-lab-server", "data", "results", task.ID)
 	if err := os.MkdirAll(outputDir, 0755); err != nil {
@@ -88,77 +87,80 @@ func (r *Runner) Start(task *store.Task, exp experiments.Experiment) error {
 	}
 
 	r.store.UpdateStatus(task.ID, store.TaskStatusRunning)
+	r.hub.Broadcast(ws.Message{TaskID: task.ID, Type: "started", Payload: "实验已启动"})
 
-	// Stream logs via WebSocket
 	go r.streamLogs(task.ID, stdout, stderr)
 
-	// Wait for completion
 	go func() {
 		err := cmd.Wait()
 		if err != nil {
-			r.store.SetError(task.ID, err.Error())
-			r.hub.Broadcast(ws.Message{TaskID: task.ID, Type: "error", Payload: err.Error()})
+			errMsg := fmt.Sprintf("实验执行失败: %v", err)
+			r.store.SetError(task.ID, errMsg)
+			r.hub.Broadcast(ws.Message{TaskID: task.ID, Type: "error", Payload: errMsg})
 			return
 		}
 
-		// Copy report dir to task output dir
+		r.store.UpdateProgress(task.ID, 90)
+
+		reportDir := filepath.Join(r.projectRoot, exp.ReportDir)
 		if err := copyDir(reportDir, outputDir); err != nil {
-			// Report may not exist if experiment failed silently; don't treat as fatal
-			fmt.Fprintf(os.Stderr, "copy report dir: %v\n", err)
+			fmt.Fprintf(os.Stderr, "copy report dir (may not exist): %v\n", err)
 		}
 
-		// Collect result files
 		files, metrics := r.collectResults(outputDir)
 		if err := r.store.SetResult(task.ID, files, metrics); err != nil {
 			r.store.SetError(task.ID, err.Error())
 			return
 		}
-		r.hub.Broadcast(ws.Message{TaskID: task.ID, Type: "completed", Payload: "done"})
+
+		r.store.UpdateProgress(task.ID, 100)
+		r.hub.Broadcast(ws.Message{TaskID: task.ID, Type: "completed", Payload: "实验完成"})
 	}()
 
 	return nil
 }
 
 func (r *Runner) streamLogs(taskID string, stdout, stderr io.Reader) {
+	progressPatterns := []*regexp.Regexp{
+		regexp.MustCompile(`\[进度\s+(\d+)/(\d+)\]`),
+		regexp.MustCompile(`progress:\s*(\d+)/(\d+)`),
+		regexp.MustCompile(`(\d+)%\s*completed`),
+		regexp.MustCompile(`\[EXP\]\s*(\d+)/(\d+)`),
+	}
+
 	scan := func(rd io.Reader) {
 		scanner := bufio.NewScanner(rd)
+		scanner.Buffer(make([]byte, 0, 64*1024), 256*1024)
 		for scanner.Scan() {
 			line := scanner.Text()
 			r.hub.Broadcast(ws.Message{TaskID: taskID, Type: "log", Payload: line})
-			// Try to parse progress from known patterns
-			if containsAny(line, "进度", "progress", "[进度", "Running") {
-				var current, total int
-				if _, err := fmt.Sscanf(line, "[进度 %d/%d]", &current, &total); err == nil && total > 0 {
-					progress := current * 100 / total
-					r.store.UpdateProgress(taskID, progress)
+
+			for _, pattern := range progressPatterns {
+				matches := pattern.FindStringSubmatch(line)
+				if len(matches) == 3 {
+					current, _ := strconv.Atoi(matches[1])
+					total, _ := strconv.Atoi(matches[2])
+					if total > 0 {
+						progress := current * 100 / total
+						r.store.UpdateProgress(taskID, progress)
+						break
+					}
+				} else if len(matches) == 2 {
+					percent, _ := strconv.Atoi(matches[1])
+					if percent > 0 && percent <= 100 {
+						r.store.UpdateProgress(taskID, percent)
+						break
+					}
 				}
+			}
+
+			if strings.Contains(line, "Running") || strings.Contains(line, "开始实验") {
+				r.store.UpdateProgress(taskID, 10)
 			}
 		}
 	}
 	go scan(stdout)
 	go scan(stderr)
-}
-
-func containsAny(s string, subs ...string) bool {
-	for _, sub := range subs {
-		if contains(s, sub) {
-			return true
-		}
-	}
-	return false
-}
-
-func contains(s, sub string) bool {
-	return len(s) >= len(sub) && (s == sub || len(sub) > 0 && indexOf(s, sub) >= 0)
-}
-
-func indexOf(s, sub string) int {
-	for i := 0; i <= len(s)-len(sub); i++ {
-		if s[i:i+len(sub)] == sub {
-			return i
-		}
-	}
-	return -1
 }
 
 func (r *Runner) collectResults(outputDir string) ([]string, map[string]any) {
@@ -172,19 +174,49 @@ func (r *Runner) collectResults(outputDir string) ([]string, map[string]any) {
 		rel, _ := filepath.Rel(outputDir, path)
 		files = append(files, rel)
 
-		if info.Name() == "result.json" {
+		baseName := info.Name()
+		if baseName == "result.json" || baseName == "summary.json" {
 			data, err := os.ReadFile(path)
 			if err == nil {
 				var result map[string]any
 				if json.Unmarshal(data, &result) == nil {
-					metrics = result
+					for k, v := range result {
+						metrics[k] = v
+					}
 				}
 			}
 		}
+
+		if strings.HasSuffix(baseName, ".csv") {
+			metrics["csv_files"] = appendOrInit(metrics["csv_files"], rel)
+		}
+
+		if strings.HasSuffix(baseName, ".svg") {
+			if count, ok := metrics["svg_count"].(int); ok {
+				metrics["svg_count"] = count + 1
+			} else {
+				metrics["svg_count"] = 1
+			}
+		}
+
 		return nil
 	})
 
+	if metrics["svg_count"] == nil {
+		metrics["svg_count"] = 0
+	}
+
 	return files, metrics
+}
+
+func appendOrInit(existing any, item string) []string {
+	if existing == nil {
+		return []string{item}
+	}
+	if arr, ok := existing.([]string); ok {
+		return append(arr, item)
+	}
+	return []string{item}
 }
 
 // Cancel kills a running task (best effort).

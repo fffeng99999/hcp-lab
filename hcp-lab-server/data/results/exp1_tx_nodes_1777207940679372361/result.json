@@ -1,0 +1,143 @@
+{
+  "name": "实验一：交易量 × 节点规模",
+  "description": "交易量与节点规模组合实验",
+  "points": [
+    {
+      "params": {
+        "nodes": 4,
+        "tx": 1000
+      },
+      "metrics": {
+        "duration_s": "67.2026676389999977",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "1.4862018828451882",
+        "p50_ms": "1.0220000000000000",
+        "p95_ms": "1.8149999999999999",
+        "p99_ms": "15.5909999999999993",
+        "rocksdb_write_avg_ms": "2.4545454545454546",
+        "rocksdb_write_p50_ms": "2.0000000000000000",
+        "rocksdb_write_p95_ms": "4.0000000000000000",
+        "rocksdb_write_p99_ms": "8.0000000000000000",
+        "rocksdb_write_amplification": "0.0000000000000000",
+        "rocksdb_compaction_ms": "0.0000000000000000",
+        "rocksdb_level0_files": "0.0000000000000000",
+        "rocksdb_stall_ms": "0.0000000000000000",
+        "rocksdb_wal_synced": "0.0000000000000000",
+        "rocksdb_wal_bytes": "0.0000000000000000",
+        "rocksdb_wal_file_bytes": "0.0000000000000000",
+        "cpu_percent": "12.6300000000000008",
+        "mem_bytes": "7575793664.0000000000000000",
+        "net_mbps": "0.5158442473910845",
+        "io_util": "0.0000000000000000",
+        "io_await": "0.0000000000000000",
+        "io_read_s": "0.0000000000000000",
+        "io_write_s": "0.0000000000000000",
+        "consensus_failures": "0.0000000000000000",
+        "tps": "14.2256257613976125"
+      }
+    },
+    {
+      "params": {
+        "nodes": 8,
+        "tx": 1000
+      },
+      "metrics": {
+        "duration_s": "0.0008015250000000",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "rocksdb_write_amplification": "0.0000000000000000",
+        "rocksdb_compaction_ms": "0.0000000000000000",
+        "rocksdb_level0_files": "0.0000000000000000",
+        "rocksdb_stall_ms": "0.0000000000000000",
+        "rocksdb_wal_synced": "0.0000000000000000",
+        "rocksdb_wal_bytes": "0.0000000000000000",
+        "rocksdb_wal_file_bytes": "0.0000000000000000",
+        "cpu_percent": "0.0000000000000000",
+        "mem_bytes": "0.0000000000000000",
+        "net_mbps": "0.1966223360452656",
+        "io_util": "0.0000000000000000",
+        "io_await": "0.0000000000000000",
+        "io_read_s": "0.0000000000000000",
+        "io_write_s": "0.0000000000000000",
+        "consensus_failures": "0.0000000000000000",
+        "tps": "0.0000000000000000"
+      }
+    },
+    {
+      "params": {
+        "nodes": 16,
+        "tx": 1000
+      },
+      "metrics": {
+        "duration_s": "0.0009445760000000",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "rocksdb_write_amplification": "0.0000000000000000",
+        "rocksdb_compaction_ms": "0.0000000000000000",
+        "rocksdb_level0_files": "0.0000000000000000",
+        "rocksdb_stall_ms": "0.0000000000000000",
+        "rocksdb_wal_synced": "0.0000000000000000",
+        "rocksdb_wal_bytes": "0.0000000000000000",
+        "rocksdb_wal_file_bytes": "0.0000000000000000",
+        "cpu_percent": "0.0000000000000000",
+        "mem_bytes": "0.0000000000000000",
+        "net_mbps": "0.1616189278083485",
+        "io_util": "0.0000000000000000",
+        "io_await": "0.0000000000000000",
+        "io_read_s": "0.0000000000000000",
+        "io_write_s": "0.0000000000000000",
+        "consensus_failures": "0.0000000000000000",
+        "tps": "0.0000000000000000"
+      }
+    },
+    {
+      "params": {
+        "nodes": 32,
+        "tx": 1000
+      },
+      "metrics": {
+        "duration_s": "0.0019551960000000",
+        "avg_block_time_ms": "0.0000000000000000",
+        "avg_confirm_time_ms": "0.0000000000000000",
+        "p50_ms": "0.0000000000000000",
+        "p95_ms": "0.0000000000000000",
+        "p99_ms": "0.0000000000000000",
+        "rocksdb_write_avg_ms": "0.0000000000000000",
+        "rocksdb_write_p50_ms": "0.0000000000000000",
+        "rocksdb_write_p95_ms": "0.0000000000000000",
+        "rocksdb_write_p99_ms": "0.0000000000000000",
+        "rocksdb_write_amplification": "0.0000000000000000",
+        "rocksdb_compaction_ms": "0.0000000000000000",
+        "rocksdb_level0_files": "0.0000000000000000",
+        "rocksdb_stall_ms": "0.0000000000000000",
+        "rocksdb_wal_synced": "0.0000000000000000",
+        "rocksdb_wal_bytes": "0.0000000000000000",
+        "rocksdb_wal_file_bytes": "0.0000000000000000",
+        "cpu_percent": "0.0000000000000000",
+        "mem_bytes": "0.0000000000000000",
+        "net_mbps": "0.1466495349783464",
+        "io_util": "0.0000000000000000",
+        "io_await": "0.0000000000000000",
+        "io_read_s": "0.0000000000000000",
+        "io_write_s": "0.0000000000000000",
+        "consensus_failures": "0.0000000000000000",
+        "tps": "0.0000000000000000"
+      }
+    }
+  ],
+  "metadata": {}
+}
