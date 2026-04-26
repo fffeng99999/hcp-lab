@@ -7,7 +7,9 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
+	"time"
 
 	"hcp-lab-server/internal/experiments"
 	"hcp-lab-server/internal/runner"
@@ -117,15 +119,14 @@ func main() {
 			return
 		}
 
-		outputDir := runner.GenerateMatrixID(id)
+		outputDir := filepath.Join("hcp-lab", "hcp-lab-server", "data", "results", id+"_"+strconv.FormatInt(time.Now().UnixNano(), 10))
 		task, err := st.CreateTask(id, exp.Name, params, outputDir)
 		if err != nil {
 			respError(w, 500, "create task: "+err.Error())
 			return
 		}
 
-		ctx := r.Context()
-		if err := rnr.Start(ctx, task, *exp); err != nil {
+		if err := rnr.Start(task, *exp); err != nil {
 			respError(w, 500, "start task: "+err.Error())
 			return
 		}

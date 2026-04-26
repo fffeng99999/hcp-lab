@@ -1,5 +1,22 @@
 [
   {
+    "id": "exp1_tx_nodes_1777101218160194175",
+    "exp_id": "exp1_tx_nodes",
+    "exp_name": "实验一：交易量 × 节点规模",
+    "status": "failed",
+    "params": {
+      "NODES_LIST": "4",
+      "TX_LIST": "10"
+    },
+    "output_dir": "hcp-lab/hcp-lab-server/data/results/exp1_tx_nodes_1777101218160188651",
+    "result_files": null,
+    "error_msg": "signal: killed",
+    "created_at": "2026-04-25T07:13:38.160199149Z",
+    "started_at": "2026-04-25T07:13:38.161374196Z",
+    "finished_at": "2026-04-25T07:13:38.161961563Z",
+    "progress": 0
+  },
+  {
     "id": "exp1_tx_nodes_1777044059781748039",
     "exp_id": "exp1_tx_nodes",
     "exp_name": "实验一：交易量 × 节点规模",
@@ -48,6 +65,92 @@
     "created_at": "2026-04-24T14:58:42.637106673Z",
     "started_at": "2026-04-24T14:58:42.638638912Z",
     "finished_at": "2026-04-24T14:58:42.639244313Z",
+    "progress": 0
+  },
+  {
+    "id": "exp1_tx_nodes_1777101281772983046",
+    "exp_id": "exp1_tx_nodes",
+    "exp_name": "实验一：交易量 × 节点规模",
+    "status": "completed",
+    "params": {
+      "NODES_LIST": "4",
+      "TX_LIST": "10"
+    },
+    "output_dir": "hcp-lab/hcp-lab-server/data/results/exp1_tx_nodes_1777101281772967418",
+    "result_files": [
+      "exp1_tps_vs_nodes_by_tx.csv",
+      "exp1_tps_vs_tx_by_nodes.csv",
+      "figures/exp1_tps_vs_tx_by_nodes.svg",
+      "figures/exp1_tps_vs_tx_by_nodes_bar.svg",
+      "figures/exp_tps_vs_tx_by_nodes.svg",
+      "report.aux",
+      "report.log",
+      "report.md",
+      "report.pdf",
+      "report.tex",
+      "result.json"
+    ],
+    "metrics": {
+      "description": "交易量与节点规模组合实验",
+      "metadata": {},
+      "name": "实验一：交易量 × 节点规模",
+      "points": [
+        {
+          "metrics": {
+            "avg_block_time_ms": "0.0000000000000000",
+            "avg_confirm_time_ms": "1.7700000000000000",
+            "consensus_failures": "0.0000000000000000",
+            "cpu_percent": "13.9399999999999995",
+            "duration_s": "0.9024532740000000",
+            "io_await": "0.0000000000000000",
+            "io_read_s": "0.0000000000000000",
+            "io_util": "0.0000000000000000",
+            "io_write_s": "0.0000000000000000",
+            "mem_bytes": "5869346816.0000000000000000",
+            "net_mbps": "0.2247016921547109",
+            "p50_ms": "1.1570000000000000",
+            "p95_ms": "3.7109999999999999",
+            "p99_ms": "3.7109999999999999",
+            "rocksdb_compaction_ms": "0.0000000000000000",
+            "rocksdb_level0_files": "0.0000000000000000",
+            "rocksdb_stall_ms": "0.0000000000000000",
+            "rocksdb_wal_bytes": "0.0000000000000000",
+            "rocksdb_wal_file_bytes": "0.0000000000000000",
+            "rocksdb_wal_synced": "0.0000000000000000",
+            "rocksdb_write_amplification": "0.0000000000000000",
+            "rocksdb_write_avg_ms": "3.0833333333333335",
+            "rocksdb_write_p50_ms": "2.5000000000000000",
+            "rocksdb_write_p95_ms": "5.4499999999999993",
+            "rocksdb_write_p99_ms": "5.8900000000000006",
+            "tps": "8.8647248899005042"
+          },
+          "params": {
+            "nodes": 4,
+            "tx": 10
+          }
+        }
+      ]
+    },
+    "created_at": "2026-04-25T07:14:41.772988804Z",
+    "started_at": "2026-04-25T07:14:41.774587571Z",
+    "finished_at": "2026-04-25T07:15:18.962362583Z",
+    "progress": 100
+  },
+  {
+    "id": "exp1_tx_nodes_1777101127165313097",
+    "exp_id": "exp1_tx_nodes",
+    "exp_name": "实验一：交易量 × 节点规模",
+    "status": "failed",
+    "params": {
+      "NODES_LIST": "4",
+      "TX_LIST": "10"
+    },
+    "output_dir": "hcp-lab/hcp-lab-server/data/results/exp1_tx_nodes_1777101127165298059",
+    "result_files": null,
+    "error_msg": "signal: killed",
+    "created_at": "2026-04-25T07:12:07.165322132Z",
+    "started_at": "2026-04-25T07:12:07.166692376Z",
+    "finished_at": "2026-04-25T07:12:07.167167513Z",
     "progress": 0
   }
 ]

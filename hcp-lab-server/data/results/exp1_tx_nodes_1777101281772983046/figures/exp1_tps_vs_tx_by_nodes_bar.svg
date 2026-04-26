@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560">
+  <rect x="0" y="0" width="960" height="560" fill="white" stroke="none"/>
+  <text x="480.0" y="30" font-size="16" text-anchor="middle">实验1 性能柱状图（TPS）</text>
+  <line x1="80" y1="60" x2="80" y2="482" stroke="#333" />
+  <line x1="80" y1="482" x2="750" y2="482" stroke="#333" />
+  <rect x="96.00" y="60.00" width="382.80" height="422.00" fill="#1976d2" />
+  <text x="415.00" y="510" font-size="12" text-anchor="middle">10</text><text x="68" y="486.00" font-size="12" text-anchor="end">0.00</text><text x="68" y="401.60" font-size="12" text-anchor="end">1.77</text><text x="68" y="317.20" font-size="12" text-anchor="end">3.55</text><text x="68" y="232.80" font-size="12" text-anchor="end">5.32</text><text x="68" y="148.40" font-size="12" text-anchor="end">7.09</text><text x="68" y="64.00" font-size="12" text-anchor="end">8.86</text>
+  <text x="480.0" y="544" font-size="12" text-anchor="middle">交易数量</text>
+  <text x="20" y="280.0" font-size="12" text-anchor="middle" transform="rotate(-90 20 280.0)">性能(TPS)</text>
+  <rect x="770" y="62" width="12" height="12" fill="#1976d2" /><text x="788" y="72" font-size="12" text-anchor="start">nodes=4</text>
+</svg>

@@ -2,7 +2,6 @@ package runner
 
 import (
 	"bufio"
-	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -10,8 +9,6 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strconv"
-	"strings"
-	"time"
 
 	"hcp-lab-server/internal/experiments"
 	"hcp-lab-server/internal/store"
@@ -34,20 +31,21 @@ func New(projectRoot string, st *store.Store, hub *ws.Hub) *Runner {
 	}
 }
 
-// buildArgs converts params map to command line arguments.
-func buildArgs(params map[string]any) []string {
-	var args []string
+// envVarName returns the uppercase param name as environment variable key.
+func envVarName(paramName string) string {
+	return paramName
+}
+
+// buildEnv converts params map to environment variable slice.
+func buildEnv(baseEnv []string, params map[string]any) []string {
+	env := make([]string, len(baseEnv))
+	copy(env, baseEnv)
 	for k, v := range params {
-		key := "--" + strings.ReplaceAll(k, "_", "-")
+		key := envVarName(k)
 		var val string
 		switch vv := v.(type) {
 		case bool:
-			if vv {
-				args = append(args, key)
-			} else {
-				args = append(args, "--no-"+strings.ReplaceAll(k, "_", "-"))
-			}
-			continue
+			val = strconv.FormatBool(vv)
 		case float64:
 			val = strconv.FormatFloat(vv, 'f', -1, 64)
 		case int:
@@ -57,31 +55,24 @@ func buildArgs(params map[string]any) []string {
 		default:
 			val = fmt.Sprintf("%v", v)
 		}
-		args = append(args, key, val)
+		env = append(env, key+"="+val)
 	}
-	return args
+	return env
 }
 
 // Start begins an experiment run asynchronously.
-func (r *Runner) Start(ctx context.Context, task *store.Task, exp experiments.Experiment) error {
-	scriptPath := experiments.ResolveScriptPath(r.projectRoot, exp.ScriptPath)
+func (r *Runner) Start(task *store.Task, exp experiments.Experiment) error {
+	scriptPath := experiments.ResolveScriptPath(r.projectRoot, exp.RunScript)
+	reportDir := filepath.Join(r.projectRoot, exp.ReportDir)
 
-	// Ensure output dir exists and is absolute relative to project root
-	outputDir := task.OutputDir
-	if !filepath.IsAbs(outputDir) {
-		outputDir = filepath.Join(r.projectRoot, outputDir)
-	}
+	outputDir := filepath.Join(r.projectRoot, "hcp-lab", "hcp-lab-server", "data", "results", task.ID)
 	if err := os.MkdirAll(outputDir, 0755); err != nil {
 		return fmt.Errorf("mkdir output dir: %w", err)
 	}
 
-	args := buildArgs(task.Params)
-	// Override out param to our task-specific dir
-	args = overrideArg(args, "--out", outputDir)
-
-	cmd := exec.CommandContext(ctx, "python3", append([]string{scriptPath}, args...)...)
+	cmd := exec.Command("bash", scriptPath)
 	cmd.Dir = r.projectRoot
-	cmd.Env = append(os.Environ(), "PYTHONPATH="+filepath.Join(r.projectRoot, "hcp-lab"))
+	cmd.Env = buildEnv(os.Environ(), task.Params)
 
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
@@ -110,6 +101,12 @@ func (r *Runner) Start(ctx context.Context, task *store.Task, exp experiments.Ex
 			return
 		}
 
+		// Copy report dir to task output dir
+		if err := copyDir(reportDir, outputDir); err != nil {
+			// Report may not exist if experiment failed silently; don't treat as fatal
+			fmt.Fprintf(os.Stderr, "copy report dir: %v\n", err)
+		}
+
 		// Collect result files
 		files, metrics := r.collectResults(outputDir)
 		if err := r.store.SetResult(task.ID, files, metrics); err != nil {
@@ -122,16 +119,6 @@ func (r *Runner) Start(ctx context.Context, task *store.Task, exp experiments.Ex
 	return nil
 }
 
-func overrideArg(args []string, key, val string) []string {
-	for i := 0; i < len(args); i++ {
-		if args[i] == key && i+1 < len(args) {
-			args[i+1] = val
-			return args
-		}
-	}
-	return append(args, key, val)
-}
-
 func (r *Runner) streamLogs(taskID string, stdout, stderr io.Reader) {
 	scan := func(rd io.Reader) {
 		scanner := bufio.NewScanner(rd)
@@ -139,8 +126,7 @@ func (r *Runner) streamLogs(taskID string, stdout, stderr io.Reader) {
 			line := scanner.Text()
 			r.hub.Broadcast(ws.Message{TaskID: taskID, Type: "log", Payload: line})
 			// Try to parse progress from known patterns
-			if strings.Contains(line, "进度") || strings.Contains(line, "progress") {
-				// simplistic progress parsing: look for X/Y
+			if containsAny(line, "进度", "progress", "[进度", "Running") {
 				var current, total int
 				if _, err := fmt.Sscanf(line, "[进度 %d/%d]", &current, &total); err == nil && total > 0 {
 					progress := current * 100 / total
@@ -153,11 +139,32 @@ func (r *Runner) streamLogs(taskID string, stdout, stderr io.Reader) {
 	go scan(stderr)
 }
 
+func containsAny(s string, subs ...string) bool {
+	for _, sub := range subs {
+		if contains(s, sub) {
+			return true
+		}
+	}
+	return false
+}
+
+func contains(s, sub string) bool {
+	return len(s) >= len(sub) && (s == sub || len(sub) > 0 && indexOf(s, sub) >= 0)
+}
+
+func indexOf(s, sub string) int {
+	for i := 0; i <= len(s)-len(sub); i++ {
+		if s[i:i+len(sub)] == sub {
+			return i
+		}
+	}
+	return -1
+}
+
 func (r *Runner) collectResults(outputDir string) ([]string, map[string]any) {
 	var files []string
 	metrics := make(map[string]any)
 
-	// Walk outputDir
 	_ = filepath.Walk(outputDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil || info.IsDir() {
 			return nil
@@ -165,7 +172,6 @@ func (r *Runner) collectResults(outputDir string) ([]string, map[string]any) {
 		rel, _ := filepath.Rel(outputDir, path)
 		files = append(files, rel)
 
-		// Parse result.json
 		if info.Name() == "result.json" {
 			data, err := os.ReadFile(path)
 			if err == nil {
@@ -183,11 +189,61 @@ func (r *Runner) collectResults(outputDir string) ([]string, map[string]any) {
 
 // Cancel kills a running task (best effort).
 func (r *Runner) Cancel(taskID string) error {
-	// For simplicity, we rely on context cancellation in future versions.
 	return r.store.UpdateStatus(taskID, store.TaskStatusCancelled)
 }
 
-// GenerateMatrixID creates a unique output directory name for a task.
-func GenerateMatrixID(expID string) string {
-	return fmt.Sprintf("hcp-lab/hcp-lab-server/data/results/%s_%s", expID, time.Now().Format("20060102_150405"))
+// copyDir recursively copies src directory to dst.
+func copyDir(src, dst string) error {
+	info, err := os.Stat(src)
+	if err != nil {
+		return err
+	}
+	if !info.IsDir() {
+		return fmt.Errorf("src is not a directory: %s", src)
+	}
+
+	if err := os.MkdirAll(dst, info.Mode()); err != nil {
+		return err
+	}
+
+	entries, err := os.ReadDir(src)
+	if err != nil {
+		return err
+	}
+
+	for _, entry := range entries {
+		srcPath := filepath.Join(src, entry.Name())
+		dstPath := filepath.Join(dst, entry.Name())
+
+		if entry.IsDir() {
+			if err := copyDir(srcPath, dstPath); err != nil {
+				return err
+			}
+		} else {
+			if err := copyFile(srcPath, dstPath); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func copyFile(src, dst string) error {
+	in, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer in.Close()
+
+	out, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
+	defer out.Close()
+
+	_, err = io.Copy(out, in)
+	if err != nil {
+		return err
+	}
+	return out.Close()
 }
