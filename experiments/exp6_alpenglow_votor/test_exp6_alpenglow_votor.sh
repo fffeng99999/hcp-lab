@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 EXP_DIR="tests/exp6_alpenglow_votor"
 REPORT_OUT="experiments/exp6_alpenglow_votor/report"
-NODE_LIST="${NODE_LIST:-4,8,16,32}"
+NODES_LIST="${NODES_LIST:-4,8,16,32}"
 TX_COUNT="${TX_COUNT:-500}"
 FAULTY_RATIO_LIST="${FAULTY_RATIO_LIST:-0,0.1,0.2}"
 FAST_THRESHOLD="${FAST_THRESHOLD:-0.8}"
@@ -33,7 +33,7 @@ export LOADGEN_DB_SCHEMA_PREFIX
 export LOADGEN_DATABASE_URL
 
 echo "开始实验6：Alpenglow Votor 性能验证"
-echo "节点列表: $NODE_LIST"
+echo "节点列表: $NODES_LIST"
 echo "交易数: $TX_COUNT"
 echo "故障比例列表: $FAULTY_RATIO_LIST"
 echo "快速路径阈值: $FAST_THRESHOLD"
@@ -55,7 +55,7 @@ cd "$PROJECT_ROOT/hcp-lab"
 export EXP_ARTIFACT_ROOT="$EXP_DIR"
 export PYTHONPATH="$PROJECT_ROOT/hcp-lab:${PYTHONPATH}"
 python3 experiments/exp6_alpenglow_votor/run_exp6.py \
-  --nodes "$NODE_LIST" \
+  --nodes "$NODES_LIST" \
   --tx "$TX_COUNT" \
   --faulty-ratio "$FAULTY_RATIO_LIST" \
   --fast-threshold "$FAST_THRESHOLD" \

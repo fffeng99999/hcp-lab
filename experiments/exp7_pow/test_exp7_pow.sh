@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 EXP_DIR="tests/exp7_pow"
 REPORT_OUT="experiments/exp7_pow/report"
-NODE_LIST="${NODE_LIST:-4,8,16,32}"
+NODES_LIST="${NODES_LIST:-4,8,16,32}"
 DURATION="${DURATION:-100}"
 REPEAT="${REPEAT:-1}"
 DIFFICULTY="${DIFFICULTY:-8}"
@@ -35,7 +35,7 @@ export LOADGEN_DB_SCHEMA_PREFIX
 export LOADGEN_DATABASE_URL
 
 echo "开始实验7：PoW 节点扩展性与性能测试"
-echo "节点列表: $NODE_LIST"
+echo "节点列表: $NODES_LIST"
 echo "运行时长(s): $DURATION"
 echo "重复次数: $REPEAT"
 echo "PoW 难度: $DIFFICULTY"
@@ -59,7 +59,7 @@ cd "$PROJECT_ROOT/hcp-lab"
 export EXP_ARTIFACT_ROOT="$EXP_DIR"
 export PYTHONPATH="$PROJECT_ROOT/hcp-lab:${PYTHONPATH}"
 python3 experiments/exp7_pow/run_exp7.py \
-  --nodes "$NODE_LIST" \
+  --nodes "$NODES_LIST" \
   --duration "$DURATION" \
   --repeat "$REPEAT" \
   --difficulty "$DIFFICULTY" \

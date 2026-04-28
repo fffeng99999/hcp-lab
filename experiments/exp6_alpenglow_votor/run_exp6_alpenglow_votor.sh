@@ -3,7 +3,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-export NODE_LIST="${NODE_LIST:-4,8,16,32}"
+export NODES_LIST="${NODES_LIST:-4,8,16,32}"
 export TX_COUNT="${TX_COUNT:-500}"
 export FAULTY_RATIO_LIST="${FAULTY_RATIO_LIST:-0,0.1,0.2}"
 export FAST_THRESHOLD="${FAST_THRESHOLD:-0.8}"
