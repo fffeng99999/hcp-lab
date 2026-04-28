@@ -4,7 +4,8 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 export NODES_LIST="${NODES_LIST:-4,8,16,32}"
-export TX_TOTAL="${TX_TOTAL:-1000}"
+export TX_TOTAL="${TX_TOTAL:-100,1000,10000}"
+export REPEAT="${REPEAT:-5}"
 export PORT_OFFSET="${PORT_OFFSET:-10000}"
 export CHAIN_ID="${CHAIN_ID:-hcp-exp10}"
 export LOADGEN_DB_ISOLATION="${LOADGEN_DB_ISOLATION:-true}"

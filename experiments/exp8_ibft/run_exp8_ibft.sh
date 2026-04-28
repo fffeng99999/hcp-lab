@@ -3,9 +3,10 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-export NODES_LIST="${NODES_LIST:-10,20,30,40,50}"
+export NODES_LIST="${NODES_LIST:-4,8,16,32}"
+export TX_TOTAL="${TX_TOTAL:-100,1000,10000}"
+export REPEAT="${REPEAT:-5}"
 export TARGET_TPS_LIST="${TARGET_TPS_LIST:-1000,3000,5000}"
-export TX_TOTAL="${TX_TOTAL:-5000}"
 export FAULTY_RATIO_LIST="${FAULTY_RATIO_LIST:-0,0.1,0.2}"
 export PORT_OFFSET="${PORT_OFFSET:-80}"
 export CHAIN_ID="${CHAIN_ID:-hcp-exp8}"

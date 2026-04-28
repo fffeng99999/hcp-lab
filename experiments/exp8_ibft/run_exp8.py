@@ -52,9 +52,9 @@ def write_svg(path: Path, content: str) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="实验八：IBFT 性能与 round-change 行为建模")
-    parser.add_argument("--nodes", type=str, default="10,20,30,40,50")
+    parser.add_argument("--nodes", type=str, default="4,8,16,32")
     parser.add_argument("--tps", type=str, default="1000,3000,5000")
-    parser.add_argument("--tx", type=int, default=5000)
+    parser.add_argument("--tx", type=int, default=100)
     parser.add_argument("--faulty-ratio", type=str, default="0,0.1,0.2")
     parser.add_argument("--batch-size", type=int, default=200)
     parser.add_argument("--base-latency-ms", type=float, default=1.0)

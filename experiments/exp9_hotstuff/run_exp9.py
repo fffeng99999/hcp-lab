@@ -18,7 +18,7 @@ def main():
     parser = argparse.ArgumentParser(description='实验九：HotStuff BFT 共识性能建模')
     parser.add_argument('--nodes', type=str, default='4,8,16,32')
     parser.add_argument('--tps', type=str, default='1000,2000,3000')
-    parser.add_argument('--tx', type=int, default=3000)
+    parser.add_argument('--tx', type=int, default=100)
     parser.add_argument('--faulty-ratio', type=str, default='0,0.1,0.2')
     parser.add_argument('--base-latency-ms', type=float, default=1.0)
     parser.add_argument('--jitter-ms', type=float, default=0.5)

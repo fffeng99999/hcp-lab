@@ -4,8 +4,8 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 export NODES_LIST="${NODES_LIST:-4,8,16,32}"
-export DURATION="${DURATION:-100}"
-export REPEAT="${REPEAT:-1}"
+export TX_COUNT="${TX_COUNT:-100,1000,10000}"
+export REPEAT="${REPEAT:-5}"
 export DIFFICULTY="${DIFFICULTY:-8}"
 export TARGET_BLOCK_MS="${TARGET_BLOCK_MS:-2000}"
 export TX_PER_BLOCK="${TX_PER_BLOCK:-100}"

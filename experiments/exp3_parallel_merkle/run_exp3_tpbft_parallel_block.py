@@ -34,11 +34,11 @@ def write_svg(path: Path, content: str) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="实验三：tPBFT 并行 Merkle Hash（真实交易）")
+    parser = argparse.ArgumentParser(description="实验三：tPBFT 并行 Merkle Hash")
     parser.add_argument("--k", type=str, default="1,2,4,8")
-    parser.add_argument("--tx", type=str, default="1000,5000,10000")
-    parser.add_argument("--repeat", type=int, default=30)
-    parser.add_argument("--nodes", type=int, default=1)
+    parser.add_argument("--tx", type=str, default="100,1000,10000")
+    parser.add_argument("--repeat", type=int, default=5)
+    parser.add_argument("--nodes", type=int, default=4)
     parser.add_argument("--out", type=str, default="experiments/exp3_parallel_merkle/report")
     parser.add_argument("--loadgen-args", type=str, default="")
     parser.add_argument("--line-chart", type=str, default="true")

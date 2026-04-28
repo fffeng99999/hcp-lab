@@ -75,8 +75,8 @@ def simulate_fail_rate(p: float, g: int, s: int, trials: int) -> float:
 def main() -> None:
     parser = argparse.ArgumentParser(description="实验四：分层共识通信复杂度与高频负载边界")
     parser.add_argument("--groups", type=str, default="32,16,8,4,2")
-    parser.add_argument("--nodes", type=int, default=32)
-    parser.add_argument("--tx", type=int, default=10000)
+    parser.add_argument("--nodes", type=int, default=4)
+    parser.add_argument("--tx", type=int, default=100)
     parser.add_argument("--repeat", type=int, default=5)
     parser.add_argument("--out", type=str, default="experiments/exp4_hierarchical_consensus/report")
     parser.add_argument("--message-bytes", type=int, default=256)

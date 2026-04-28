@@ -19,8 +19,8 @@ def parse_list(value: str) -> List[int]:
 def main() -> None:
     parser = argparse.ArgumentParser(description="实验一：交易量 × 节点规模")
     parser.add_argument("--matrix", type=str, help="参数矩阵 JSON 文件路径")
-    parser.add_argument("--nodes", type=str, default="4,8,16")
-    parser.add_argument("--tx", type=str, default="100")
+    parser.add_argument("--nodes", type=str, default="4,8,16,32")
+    parser.add_argument("--tx", type=str, default="100,1000,10000")
     parser.add_argument("--out", type=str, default="experiments/exp1_tx_nodes/report")
     parser.add_argument("--loadgen-args", type=str, default="")
     parser.add_argument("--line-chart", type=str, default="true")

@@ -64,7 +64,7 @@ def build_default_loadgen_args() -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description="实验五：分层 TPBFT")
     parser.add_argument("--groups", type=str, default="32,16,8,4,2")
-    parser.add_argument("--nodes", type=int, default=32)
+    parser.add_argument("--nodes", type=int, default=4)
     parser.add_argument("--tx", type=int, default=100)
     parser.add_argument("--repeat", type=int, default=5)
     parser.add_argument("--sig-algos", type=str, default="bls,ed25519")

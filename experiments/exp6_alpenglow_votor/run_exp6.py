@@ -53,7 +53,7 @@ def write_svg(path: Path, content: str) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="实验六：Alpenglow Votor 性能验证")
     parser.add_argument("--nodes", type=str, default="4,8,16,32", help="验证节点数量列表")
-    parser.add_argument("--tx", type=int, default=500, help="总交易数")
+    parser.add_argument("--tx", type=int, default=100, help="总交易数")
     parser.add_argument("--faulty-ratio", type=str, default="0,0.1,0.2", help="模拟故障节点比例")
     parser.add_argument("--fast-threshold", type=float, default=0.8, help="快速路径阈值 (default: 80%)")
     parser.add_argument("--slow-threshold", type=float, default=0.6, help="慢速路径阈值 (default: 60%)")

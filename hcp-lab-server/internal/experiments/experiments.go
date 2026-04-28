@@ -27,8 +27,8 @@ type Experiment struct {
 	ID          string        `json:"id"`
 	Name        string        `json:"name"`
 	Description string        `json:"description"`
-	RunScript   string        `json:"run_script"`   // e.g. experiments/exp1_tx_nodes/run_exp1_tx_nodes.sh
-	ReportDir   string        `json:"report_dir"`   // e.g. experiments/exp1_tx_nodes/report
+	RunScript   string        `json:"run_script"` // e.g. experiments/exp1_tx_nodes/run_exp1_tx_nodes.sh
+	ReportDir   string        `json:"report_dir"` // e.g. experiments/exp1_tx_nodes/report
 	Params      []ParamSchema `json:"params"`
 }
 
@@ -42,7 +42,8 @@ var Registry = []Experiment{
 		ReportDir:   "hcp-lab/experiments/exp1_tx_nodes/report",
 		Params: []ParamSchema{
 			{Name: "NODES_LIST", Type: ParamTypeListInt, Default: "4,8,16,32", Description: "节点数量列表", Required: true},
-			{Name: "TX_LIST", Type: ParamTypeListInt, Default: "1000", Description: "交易数量列表", Required: true},
+			{Name: "TX_LIST", Type: ParamTypeListInt, Default: "100,1000,10000", Description: "交易数量列表", Required: true},
+			{Name: "REPEAT", Type: ParamTypeInt, Default: 5, Description: "重复次数", Required: false},
 			{Name: "PORT_OFFSET", Type: ParamTypeInt, Default: 10, Description: "端口偏移量", Required: false},
 			{Name: "CHAIN_ID", Type: ParamTypeString, Default: "hcp-exp1", Description: "链ID", Required: false},
 			{Name: "TARGET_TPS", Type: ParamTypeInt, Default: 300, Description: "目标TPS", Required: false},
@@ -85,9 +86,9 @@ var Registry = []Experiment{
 		ReportDir:   "hcp-lab/experiments/exp3_parallel_merkle/report",
 		Params: []ParamSchema{
 			{Name: "K_LIST", Type: ParamTypeListInt, Default: "1,2,4,8", Description: "并行度列表", Required: true},
-			{Name: "TX_LIST", Type: ParamTypeListInt, Default: "1000,5000,10000", Description: "交易数量列表", Required: true},
-			{Name: "REPEAT", Type: ParamTypeInt, Default: 30, Description: "重复次数", Required: false},
-			{Name: "NODE_COUNT", Type: ParamTypeInt, Default: 1, Description: "节点数量", Required: false},
+			{Name: "TX_LIST", Type: ParamTypeListInt, Default: "100,1000,10000", Description: "交易数量列表", Required: true},
+			{Name: "REPEAT", Type: ParamTypeInt, Default: 5, Description: "重复次数", Required: false},
+			{Name: "NODE_COUNT", Type: ParamTypeInt, Default: 4, Description: "节点数量", Required: false},
 			{Name: "PORT_OFFSET", Type: ParamTypeInt, Default: 3000, Description: "端口偏移量", Required: false},
 			{Name: "CHAIN_ID", Type: ParamTypeString, Default: "hcp-exp3", Description: "链ID", Required: false},
 			{Name: "LOADGEN_DB_ISOLATION", Type: ParamTypeBool, Default: true, Description: "数据库隔离", Required: false},
@@ -122,7 +123,7 @@ var Registry = []Experiment{
 		Params: []ParamSchema{
 			{Name: "GROUP_LIST", Type: ParamTypeListInt, Default: "32,16,8,4,2", Description: "分组数量列表", Required: true},
 			{Name: "SIG_ALGO_LIST", Type: ParamTypeString, Default: "bls,ed25519", Description: "签名算法列表", Required: false},
-			{Name: "NODE_COUNT", Type: ParamTypeInt, Default: 32, Description: "节点数量", Required: true},
+			{Name: "NODE_COUNT", Type: ParamTypeInt, Default: 4, Description: "节点数量", Required: true},
 			{Name: "TX_COUNT", Type: ParamTypeInt, Default: 100, Description: "交易数量", Required: true},
 			{Name: "REPEAT", Type: ParamTypeInt, Default: 5, Description: "重复次数", Required: false},
 			{Name: "PORT_OFFSET", Type: ParamTypeInt, Default: 5000, Description: "端口偏移量", Required: false},
@@ -140,7 +141,7 @@ var Registry = []Experiment{
 		ReportDir:   "hcp-lab/experiments/exp6_alpenglow_votor/report",
 		Params: []ParamSchema{
 			{Name: "NODES_LIST", Type: ParamTypeListInt, Default: "4,8,16,32", Description: "验证节点数量列表", Required: true},
-			{Name: "TX_COUNT", Type: ParamTypeInt, Default: 500, Description: "总交易数", Required: true},
+			{Name: "TX_COUNT", Type: ParamTypeInt, Default: 100, Description: "总交易数", Required: true},
 			{Name: "FAULTY_RATIO_LIST", Type: ParamTypeString, Default: "0,0.1,0.2", Description: "故障节点比例列表", Required: true},
 			{Name: "FAST_THRESHOLD", Type: ParamTypeFloat, Default: 0.8, Description: "快速路径阈值", Required: false},
 			{Name: "SLOW_THRESHOLD", Type: ParamTypeFloat, Default: 0.6, Description: "慢速路径阈值", Required: false},
@@ -162,7 +163,7 @@ var Registry = []Experiment{
 		Params: []ParamSchema{
 			{Name: "NODES_LIST", Type: ParamTypeListInt, Default: "4,8,16,32", Description: "节点数量列表", Required: true},
 			{Name: "DURATION", Type: ParamTypeInt, Default: 100, Description: "运行时长(秒)", Required: true},
-			{Name: "REPEAT", Type: ParamTypeInt, Default: 1, Description: "重复次数", Required: false},
+			{Name: "REPEAT", Type: ParamTypeInt, Default: 5, Description: "重复次数", Required: false},
 			{Name: "DIFFICULTY", Type: ParamTypeInt, Default: 8, Description: "挖矿难度", Required: false},
 			{Name: "TARGET_BLOCK_MS", Type: ParamTypeInt, Default: 2000, Description: "目标出块间隔(ms)", Required: false},
 			{Name: "TX_PER_BLOCK", Type: ParamTypeInt, Default: 100, Description: "每块交易数", Required: false},
@@ -183,9 +184,10 @@ var Registry = []Experiment{
 		RunScript:   "hcp-lab/experiments/exp8_ibft/run_exp8_ibft.sh",
 		ReportDir:   "hcp-lab/experiments/exp8_ibft/report",
 		Params: []ParamSchema{
-			{Name: "NODES_LIST", Type: ParamTypeListInt, Default: "10,20,30,40,50", Description: "节点数量列表", Required: true},
+			{Name: "NODES_LIST", Type: ParamTypeListInt, Default: "4,8,16,32", Description: "节点数量列表", Required: true},
 			{Name: "TARGET_TPS_LIST", Type: ParamTypeListInt, Default: "1000,3000,5000", Description: "TPS 列表", Required: true},
-			{Name: "TX_TOTAL", Type: ParamTypeInt, Default: 5000, Description: "总交易数", Required: true},
+			{Name: "TX_TOTAL", Type: ParamTypeInt, Default: 100, Description: "总交易数", Required: true},
+			{Name: "REPEAT", Type: ParamTypeInt, Default: 5, Description: "重复次数", Required: false},
 			{Name: "FAULTY_RATIO_LIST", Type: ParamTypeString, Default: "0,0.1,0.2", Description: "故障节点比例列表", Required: true},
 			{Name: "PORT_OFFSET", Type: ParamTypeInt, Default: 80, Description: "端口偏移量", Required: false},
 			{Name: "CHAIN_ID", Type: ParamTypeString, Default: "hcp-exp8", Description: "链ID", Required: false},
@@ -215,7 +217,8 @@ var Registry = []Experiment{
 		ReportDir:   "hcp-lab/experiments/exp9_hotstuff/report",
 		Params: []ParamSchema{
 			{Name: "NODES_LIST", Type: ParamTypeListInt, Default: "4,8,16,32", Description: "节点数量列表", Required: true},
-			{Name: "TX_TOTAL", Type: ParamTypeInt, Default: 1000, Description: "总交易数", Required: true},
+			{Name: "TX_TOTAL", Type: ParamTypeInt, Default: 100, Description: "总交易数", Required: true},
+			{Name: "REPEAT", Type: ParamTypeInt, Default: 5, Description: "重复次数", Required: false},
 			{Name: "FAULTY_RATIO_LIST", Type: ParamTypeString, Default: "0,0.1,0.2", Description: "故障节点比例列表", Required: true},
 			{Name: "PORT_OFFSET", Type: ParamTypeInt, Default: 9000, Description: "端口偏移量", Required: false},
 			{Name: "CHAIN_ID", Type: ParamTypeString, Default: "hcp-exp9", Description: "链ID", Required: false},
@@ -241,7 +244,8 @@ var Registry = []Experiment{
 		ReportDir:   "hcp-lab/experiments/exp10_raft/report",
 		Params: []ParamSchema{
 			{Name: "NODES_LIST", Type: ParamTypeListInt, Default: "4,8,16,32", Description: "节点数量列表", Required: true},
-			{Name: "TX_TOTAL", Type: ParamTypeInt, Default: 1000, Description: "总交易数", Required: true},
+			{Name: "TX_TOTAL", Type: ParamTypeInt, Default: 100, Description: "总交易数", Required: true},
+			{Name: "REPEAT", Type: ParamTypeInt, Default: 5, Description: "重复次数", Required: false},
 			{Name: "PORT_OFFSET", Type: ParamTypeInt, Default: 10000, Description: "端口偏移量", Required: false},
 			{Name: "CHAIN_ID", Type: ParamTypeString, Default: "hcp-exp10", Description: "链ID", Required: false},
 			{Name: "RAFT_NODE_COUNT", Type: ParamTypeInt, Default: 4, Description: "Raft节点数", Required: false},
