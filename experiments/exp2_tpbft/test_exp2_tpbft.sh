@@ -1,0 +1,79 @@
+#!/bin/bash
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+EXP_DIR="tests/exp2_tpbft"
+REPORT_OUT="experiments/exp2_tpbft/report"
+NODES_LIST="${NODES_LIST:-4,8,16,32}"
+TX_LIST="${TX_LIST:-100,1000,10000}"
+REPEAT="${REPEAT:-3}"
+PORT_OFFSET="${PORT_OFFSET:-2000}"
+CHAIN_ID="${CHAIN_ID:-hcp-exp2}"
+HCPD_BINARY="../$EXP_DIR/bin/hcpd"
+CLI_BINARY="$EXP_DIR/bin/hcpd"
+GRPC_PORT=$((9090 + PORT_OFFSET))
+RPC_PORT=$((26657 + PORT_OFFSET))
+LOADGEN_DB_ISOLATION="${LOADGEN_DB_ISOLATION:-true}"
+LOADGEN_DB_RESET="${LOADGEN_DB_RESET:-true}"
+LOADGEN_DB_SCHEMA_PREFIX="${LOADGEN_DB_SCHEMA_PREFIX:-exp2}"
+LOADGEN_DATABASE_URL="${LOADGEN_DATABASE_URL:-}"
+TARGET_TPS="${TARGET_TPS:-300}"
+CONCURRENCY="${CONCURRENCY:-128}"
+BATCH_SIZE="${BATCH_SIZE:-8}"
+COMET_TIMEOUT_COMMIT="${COMET_TIMEOUT_COMMIT:-500ms}"
+COMET_SKIP_TIMEOUT_COMMIT="${COMET_SKIP_TIMEOUT_COMMIT:-true}"
+COMET_MEMPOOL_RECHECK="${COMET_MEMPOOL_RECHECK:-false}"
+COMET_TIMEOUT_PROPOSE="${COMET_TIMEOUT_PROPOSE:-3s}"
+COMET_TIMEOUT_PREVOTE="${COMET_TIMEOUT_PREVOTE:-1s}"
+COMET_TIMEOUT_PRECOMMIT="${COMET_TIMEOUT_PRECOMMIT:-1s}"
+
+TPBFT_MIN_TRUST="${TPBFT_MIN_TRUST:-0.6}"
+TPBFT_MAX_VALIDATORS="${TPBFT_MAX_VALIDATORS:-100}"
+TPBFT_HISTORY_WINDOW="${TPBFT_HISTORY_WINDOW:-100}"
+
+export PORT_OFFSET
+export HCPD_BINARY
+export CHAIN_ID
+export EXTRA_ACCOUNT_COUNT=100
+export COMET_TIMEOUT_COMMIT
+export COMET_SKIP_TIMEOUT_COMMIT
+export COMET_MEMPOOL_RECHECK
+export COMET_TIMEOUT_PROPOSE
+export COMET_TIMEOUT_PREVOTE
+export COMET_TIMEOUT_PRECOMMIT
+export LOADGEN_DB_ISOLATION
+export LOADGEN_DB_RESET
+export LOADGEN_DB_SCHEMA_PREFIX
+export LOADGEN_DATABASE_URL
+export TPBFT_MIN_TRUST
+export TPBFT_MAX_VALIDATORS
+export TPBFT_HISTORY_WINDOW
+
+echo "开始实验2：tPBFT 共识性能与节点规模扩展性测试"
+echo "节点列表: $NODES_LIST"
+echo "交易列表: $TX_LIST"
+echo "重复次数: $REPEAT"
+echo "链ID: $CHAIN_ID"
+echo "端口偏移: $PORT_OFFSET (gRPC=$GRPC_PORT, RPC=$RPC_PORT)"
+echo "负载参数: TARGET_TPS=$TARGET_TPS CONCURRENCY=$CONCURRENCY BATCH_SIZE=$BATCH_SIZE"
+echo "共识参数: PROPOSE=$COMET_TIMEOUT_PROPOSE PREVOTE=$COMET_TIMEOUT_PREVOTE PRECOMMIT=$COMET_TIMEOUT_PRECOMMIT COMMIT=$COMET_TIMEOUT_COMMIT"
+echo "tPBFT参数: MIN_TRUST=$TPBFT_MIN_TRUST MAX_VALIDATORS=$TPBFT_MAX_VALIDATORS HISTORY_WINDOW=$TPBFT_HISTORY_WINDOW"
+echo "数据库隔离: ENABLED=$LOADGEN_DB_ISOLATION RESET=$LOADGEN_DB_RESET PREFIX=$LOADGEN_DB_SCHEMA_PREFIX DB_URL_OVERRIDE=${LOADGEN_DATABASE_URL:-<default>}"
+echo "实验数据目录: $EXP_DIR"
+echo "报告输出目录: $REPORT_OUT"
+
+cd "$PROJECT_ROOT/hcp-loadgen"
+echo "构建 hcp-loadgen..."
+cargo build --release
+
+cd "$PROJECT_ROOT/hcp-lab"
+export EXP_ARTIFACT_ROOT="$EXP_DIR"
+export PYTHONPATH="$PROJECT_ROOT/hcp-lab:${PYTHONPATH}"
+echo "启动实验执行器..."
+python3 experiments/exp2_tpbft/run_exp2.py \
+  --nodes "$NODES_LIST" \
+  --tx "$TX_LIST" \
+  --repeat "$REPEAT" \
+  --out "$REPORT_OUT" \
+  --loadgen-args "--protocol grpc --grpc-endpoint http://127.0.0.1:$GRPC_PORT --rpc-endpoint tcp://127.0.0.1:$RPC_PORT --chain-id $CHAIN_ID --keyring-backend test --keyring-home {data_root}/nodes_{nodes}/node1 --account-file {data_root}/nodes_{nodes}/accounts.jsonl --cli-binary $CLI_BINARY --send-amount 1 --fee-amount 1 --denom stake --account-count 100 --initial-nonce 0 --total-txs {tx} --target-tps $TARGET_TPS --concurrency $CONCURRENCY --batch-size $BATCH_SIZE --metrics-interval 100 --json-interval-ms 100 --csv-path {data_root}/loadgen_nodes{nodes}_tx{tx}.csv"
