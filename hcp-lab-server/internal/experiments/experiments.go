@@ -261,6 +261,26 @@ var Registry = []Experiment{
 			{Name: "LOADGEN_DB_SCHEMA_PREFIX", Type: ParamTypeString, Default: "exp10", Description: "数据库前缀", Required: false},
 		},
 	},
+	{
+		ID:          "exp11_hierarchical_tpbft_parallel_block",
+		Name:        "实验十一：分层 TPBFT + 并行 Merkle 块",
+		Description: "分层 TPBFT 共识结合并行 Merkle 块计算的综合性能实验",
+		RunScript:   "hcp-lab/experiments/exp11_hierarchical_tpbft_parallel_block/run_exp11.sh",
+		ReportDir:   "hcp-lab/experiments/exp11_hierarchical_tpbft_parallel_block/report",
+		Params: []ParamSchema{
+			{Name: "GROUP_LIST", Type: ParamTypeListInt, Default: "32,16,8,4,2", Description: "分组数量列表", Required: true},
+			{Name: "K_LIST", Type: ParamTypeListInt, Default: "1,2,4,8", Description: "并行度列表", Required: true},
+			{Name: "SIG_ALGO_LIST", Type: ParamTypeString, Default: "bls,ed25519", Description: "签名算法列表", Required: false},
+			{Name: "NODE_COUNT", Type: ParamTypeInt, Default: 4, Description: "节点数量", Required: true},
+			{Name: "TX_COUNT", Type: ParamTypeInt, Default: 100, Description: "交易数量", Required: true},
+			{Name: "REPEAT", Type: ParamTypeInt, Default: 5, Description: "重复次数", Required: false},
+			{Name: "PORT_OFFSET", Type: ParamTypeInt, Default: 11000, Description: "端口偏移量", Required: false},
+			{Name: "CHAIN_ID", Type: ParamTypeString, Default: "hcp-exp11", Description: "链ID", Required: false},
+			{Name: "LOADGEN_DB_ISOLATION", Type: ParamTypeBool, Default: true, Description: "数据库隔离", Required: false},
+			{Name: "LOADGEN_DB_RESET", Type: ParamTypeBool, Default: true, Description: "数据库重置", Required: false},
+			{Name: "LOADGEN_DB_SCHEMA_PREFIX", Type: ParamTypeString, Default: "exp11", Description: "数据库前缀", Required: false},
+		},
+	},
 }
 
 // FindByID returns an experiment by its ID.
