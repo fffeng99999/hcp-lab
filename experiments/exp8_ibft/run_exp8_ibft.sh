@@ -3,7 +3,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-export NODES_LIST="${NODES_LIST:-4,8,16,32}"
+export NODES_LIST="${NODES_LIST:-16,32,64,128,256}"
 export TX_TOTAL="${TX_TOTAL:-100,1000,10000}"
 export REPEAT="${REPEAT:-5}"
 export TARGET_TPS_LIST="${TARGET_TPS_LIST:-1000,3000,5000}"

@@ -4,7 +4,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 export GROUP_LIST="${GROUP_LIST:-32,16,8,4,2}"
-export NODE_COUNT="${NODE_COUNT:-4,8,16,32}"
+export NODE_COUNT="${NODE_COUNT:-16,32,64,128,256}"
 export TX_COUNT="${TX_COUNT:-100,1000,10000}"
 export REPEAT="${REPEAT:-5}"
 export PORT_OFFSET="${PORT_OFFSET:-4000}"

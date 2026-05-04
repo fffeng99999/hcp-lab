@@ -64,6 +64,7 @@ class ExperimentRunner:
         data_root: Path,
         log_root: Path,
         loadgen_args: List[str],
+        extra_account_count: Optional[int] = None,
     ) -> ExperimentResult:
         points: List[ExperimentPoint] = []
         total_points = len(matrix)
@@ -85,9 +86,10 @@ class ExperimentRunner:
                     log_dir,
                     use_cpu_affinity=True,
                     storage_group_size=int(share_size_value),
+                    extra_account_count=extra_account_count,
                 )
             else:
-                self.node_manager.start_nodes(num_nodes, data_dir, log_dir, use_cpu_affinity=True)
+                self.node_manager.start_nodes(num_nodes, data_dir, log_dir, use_cpu_affinity=True, extra_account_count=extra_account_count)
 
             monitor = SystemMonitor()
             monitor.start()
