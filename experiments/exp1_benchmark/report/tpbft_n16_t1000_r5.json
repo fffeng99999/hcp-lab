@@ -1,0 +1,12 @@
+{
+  "EngineType": "tpbft",
+  "NodeCount": 16,
+  "TxCount": 1000,
+  "DurationSec": 12.833146918,
+  "TPS": 77.92320982450393,
+  "P50LatencyMs": 125.69,
+  "P95LatencyMs": 218.898,
+  "P99LatencyMs": 223.613,
+  "TotalMessages": 24100,
+  "TotalBytes": 18678542
+}

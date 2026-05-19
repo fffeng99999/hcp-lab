@@ -1,0 +1,12 @@
+{
+  "EngineType": "raft",
+  "NodeCount": 16,
+  "TxCount": 1000,
+  "DurationSec": 12.505485273,
+  "TPS": 79.96490965121143,
+  "P50LatencyMs": 105.106,
+  "P95LatencyMs": 195.397,
+  "P99LatencyMs": 201.833,
+  "TotalMessages": 4329,
+  "TotalBytes": 12879099
+}

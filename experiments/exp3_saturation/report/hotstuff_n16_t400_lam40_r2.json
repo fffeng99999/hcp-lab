@@ -1,0 +1,12 @@
+{
+  "EngineType": "hotstuff",
+  "NodeCount": 16,
+  "TxCount": 400,
+  "DurationSec": 12.21862171,
+  "TPS": 32.73691660923022,
+  "P50LatencyMs": 127.006,
+  "P95LatencyMs": 203.78,
+  "P99LatencyMs": 203.78,
+  "TotalMessages": 1690,
+  "TotalBytes": 83816136
+}

@@ -1,0 +1,12 @@
+{
+  "EngineType": "hierarchical_tpbft",
+  "NodeCount": 32,
+  "TxCount": 1000,
+  "DurationSec": 12.498965225,
+  "TPS": 80.00662310827416,
+  "P50LatencyMs": 82.605,
+  "P95LatencyMs": 182.768,
+  "P99LatencyMs": 186.892,
+  "TotalMessages": 3028,
+  "TotalBytes": 2121600
+}

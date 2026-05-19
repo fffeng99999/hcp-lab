@@ -1,0 +1,12 @@
+{
+  "EngineType": "cometbft",
+  "NodeCount": 32,
+  "TxCount": 1000,
+  "DurationSec": 24.008256645,
+  "TPS": 41.652337143282814,
+  "P50LatencyMs": 172.563,
+  "P95LatencyMs": 319.754,
+  "P99LatencyMs": 329.317,
+  "TotalMessages": 251240,
+  "TotalBytes": 116953711
+}
