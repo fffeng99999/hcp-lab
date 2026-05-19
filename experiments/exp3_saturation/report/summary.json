@@ -1,2290 +1,440 @@
 {
-  "pbft": {
-    "20": {
-      "tps_mean": 26.027565165667017,
-      "tps_std": 0.050737382616386086,
-      "tps_ci": [
-        25.964576483945198,
-        26.090553847388836
-      ],
-      "p99_mean": 252.5016,
-      "p99_std": 0.6717293353725173,
-      "p99_ci": [
-        251.6676715802213,
-        253.33552841977868
-      ],
-      "raw": [
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.672924607,
-          "TPS": 26.065680329706385,
-          "P50LatencyMs": 149.292,
-          "P95LatencyMs": 248.2,
-          "P99LatencyMs": 252.071,
-          "TotalMessages": 17320,
-          "TotalBytes": 9016739
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.702562809,
-          "TPS": 25.965383854619343,
-          "P50LatencyMs": 149.967,
-          "P95LatencyMs": 247.774,
-          "P99LatencyMs": 252.899,
-          "TotalMessages": 17320,
-          "TotalBytes": 9016890
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.698434178,
-          "TPS": 25.97930895759878,
-          "P50LatencyMs": 150.156,
-          "P95LatencyMs": 248.362,
-          "P99LatencyMs": 252.208,
-          "TotalMessages": 17320,
-          "TotalBytes": 9017299
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.674712567,
-          "TPS": 26.059607868569184,
-          "P50LatencyMs": 149.584,
-          "P95LatencyMs": 248.783,
-          "P99LatencyMs": 251.852,
-          "TotalMessages": 17320,
-          "TotalBytes": 9016761
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.672287502,
-          "TPS": 26.067844817841397,
-          "P50LatencyMs": 149.528,
-          "P95LatencyMs": 248.548,
-          "P99LatencyMs": 253.478,
-          "TotalMessages": 17320,
-          "TotalBytes": 9017072
-        }
-      ]
-    },
-    "40": {
-      "tps_mean": 29.951151569562068,
-      "tps_std": 0.04747394818765299,
-      "tps_ci": [
-        29.892214327271123,
-        30.010088811853013
-      ],
-      "p99_mean": 250.623,
-      "p99_std": 0.7985430483073479,
-      "p99_ci": [
-        249.631636801561,
-        251.61436319843898
-      ],
-      "raw": [
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 13.324432683,
-          "TPS": 30.02003984082119,
-          "P50LatencyMs": 149.862,
-          "P95LatencyMs": 248.36,
-          "P99LatencyMs": 250.534,
-          "TotalMessages": 34160,
-          "TotalBytes": 17877397
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 13.349674642,
-          "TPS": 29.963277063063572,
-          "P50LatencyMs": 149.118,
-          "P95LatencyMs": 247.774,
-          "P99LatencyMs": 250.024,
-          "TotalMessages": 34160,
-          "TotalBytes": 17877560
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 13.376132437,
-          "TPS": 29.904010137754888,
-          "P50LatencyMs": 149.486,
-          "P95LatencyMs": 248.181,
-          "P99LatencyMs": 249.811,
-          "TotalMessages": 34160,
-          "TotalBytes": 17877104
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 13.351148644,
-          "TPS": 29.95996903830142,
-          "P50LatencyMs": 149.55,
-          "P95LatencyMs": 247.587,
-          "P99LatencyMs": 251.82,
-          "TotalMessages": 34160,
-          "TotalBytes": 17878185
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 13.374141509,
-          "TPS": 29.908461767869277,
-          "P50LatencyMs": 149.078,
-          "P95LatencyMs": 247.523,
-          "P99LatencyMs": 250.926,
-          "TotalMessages": 34160,
-          "TotalBytes": 17877192
-        }
-      ]
-    },
-    "60": {
-      "tps_mean": 43.68708258123551,
-      "tps_std": 0.3464092362754139,
-      "tps_ci": [
-        43.25702765912362,
-        44.117137503347394
-      ],
-      "p99_mean": 246.7406,
-      "p99_std": 0.46324647866982965,
-      "p99_ci": [
-        246.16549573763973,
-        247.31570426236027
-      ],
-      "raw": [
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 13.735154839,
-          "TPS": 43.68352647152855,
-          "P50LatencyMs": 147.575,
-          "P95LatencyMs": 244.628,
-          "P99LatencyMs": 246.968,
-          "TotalMessages": 38520,
-          "TotalBytes": 22399577
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 13.640385901,
-          "TPS": 43.98702531986378,
-          "P50LatencyMs": 147.671,
-          "P95LatencyMs": 244.48,
-          "P99LatencyMs": 246.591,
-          "TotalMessages": 38520,
-          "TotalBytes": 22398715
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 13.918800016,
-          "TPS": 43.10716436117232,
-          "P50LatencyMs": 146.904,
-          "P95LatencyMs": 243.873,
-          "P99LatencyMs": 246.874,
-          "TotalMessages": 39000,
-          "TotalBytes": 22565063
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 13.715341422,
-          "TPS": 43.746632441652096,
-          "P50LatencyMs": 147.472,
-          "P95LatencyMs": 244.166,
-          "P99LatencyMs": 246.025,
-          "TotalMessages": 38520,
-          "TotalBytes": 22398315
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 13.663982174000001,
-          "TPS": 43.9110643119608,
-          "P50LatencyMs": 147.884,
-          "P95LatencyMs": 244.627,
-          "P99LatencyMs": 247.245,
-          "TotalMessages": 38520,
-          "TotalBytes": 22399446
-        }
-      ]
-    },
-    "80": {
-      "tps_mean": 56.49693935743333,
-      "tps_std": 0.10622434415932924,
-      "tps_ci": [
-        56.36506555826734,
-        56.628813156599314
-      ],
-      "p99_mean": 244.22820000000002,
-      "p99_std": 1.6122188747189319,
-      "p99_ci": [
-        242.22668678964405,
-        246.22971321035598
-      ],
-      "raw": [
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 14.167759857,
-          "TPS": 56.46623094085946,
-          "P50LatencyMs": 135.452,
-          "P95LatencyMs": 239.934,
-          "P99LatencyMs": 242.901,
-          "TotalMessages": 42880,
-          "TotalBytes": 26918804
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 14.126490106,
-          "TPS": 56.63119387739583,
-          "P50LatencyMs": 135.552,
-          "P95LatencyMs": 239.765,
-          "P99LatencyMs": 242.883,
-          "TotalMessages": 42880,
-          "TotalBytes": 26920435
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 14.141633778,
-          "TPS": 56.570549949083826,
-          "P50LatencyMs": 135.226,
-          "P95LatencyMs": 239.819,
-          "P99LatencyMs": 243.4,
-          "TotalMessages": 42880,
-          "TotalBytes": 26921398
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 14.194947779,
-          "TPS": 56.358079822140645,
-          "P50LatencyMs": 135.347,
-          "P95LatencyMs": 240.161,
-          "P99LatencyMs": 245.898,
-          "TotalMessages": 42880,
-          "TotalBytes": 26919204
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 14.16966418,
-          "TPS": 56.45864219768686,
-          "P50LatencyMs": 135.954,
-          "P95LatencyMs": 240.472,
-          "P99LatencyMs": 246.059,
-          "TotalMessages": 42880,
-          "TotalBytes": 26920545
-        }
-      ]
-    },
-    "100": {
-      "tps_mean": 69.78960880965816,
-      "tps_std": 0.3006765861821055,
-      "tps_ci": [
-        69.41632936930108,
-        70.16288825001524
-      ],
-      "p99_mean": 246.8748,
-      "p99_std": 0.8398501056736224,
-      "p99_ci": [
-        245.83215553802043,
-        247.91744446197956
-      ],
-      "raw": [
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 14.234692748,
-          "TPS": 70.2509016318952,
-          "P50LatencyMs": 137.352,
-          "P95LatencyMs": 242.994,
-          "P99LatencyMs": 246.371,
-          "TotalMessages": 46760,
-          "TotalBytes": 31274164
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 14.320633254,
-          "TPS": 69.82931426727814,
-          "P50LatencyMs": 137.226,
-          "P95LatencyMs": 243.075,
-          "P99LatencyMs": 246.099,
-          "TotalMessages": 46760,
-          "TotalBytes": 31274005
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 14.385160917,
-          "TPS": 69.51608020027267,
-          "P50LatencyMs": 136.72,
-          "P95LatencyMs": 242.897,
-          "P99LatencyMs": 247.95,
-          "TotalMessages": 46760,
-          "TotalBytes": 31273939
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 14.383670884,
-          "TPS": 69.52328150892082,
-          "P50LatencyMs": 137.096,
-          "P95LatencyMs": 242.735,
-          "P99LatencyMs": 247.605,
-          "TotalMessages": 46760,
-          "TotalBytes": 31273410
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 14.320807129,
-          "TPS": 69.82846643992394,
-          "P50LatencyMs": 137.176,
-          "P95LatencyMs": 242.473,
-          "P99LatencyMs": 246.349,
-          "TotalMessages": 46760,
-          "TotalBytes": 31275183
-        }
-      ]
-    },
-    "120": {
-      "tps_mean": 81.28394369640418,
-      "tps_std": 0.31894572850058134,
-      "tps_ci": [
-        80.8879837563546,
-        81.67990363645376
-      ],
-      "p99_mean": 249.5882,
-      "p99_std": 0.3518560785321156,
-      "p99_ci": [
-        249.15138301418668,
-        250.02501698581332
-      ],
-      "raw": [
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 14.67463929,
-          "TPS": 81.77373060322766,
-          "P50LatencyMs": 137.201,
-          "P95LatencyMs": 242.465,
-          "P99LatencyMs": 250.179,
-          "TotalMessages": 51120,
-          "TotalBytes": 35801776
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 14.803392743,
-          "TPS": 81.06249836325105,
-          "P50LatencyMs": 136.093,
-          "P95LatencyMs": 242.215,
-          "P99LatencyMs": 249.282,
-          "TotalMessages": 51120,
-          "TotalBytes": 35802013
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 14.738534474,
-          "TPS": 81.41922130160904,
-          "P50LatencyMs": 137.55,
-          "P95LatencyMs": 242.837,
-          "P99LatencyMs": 249.591,
-          "TotalMessages": 51120,
-          "TotalBytes": 35801820
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 14.817250968,
-          "TPS": 80.98668252239055,
-          "P50LatencyMs": 136.062,
-          "P95LatencyMs": 241.704,
-          "P99LatencyMs": 249.519,
-          "TotalMessages": 51600,
-          "TotalBytes": 35968600
-        },
-        {
-          "EngineType": "pbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 14.782405633,
-          "TPS": 81.17758569154263,
-          "P50LatencyMs": 135.521,
-          "P95LatencyMs": 242.527,
-          "P99LatencyMs": 249.37,
-          "TotalMessages": 51120,
-          "TotalBytes": 35801880
-        }
-      ]
-    }
-  },
-  "tpbft": {
-    "20": {
-      "tps_mean": 27.70729438886749,
-      "tps_std": 0.13108209814963936,
-      "tps_ci": [
-        27.54456055960785,
-        27.87002821812713
-      ],
-      "p99_mean": 225.76220000000004,
-      "p99_std": 1.073414971015405,
-      "p99_ci": [
-        224.42959294622406,
-        227.094807053776
-      ],
-      "raw": [
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.204896453,
-          "TPS": 27.7588999792944,
-          "P50LatencyMs": 124.958,
-          "P95LatencyMs": 220.238,
-          "P99LatencyMs": 225.493,
-          "TotalMessages": 8120,
-          "TotalBytes": 4887325
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.179936388,
-          "TPS": 27.85539999132371,
-          "P50LatencyMs": 124.296,
-          "P95LatencyMs": 218.838,
-          "P99LatencyMs": 224.319,
-          "TotalMessages": 8120,
-          "TotalBytes": 4886633
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.217658975,
-          "TPS": 27.709815702396774,
-          "P50LatencyMs": 126.169,
-          "P95LatencyMs": 220.113,
-          "P99LatencyMs": 227.184,
-          "TotalMessages": 8120,
-          "TotalBytes": 4886669
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.273421593,
-          "TPS": 27.497374852089095,
-          "P50LatencyMs": 124.542,
-          "P95LatencyMs": 220.743,
-          "P99LatencyMs": 226.349,
-          "TotalMessages": 8340,
-          "TotalBytes": 4963614
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.216313696,
-          "TPS": 27.714981419233467,
-          "P50LatencyMs": 124.574,
-          "P95LatencyMs": 220.146,
-          "P99LatencyMs": 225.466,
-          "TotalMessages": 8120,
-          "TotalBytes": 4887076
-        }
-      ]
-    },
-    "40": {
-      "tps_mean": 32.24507562134145,
-      "tps_std": 0.10524005188751327,
-      "tps_ci": [
-        32.11442378652273,
-        32.37572745616017
-      ],
-      "p99_mean": 224.254,
-      "p99_std": 0.3294594056936299,
-      "p99_ci": [
-        223.8449876983131,
-        224.66301230168688
-      ],
-      "raw": [
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.463285931,
-          "TPS": 32.09426488443772,
-          "P50LatencyMs": 124.85,
-          "P95LatencyMs": 219.7,
-          "P99LatencyMs": 224.506,
-          "TotalMessages": 16460,
-          "TotalBytes": 9856454
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.383882854,
-          "TPS": 32.30004714319466,
-          "P50LatencyMs": 125.154,
-          "P95LatencyMs": 219.556,
-          "P99LatencyMs": 224.251,
-          "TotalMessages": 16240,
-          "TotalBytes": 9779926
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.408455801,
-          "TPS": 32.236082105217626,
-          "P50LatencyMs": 124.404,
-          "P95LatencyMs": 219.098,
-          "P99LatencyMs": 223.807,
-          "TotalMessages": 16240,
-          "TotalBytes": 9780224
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.415808161,
-          "TPS": 32.216992628515534,
-          "P50LatencyMs": 124.427,
-          "P95LatencyMs": 219.704,
-          "P99LatencyMs": 224.078,
-          "TotalMessages": 16240,
-          "TotalBytes": 9779922
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.354070879,
-          "TPS": 32.377991345341705,
-          "P50LatencyMs": 124.566,
-          "P95LatencyMs": 218.859,
-          "P99LatencyMs": 224.628,
-          "TotalMessages": 16240,
-          "TotalBytes": 9779666
-        }
-      ]
-    },
-    "60": {
-      "tps_mean": 46.97691318196772,
-      "tps_std": 0.13499257128398023,
-      "tps_ci": [
-        46.80932463740865,
-        47.144501726526784
-      ],
-      "p99_mean": 222.9502,
-      "p99_std": 1.5019652792258553,
-      "p99_ci": [
-        221.0855627630798,
-        224.8148372369202
-      ],
-      "raw": [
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.745898152,
-          "TPS": 47.07396786360262,
-          "P50LatencyMs": 123.991,
-          "P95LatencyMs": 216.375,
-          "P99LatencyMs": 224.659,
-          "TotalMessages": 19300,
-          "TotalBytes": 12899945
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.727950047,
-          "TPS": 47.14034842880461,
-          "P50LatencyMs": 123.024,
-          "P95LatencyMs": 211.684,
-          "P99LatencyMs": 223.503,
-          "TotalMessages": 19080,
-          "TotalBytes": 12823120
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.806065896,
-          "TPS": 46.852796547565106,
-          "P50LatencyMs": 115.999,
-          "P95LatencyMs": 209.951,
-          "P99LatencyMs": 223.823,
-          "TotalMessages": 19080,
-          "TotalBytes": 12823296
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.812003931,
-          "TPS": 46.83108147884942,
-          "P50LatencyMs": 121.01,
-          "P95LatencyMs": 211.219,
-          "P99LatencyMs": 221.134,
-          "TotalMessages": 19080,
-          "TotalBytes": 12823194
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.769660216,
-          "TPS": 46.98637159101681,
-          "P50LatencyMs": 115.916,
-          "P95LatencyMs": 209.606,
-          "P99LatencyMs": 221.632,
-          "TotalMessages": 19080,
-          "TotalBytes": 12823364
-        }
-      ]
-    },
-    "80": {
-      "tps_mean": 61.60054337701833,
-      "tps_std": 0.09958768159135174,
-      "tps_ci": [
-        61.476908761756455,
-        61.72417799228021
-      ],
-      "p99_mean": 224.8074,
-      "p99_std": 0.37943945498589754,
-      "p99_ci": [
-        224.33633921936192,
-        225.27846078063808
-      ],
-      "raw": [
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 12.987517299,
-          "TPS": 61.597608040267836,
-          "P50LatencyMs": 121.181,
-          "P95LatencyMs": 213.321,
-          "P99LatencyMs": 224.169,
-          "TotalMessages": 21700,
-          "TotalBytes": 15789038
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 13.014156476,
-          "TPS": 61.471521529291316,
-          "P50LatencyMs": 120.819,
-          "P95LatencyMs": 213.914,
-          "P99LatencyMs": 224.885,
-          "TotalMessages": 21700,
-          "TotalBytes": 15789384
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 12.960108658,
-          "TPS": 61.72787752872558,
-          "P50LatencyMs": 120.709,
-          "P95LatencyMs": 213.482,
-          "P99LatencyMs": 225.112,
-          "TotalMessages": 21700,
-          "TotalBytes": 15789323
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 12.974138812,
-          "TPS": 61.66112538121347,
-          "P50LatencyMs": 121.166,
-          "P95LatencyMs": 213.117,
-          "P99LatencyMs": 225.071,
-          "TotalMessages": 21700,
-          "TotalBytes": 15789605
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 12.998706673000001,
-          "TPS": 61.5445844055935,
-          "P50LatencyMs": 121.361,
-          "P95LatencyMs": 213.528,
-          "P99LatencyMs": 224.8,
-          "TotalMessages": 21700,
-          "TotalBytes": 15789600
-        }
-      ]
-    },
-    "100": {
-      "tps_mean": 78.0954284694074,
-      "tps_std": 0.2879487693792514,
-      "tps_ci": [
-        77.7379501673879,
-        78.4529067714269
-      ],
-      "p99_mean": 223.84099999999998,
-      "p99_std": 0.2885056325273384,
-      "p99_ci": [
-        223.48283037190512,
-        224.19916962809484
-      ],
-      "raw": [
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.846373237,
-          "TPS": 77.84298194916288,
-          "P50LatencyMs": 125.818,
-          "P95LatencyMs": 219.694,
-          "P99LatencyMs": 223.443,
-          "TotalMessages": 24100,
-          "TotalBytes": 18678853
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.825286563,
-          "TPS": 77.97096736106667,
-          "P50LatencyMs": 125.637,
-          "P95LatencyMs": 218.768,
-          "P99LatencyMs": 223.853,
-          "TotalMessages": 24100,
-          "TotalBytes": 18678047
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.759041991,
-          "TPS": 78.37579033797225,
-          "P50LatencyMs": 126.566,
-          "P95LatencyMs": 219.971,
-          "P99LatencyMs": 224.258,
-          "TotalMessages": 23880,
-          "TotalBytes": 18600971
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.844742916,
-          "TPS": 77.85286218180002,
-          "P50LatencyMs": 126.146,
-          "P95LatencyMs": 219.329,
-          "P99LatencyMs": 223.829,
-          "TotalMessages": 24100,
-          "TotalBytes": 18678518
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.749485028,
-          "TPS": 78.43454051703522,
-          "P50LatencyMs": 126.643,
-          "P95LatencyMs": 220.237,
-          "P99LatencyMs": 223.822,
-          "TotalMessages": 23880,
-          "TotalBytes": 18601309
-        }
-      ]
-    },
-    "120": {
-      "tps_mean": 91.80672747832197,
-      "tps_std": 0.17318036878139556,
-      "tps_ci": [
-        91.59173012199174,
-        92.0217248346522
-      ],
-      "p99_mean": 223.7582,
-      "p99_std": 0.5623883889270866,
-      "p99_ci": [
-        223.06001453186087,
-        224.4563854681391
-      ],
-      "raw": [
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 13.067194677,
-          "TPS": 91.83302381743493,
-          "P50LatencyMs": 122.076,
-          "P95LatencyMs": 216.277,
-          "P99LatencyMs": 223.858,
-          "TotalMessages": 26720,
-          "TotalBytes": 21649115
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 13.062021366,
-          "TPS": 91.86939497155926,
-          "P50LatencyMs": 123.337,
-          "P95LatencyMs": 216.638,
-          "P99LatencyMs": 224.386,
-          "TotalMessages": 26720,
-          "TotalBytes": 21647874
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 13.03740944,
-          "TPS": 92.04282534214865,
-          "P50LatencyMs": 122.696,
-          "P95LatencyMs": 216.113,
-          "P99LatencyMs": 224.153,
-          "TotalMessages": 26720,
-          "TotalBytes": 21648739
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 13.085809826,
-          "TPS": 91.7023872390181,
-          "P50LatencyMs": 122.702,
-          "P95LatencyMs": 215.685,
-          "P99LatencyMs": 223.391,
-          "TotalMessages": 26720,
-          "TotalBytes": 21648527
-        },
-        {
-          "EngineType": "tpbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 13.102438376,
-          "TPS": 91.58600602144897,
-          "P50LatencyMs": 122.021,
-          "P95LatencyMs": 215.138,
-          "P99LatencyMs": 223.003,
-          "TotalMessages": 26720,
-          "TotalBytes": 21648724
-        }
-      ]
-    }
-  },
-  "hotstuff": {
-    "20": {
-      "tps_mean": 28.131257940039518,
-      "tps_std": 0.004682373722665292,
-      "tps_ci": [
-        28.125444937221665,
-        28.13707094285737
-      ],
-      "p99_mean": 203.80599999999998,
-      "p99_std": 0.1604571593915364,
-      "p99_ci": [
-        203.60679806206562,
-        204.00520193793434
-      ],
-      "raw": [
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.109587443,
-          "TPS": 28.131027517907132,
-          "P50LatencyMs": 126.803,
-          "P95LatencyMs": 203.611,
-          "P99LatencyMs": 203.611,
-          "TotalMessages": 1100,
-          "TotalBytes": 37956428
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.110113445,
-          "TPS": 28.128946401079542,
-          "P50LatencyMs": 127.054,
-          "P95LatencyMs": 204.001,
-          "P99LatencyMs": 204.001,
-          "TotalMessages": 1100,
-          "TotalBytes": 37918985
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.108698342,
-          "TPS": 28.134545929224352,
-          "P50LatencyMs": 126.821,
-          "P95LatencyMs": 203.892,
-          "P99LatencyMs": 203.892,
-          "TotalMessages": 1100,
-          "TotalBytes": 37946885
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.111131893,
-          "TPS": 28.124917806246067,
-          "P50LatencyMs": 126.709,
-          "P95LatencyMs": 203.852,
-          "P99LatencyMs": 203.852,
-          "TotalMessages": 1100,
-          "TotalBytes": 37926898
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.108115708,
-          "TPS": 28.136852045740504,
-          "P50LatencyMs": 126.605,
-          "P95LatencyMs": 203.674,
-          "P99LatencyMs": 203.674,
-          "TotalMessages": 1100,
-          "TotalBytes": 37944307
-        }
-      ]
-    },
-    "40": {
-      "tps_mean": 32.73172361755819,
-      "tps_std": 0.014938655085032846,
-      "tps_ci": [
-        32.713177801002814,
-        32.75026943411356
-      ],
-      "p99_mean": 203.7668,
-      "p99_std": 0.5230785791828969,
-      "p99_ci": [
-        203.1174162824999,
-        204.41618371750008
-      ],
-      "raw": [
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.22589084,
-          "TPS": 32.71745226869701,
-          "P50LatencyMs": 126.904,
-          "P95LatencyMs": 204.268,
-          "P99LatencyMs": 204.268,
-          "TotalMessages": 1690,
-          "TotalBytes": 83801351
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.21862171,
-          "TPS": 32.73691660923022,
-          "P50LatencyMs": 127.006,
-          "P95LatencyMs": 203.78,
-          "P99LatencyMs": 203.78,
-          "TotalMessages": 1690,
-          "TotalBytes": 83816136
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.223385456,
-          "TPS": 32.724158248945265,
-          "P50LatencyMs": 125.978,
-          "P95LatencyMs": 202.912,
-          "P99LatencyMs": 202.912,
-          "TotalMessages": 1690,
-          "TotalBytes": 83836979
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.211758873,
-          "TPS": 32.75531429664841,
-          "P50LatencyMs": 126.532,
-          "P95LatencyMs": 203.772,
-          "P99LatencyMs": 203.772,
-          "TotalMessages": 1690,
-          "TotalBytes": 83822151
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.223154465,
-          "TPS": 32.724776664270024,
-          "P50LatencyMs": 127.268,
-          "P95LatencyMs": 204.102,
-          "P99LatencyMs": 204.102,
-          "TotalMessages": 1690,
-          "TotalBytes": 83797025
-        }
-      ]
-    },
-    "60": {
-      "tps_mean": 48.00002459558694,
-      "tps_std": 0.014628009221777911,
-      "tps_ci": [
-        47.981864434979904,
-        48.01818475619398
-      ],
-      "p99_mean": 203.83659999999998,
-      "p99_std": 0.21248717608364406,
-      "p99_ci": [
-        203.5728046204571,
-        204.10039537954285
-      ],
-      "raw": [
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.502811443,
-          "TPS": 47.98920648650783,
-          "P50LatencyMs": 115.33,
-          "P95LatencyMs": 203.626,
-          "P99LatencyMs": 203.626,
-          "TotalMessages": 1905,
-          "TotalBytes": 92467325
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.503360466,
-          "TPS": 47.98709927875481,
-          "P50LatencyMs": 116.361,
-          "P95LatencyMs": 204.181,
-          "P99LatencyMs": 204.181,
-          "TotalMessages": 1905,
-          "TotalBytes": 92470350
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.499615099,
-          "TPS": 48.00147806535271,
-          "P50LatencyMs": 115.682,
-          "P95LatencyMs": 203.878,
-          "P99LatencyMs": 203.878,
-          "TotalMessages": 1905,
-          "TotalBytes": 92495511
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.500391919,
-          "TPS": 47.99849507822459,
-          "P50LatencyMs": 115.558,
-          "P95LatencyMs": 203.732,
-          "P99LatencyMs": 203.732,
-          "TotalMessages": 1905,
-          "TotalBytes": 92478133
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.49379369,
-          "TPS": 48.02384406909476,
-          "P50LatencyMs": 115.628,
-          "P95LatencyMs": 203.766,
-          "P99LatencyMs": 203.766,
-          "TotalMessages": 1905,
-          "TotalBytes": 92513044
-        }
-      ]
-    },
-    "80": {
-      "tps_mean": 62.57633233970755,
-      "tps_std": 0.023435887702681943,
-      "tps_ci": [
-        62.54723750676093,
-        62.60542717265417
-      ],
-      "p99_mean": 204.3162,
-      "p99_std": 0.3744231563351839,
-      "p99_ci": [
-        203.85136677827091,
-        204.7810332217291
-      ],
-      "raw": [
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 12.788874243,
-          "TPS": 62.55437224569477,
-          "P50LatencyMs": 109.03,
-          "P95LatencyMs": 203.867,
-          "P99LatencyMs": 203.867,
-          "TotalMessages": 2120,
-          "TotalBytes": 97870433
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 12.779556829,
-          "TPS": 62.59997985099143,
-          "P50LatencyMs": 109.391,
-          "P95LatencyMs": 204.398,
-          "P99LatencyMs": 204.398,
-          "TotalMessages": 2120,
-          "TotalBytes": 97883546
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 12.786805367,
-          "TPS": 62.56449340072293,
-          "P50LatencyMs": 109.456,
-          "P95LatencyMs": 204.345,
-          "P99LatencyMs": 204.345,
-          "TotalMessages": 2120,
-          "TotalBytes": 97888360
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 12.778866696,
-          "TPS": 62.60336061338002,
-          "P50LatencyMs": 109.416,
-          "P95LatencyMs": 204.869,
-          "P99LatencyMs": 204.869,
-          "TotalMessages": 2120,
-          "TotalBytes": 97887275
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 12.787835068,
-          "TPS": 62.559455587748594,
-          "P50LatencyMs": 108.866,
-          "P95LatencyMs": 204.102,
-          "P99LatencyMs": 204.102,
-          "TotalMessages": 2120,
-          "TotalBytes": 97893984
-        }
-      ]
-    },
-    "100": {
-      "tps_mean": 79.72987492277025,
-      "tps_std": 0.05256137336557241,
-      "tps_ci": [
-        79.6646218204804,
-        79.7951280250601
-      ],
-      "p99_mean": 204.0282,
-      "p99_std": 1.2057969149073207,
-      "p99_ci": [
-        202.5312454040465,
-        205.5251545959535
-      ],
-      "raw": [
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.537244445,
-          "TPS": 79.76234366227195,
-          "P50LatencyMs": 107.363,
-          "P95LatencyMs": 203.226,
-          "P99LatencyMs": 203.226,
-          "TotalMessages": 2305,
-          "TotalBytes": 98814658
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.555158249,
-          "TPS": 79.6485380882912,
-          "P50LatencyMs": 107.693,
-          "P95LatencyMs": 202.933,
-          "P99LatencyMs": 202.933,
-          "TotalMessages": 2305,
-          "TotalBytes": 98810047
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.533263878,
-          "TPS": 79.78767619784412,
-          "P50LatencyMs": 110.113,
-          "P95LatencyMs": 205.172,
-          "P99LatencyMs": 205.172,
-          "TotalMessages": 2305,
-          "TotalBytes": 98748570
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.543059704000001,
-          "TPS": 79.72536395414737,
-          "P50LatencyMs": 108.213,
-          "P95LatencyMs": 203.314,
-          "P99LatencyMs": 203.314,
-          "TotalMessages": 2305,
-          "TotalBytes": 98819131
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.54304574,
-          "TPS": 79.72545271129658,
-          "P50LatencyMs": 109.897,
-          "P95LatencyMs": 205.496,
-          "P99LatencyMs": 205.496,
-          "TotalMessages": 2305,
-          "TotalBytes": 98838755
-        }
-      ]
-    },
-    "120": {
-      "tps_mean": 95.01331507598113,
-      "tps_std": 0.47141868887132654,
-      "tps_ci": [
-        94.42806530116432,
-        95.59856485079793
-      ],
-      "p99_mean": 203.934,
-      "p99_std": 0.3237491312729669,
-      "p99_ci": [
-        203.53207680381047,
-        204.33592319618953
-      ],
-      "raw": [
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 12.696279406,
-          "TPS": 94.51587836298756,
-          "P50LatencyMs": 113.588,
-          "P95LatencyMs": 195.053,
-          "P99LatencyMs": 204.065,
-          "TotalMessages": 2520,
-          "TotalBytes": 102125189
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 12.590331241,
-          "TPS": 95.3112334401687,
-          "P50LatencyMs": 114.5,
-          "P95LatencyMs": 194.451,
-          "P99LatencyMs": 203.368,
-          "TotalMessages": 2505,
-          "TotalBytes": 100404627
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 12.701030498,
-          "TPS": 94.48052267797964,
-          "P50LatencyMs": 102.755,
-          "P95LatencyMs": 195.264,
-          "P99LatencyMs": 204.033,
-          "TotalMessages": 2520,
-          "TotalBytes": 102065421
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 12.578793115,
-          "TPS": 95.39865939674452,
-          "P50LatencyMs": 110.315,
-          "P95LatencyMs": 195.435,
-          "P99LatencyMs": 204.19,
-          "TotalMessages": 2505,
-          "TotalBytes": 100442955
-        },
-        {
-          "EngineType": "hotstuff",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 12.58385547,
-          "TPS": 95.36028150202523,
-          "P50LatencyMs": 106.427,
-          "P95LatencyMs": 195.204,
-          "P99LatencyMs": 204.014,
-          "TotalMessages": 2505,
-          "TotalBytes": 100410246
-        }
-      ]
-    }
-  },
   "raft": {
+    "10": {
+      "tps_mean": 9.499067619017856,
+      "tps_std": 0.0,
+      "tps_ci": [
+        0.0,
+        0.0
+      ],
+      "p99_mean": 139.905,
+      "p99_std": 0.0,
+      "p99_ci": [
+        0.0,
+        0.0
+      ],
+      "msgs_mean": 467.0,
+      "msgs_std": 0.0,
+      "bytes_mean": 366566.0,
+      "success_rate_mean": 1.0,
+      "raw": [
+        {
+          "params": {
+            "point": "raft_n8_lam10_r1",
+            "engine": "raft",
+            "nodes": 8,
+            "groups": 0,
+            "txs": 20,
+            "target_tps": 10,
+            "db_schema": "lg_exp3_saturation_raft_n8_lam10_r1"
+          },
+          "metrics": {
+            "tps": 9.499067619017856,
+            "loadgen_p99_ms": 9.087,
+            "success_rate": 1.0,
+            "engine_tps": 4.743767643999024,
+            "p50_ms": 124.179,
+            "p95_ms": 139.905,
+            "p99_ms": 139.905,
+            "messages": 467,
+            "bytes": 366566,
+            "accepted_txs": 20,
+            "db_trades": null
+          },
+          "duration_s": 2.1579017639160156,
+          "loadgen_exit_code": 0,
+          "loadgen": {
+            "elapsed_s": 2.1054698,
+            "sent": 20,
+            "success": 20,
+            "reject": 0,
+            "actual_tps": 9.499067619017856,
+            "success_rate": 1.0,
+            "reject_rate": 0.0,
+            "latency_avg_ms": 0.7847000000000001,
+            "latency_p50_ms": 0.309,
+            "latency_p90_ms": 0.62,
+            "latency_p99_ms": 9.087,
+            "cpu_percent": 8.91,
+            "mem_bytes": 13287673856
+          },
+          "engine_status": {
+            "accepted_txs": 20,
+            "engine": "raft",
+            "groups": 0,
+            "network": {
+              "TotalMessages": 467,
+              "TotalBytes": 366566,
+              "BroadcastCount": 0,
+              "AvgLatencyMs": 5
+            },
+            "node_status": {
+              "node-0": {
+                "NodeID": "node-0",
+                "Height": 11,
+                "View": 0,
+                "IsLeader": true,
+                "LeaderID": "node-0",
+                "PendingTxCount": 0,
+                "CommittedBlocks": 0,
+                "TPS": 4.743767643999024,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 124.179,
+                "P95LatencyMs": 139.905,
+                "P99LatencyMs": 139.905,
+                "CpuPercent": 0
+              },
+              "node-1": {
+                "NodeID": "node-1",
+                "Height": 11,
+                "View": 0,
+                "IsLeader": false,
+                "LeaderID": "node-0",
+                "PendingTxCount": 1,
+                "CommittedBlocks": 0,
+                "TPS": 4.743767643999024,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 223.937,
+                "P95LatencyMs": 223.937,
+                "P99LatencyMs": 223.937,
+                "CpuPercent": 0
+              },
+              "node-2": {
+                "NodeID": "node-2",
+                "Height": 11,
+                "View": 0,
+                "IsLeader": false,
+                "LeaderID": "node-0",
+                "PendingTxCount": 4,
+                "CommittedBlocks": 0,
+                "TPS": 4.743767643999024,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 334.138,
+                "P95LatencyMs": 334.745,
+                "P99LatencyMs": 334.745,
+                "CpuPercent": 0
+              },
+              "node-3": {
+                "NodeID": "node-3",
+                "Height": 11,
+                "View": 0,
+                "IsLeader": false,
+                "LeaderID": "node-0",
+                "PendingTxCount": 2,
+                "CommittedBlocks": 0,
+                "TPS": 4.743767643999024,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 331.384,
+                "P95LatencyMs": 331.384,
+                "P99LatencyMs": 331.384,
+                "CpuPercent": 0
+              },
+              "node-4": {
+                "NodeID": "node-4",
+                "Height": 11,
+                "View": 0,
+                "IsLeader": false,
+                "LeaderID": "node-0",
+                "PendingTxCount": 1,
+                "CommittedBlocks": 0,
+                "TPS": 4.743767643999024,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 331.232,
+                "P95LatencyMs": 331.232,
+                "P99LatencyMs": 331.232,
+                "CpuPercent": 0
+              },
+              "node-5": {
+                "NodeID": "node-5",
+                "Height": 11,
+                "View": 0,
+                "IsLeader": false,
+                "LeaderID": "node-0",
+                "PendingTxCount": 3,
+                "CommittedBlocks": 0,
+                "TPS": 4.743767643999024,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 330.671,
+                "P95LatencyMs": 333.163,
+                "P99LatencyMs": 333.163,
+                "CpuPercent": 0
+              },
+              "node-6": {
+                "NodeID": "node-6",
+                "Height": 11,
+                "View": 0,
+                "IsLeader": false,
+                "LeaderID": "node-0",
+                "PendingTxCount": 4,
+                "CommittedBlocks": 0,
+                "TPS": 4.743767643999024,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 225.311,
+                "P95LatencyMs": 319.023,
+                "P99LatencyMs": 319.023,
+                "CpuPercent": 0
+              },
+              "node-7": {
+                "NodeID": "node-7",
+                "Height": 11,
+                "View": 0,
+                "IsLeader": false,
+                "LeaderID": "node-0",
+                "PendingTxCount": 4,
+                "CommittedBlocks": 0,
+                "TPS": 4.743767643999024,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 333.639,
+                "P95LatencyMs": 333.979,
+                "P99LatencyMs": 333.979,
+                "CpuPercent": 0
+              }
+            },
+            "nodes": 8,
+            "sample_status": {
+              "NodeID": "node-0",
+              "Height": 11,
+              "View": 0,
+              "IsLeader": true,
+              "LeaderID": "node-0",
+              "PendingTxCount": 0,
+              "CommittedBlocks": 0,
+              "TPS": 4.743767643999024,
+              "AvgLatencyMs": 0,
+              "P50LatencyMs": 124.179,
+              "P95LatencyMs": 139.905,
+              "P99LatencyMs": 139.905,
+              "CpuPercent": 0
+            },
+            "uptime_s": 4.2160581
+          },
+          "db_counts": {},
+          "intermediate_paths": {
+            "test_root": "F:\\hcp-project-experiment\\tests\\exp3_saturation",
+            "bin_dir": "F:\\hcp-project-experiment\\tests\\exp3_saturation\\bin",
+            "data_dir": "F:\\hcp-project-experiment\\tests\\exp3_saturation\\data\\lg_exp3_saturation_raft_n8_lam10_r1",
+            "log_dir": "F:\\hcp-project-experiment\\tests\\exp3_saturation\\logs",
+            "csv": "F:\\hcp-project-experiment\\tests\\exp3_saturation\\csv\\lg_exp3_saturation_raft_n8_lam10_r1_loadgen.csv"
+          }
+        }
+      ]
+    },
     "20": {
-      "tps_mean": 28.15944075839182,
-      "tps_std": 0.007865448980959377,
+      "tps_mean": 18.969400081340787,
+      "tps_std": 0.0,
       "tps_ci": [
-        28.14967607923589,
-        28.169205437547753
+        0.0,
+        0.0
       ],
-      "p99_mean": 201.66799999999998,
-      "p99_std": 0.9649010311943893,
+      "p99_mean": 208.638,
+      "p99_std": 0.0,
       "p99_ci": [
-        200.4701091981333,
-        202.86589080186667
+        0.0,
+        0.0
       ],
+      "msgs_mean": 500.0,
+      "msgs_std": 0.0,
+      "bytes_mean": 623456.0,
+      "success_rate_mean": 1.0,
       "raw": [
         {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.09939357,
-          "TPS": 28.17142028090154,
-          "P50LatencyMs": 106.098,
-          "P95LatencyMs": 192.92,
-          "P99LatencyMs": 201.426,
-          "TotalMessages": 2019,
-          "TotalBytes": 2858542
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.103203842,
-          "TPS": 28.156308681082052,
-          "P50LatencyMs": 105.157,
-          "P95LatencyMs": 194.416,
-          "P99LatencyMs": 203.137,
-          "TotalMessages": 2026,
-          "TotalBytes": 2864127
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.103578046,
-          "TPS": 28.154825456252894,
-          "P50LatencyMs": 106.02,
-          "P95LatencyMs": 193.879,
-          "P99LatencyMs": 201.889,
-          "TotalMessages": 2035,
-          "TotalBytes": 2870274
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.104373542,
-          "TPS": 28.15167288398192,
-          "P50LatencyMs": 104.811,
-          "P95LatencyMs": 193.522,
-          "P99LatencyMs": 201.397,
-          "TotalMessages": 2037,
-          "TotalBytes": 2872179
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.101522102,
-          "TPS": 28.162976489740707,
-          "P50LatencyMs": 105.06,
-          "P95LatencyMs": 192.404,
-          "P99LatencyMs": 200.491,
-          "TotalMessages": 2027,
-          "TotalBytes": 2864933
-        }
-      ]
-    },
-    "40": {
-      "tps_mean": 32.7790975217153,
-      "tps_std": 0.02880958766346697,
-      "tps_ci": [
-        32.74333142866333,
-        32.81486361476727
-      ],
-      "p99_mean": 201.72,
-      "p99_std": 0.5863505777263336,
-      "p99_ci": [
-        200.9920663145544,
-        202.4479336854456
-      ],
-      "raw": [
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.213001047,
-          "TPS": 32.7519827813538,
-          "P50LatencyMs": 103.272,
-          "P95LatencyMs": 193.82,
-          "P99LatencyMs": 202.389,
-          "TotalMessages": 3775,
-          "TotalBytes": 5707220
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.202932909,
-          "TPS": 32.779005095159455,
-          "P50LatencyMs": 103.668,
-          "P95LatencyMs": 194.385,
-          "P99LatencyMs": 202.297,
-          "TotalMessages": 3723,
-          "TotalBytes": 5668705
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.214162183,
-          "TPS": 32.748869223034454,
-          "P50LatencyMs": 103.096,
-          "P95LatencyMs": 193.299,
-          "P99LatencyMs": 201.5,
-          "TotalMessages": 3778,
-          "TotalBytes": 5709104
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.193437904,
-          "TPS": 32.804530038963165,
-          "P50LatencyMs": 104.761,
-          "P95LatencyMs": 194.092,
-          "P99LatencyMs": 201.307,
-          "TotalMessages": 3660,
-          "TotalBytes": 5638714
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.190996165,
-          "TPS": 32.81110047006565,
-          "P50LatencyMs": 103.183,
-          "P95LatencyMs": 194.414,
-          "P99LatencyMs": 201.107,
-          "TotalMessages": 3717,
-          "TotalBytes": 5670126
-        }
-      ]
-    },
-    "60": {
-      "tps_mean": 48.100602801892805,
-      "tps_std": 0.03691908017585766,
-      "tps_ci": [
-        48.05476905819653,
-        48.14643654558908
-      ],
-      "p99_mean": 201.91220000000004,
-      "p99_std": 0.7061492051967456,
-      "p99_ci": [
-        201.0355405185571,
-        202.78885948144298
-      ],
-      "raw": [
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.482146613,
-          "TPS": 48.06865506411433,
-          "P50LatencyMs": 104.943,
-          "P95LatencyMs": 193.879,
-          "P99LatencyMs": 201.705,
-          "TotalMessages": 4061,
-          "TotalBytes": 8146410
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.471262676,
-          "TPS": 48.11060560488831,
-          "P50LatencyMs": 104.65,
-          "P95LatencyMs": 192.717,
-          "P99LatencyMs": 201.788,
-          "TotalMessages": 3981,
-          "TotalBytes": 8087417
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.479457672,
-          "TPS": 48.07901238739022,
-          "P50LatencyMs": 105.258,
-          "P95LatencyMs": 193.685,
-          "P99LatencyMs": 203.099,
-          "TotalMessages": 4015,
-          "TotalBytes": 8112916
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.478117396,
-          "TPS": 48.08417655954549,
-          "P50LatencyMs": 104.948,
-          "P95LatencyMs": 193.826,
-          "P99LatencyMs": 201.2,
-          "TotalMessages": 4035,
-          "TotalBytes": 8127228
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.45832576,
-          "TPS": 48.1605643935257,
-          "P50LatencyMs": 103.446,
-          "P95LatencyMs": 194.394,
-          "P99LatencyMs": 201.769,
-          "TotalMessages": 3948,
-          "TotalBytes": 8063008
-        }
-      ]
-    },
-    "80": {
-      "tps_mean": 62.74875357769016,
-      "tps_std": 0.048213935525561025,
-      "tps_ci": [
-        62.68889766706234,
-        62.80860948831798
-      ],
-      "p99_mean": 201.93,
-      "p99_std": 0.2000474943607135,
-      "p99_ci": [
-        201.6816480491947,
-        202.1783519508053
-      ],
-      "raw": [
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 12.754818448,
-          "TPS": 62.721394527214365,
-          "P50LatencyMs": 104.941,
-          "P95LatencyMs": 194.556,
-          "P99LatencyMs": 202.047,
-          "TotalMessages": 4267,
-          "TotalBytes": 10538444
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 12.736341745,
-          "TPS": 62.81238490746858,
-          "P50LatencyMs": 104.785,
-          "P95LatencyMs": 194.712,
-          "P99LatencyMs": 202.207,
-          "TotalMessages": 4201,
-          "TotalBytes": 10489149
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 12.744562546000001,
-          "TPS": 62.771868168286986,
-          "P50LatencyMs": 104.088,
-          "P95LatencyMs": 193.941,
-          "P99LatencyMs": 201.69,
-          "TotalMessages": 4288,
-          "TotalBytes": 10543022
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 12.762046717,
-          "TPS": 62.685869887495414,
-          "P50LatencyMs": 105.207,
-          "P95LatencyMs": 194.147,
-          "P99LatencyMs": 201.863,
-          "TotalMessages": 4271,
-          "TotalBytes": 10541080
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 12.748546784,
-          "TPS": 62.75225039798544,
-          "P50LatencyMs": 104.775,
-          "P95LatencyMs": 194.697,
-          "P99LatencyMs": 201.843,
-          "TotalMessages": 4244,
-          "TotalBytes": 10521333
-        }
-      ]
-    },
-    "100": {
-      "tps_mean": 80.03869251049709,
-      "tps_std": 0.06275775353726526,
-      "tps_ci": [
-        79.96078095969789,
-        80.11660406129629
-      ],
-      "p99_mean": 201.16,
-      "p99_std": 0.8768221028235963,
-      "p99_ci": [
-        200.071456099756,
-        202.248543900244
-      ],
-      "raw": [
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.505485273,
-          "TPS": 79.96490965121143,
-          "P50LatencyMs": 105.106,
-          "P95LatencyMs": 195.397,
-          "P99LatencyMs": 201.833,
-          "TotalMessages": 4329,
-          "TotalBytes": 12879099
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.489887842,
-          "TPS": 80.06477020852658,
-          "P50LatencyMs": 102.444,
-          "P95LatencyMs": 192.147,
-          "P99LatencyMs": 199.669,
-          "TotalMessages": 4306,
-          "TotalBytes": 12851009
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.479486981,
-          "TPS": 80.13149911711102,
-          "P50LatencyMs": 103.947,
-          "P95LatencyMs": 193.336,
-          "P99LatencyMs": 201.696,
-          "TotalMessages": 4241,
-          "TotalBytes": 12814197
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.497502911,
-          "TPS": 80.01598456279008,
-          "P50LatencyMs": 103.783,
-          "P95LatencyMs": 193.317,
-          "P99LatencyMs": 201.111,
-          "TotalMessages": 4364,
-          "TotalBytes": 12904935
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 12.497453798,
-          "TPS": 80.01629901284633,
-          "P50LatencyMs": 103.776,
-          "P95LatencyMs": 193.065,
-          "P99LatencyMs": 201.491,
-          "TotalMessages": 4383,
-          "TotalBytes": 12908046
-        }
-      ]
-    },
-    "120": {
-      "tps_mean": 93.61275303918364,
-      "tps_std": 0.40155766142663096,
-      "tps_ci": [
-        93.1142332806892,
-        94.11127279767808
-      ],
-      "p99_mean": 201.52839999999998,
-      "p99_std": 0.3624931723494844,
-      "p99_ci": [
-        201.07837743513713,
-        201.97842256486283
-      ],
-      "raw": [
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 12.75231335,
-          "TPS": 94.10057352456761,
-          "P50LatencyMs": 104.806,
-          "P95LatencyMs": 193.859,
-          "P99LatencyMs": 201.902,
-          "TotalMessages": 4703,
-          "TotalBytes": 15400414
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 12.837222463,
-          "TPS": 93.4781650359875,
-          "P50LatencyMs": 103.598,
-          "P95LatencyMs": 193.981,
-          "P99LatencyMs": 201.897,
-          "TotalMessages": 4593,
-          "TotalBytes": 15289550
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 12.802418203,
-          "TPS": 93.73229189769813,
-          "P50LatencyMs": 102.961,
-          "P95LatencyMs": 193.56,
-          "P99LatencyMs": 201.235,
-          "TotalMessages": 4620,
-          "TotalBytes": 15320493
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 12.901307149,
-          "TPS": 93.01383078016353,
-          "P50LatencyMs": 104.696,
-          "P95LatencyMs": 193.503,
-          "P99LatencyMs": 201.126,
-          "TotalMessages": 4608,
-          "TotalBytes": 15301080
-        },
-        {
-          "EngineType": "raft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 12.801515159000001,
-          "TPS": 93.73890395750145,
-          "P50LatencyMs": 104.472,
-          "P95LatencyMs": 193.501,
-          "P99LatencyMs": 201.482,
-          "TotalMessages": 4504,
-          "TotalBytes": 15235210
-        }
-      ]
-    }
-  },
-  "cometbft": {
-    "20": {
-      "tps_mean": 27.321081625671013,
-      "tps_std": 0.043271366678282054,
-      "tps_ci": [
-        27.267361740986104,
-        27.374801510355923
-      ],
-      "p99_mean": 232.25619999999998,
-      "p99_std": 2.6838577085978312,
-      "p99_ci": [
-        228.92428474785365,
-        235.5881152521463
-      ],
-      "raw": [
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.317985681,
-          "TPS": 27.329925025580273,
-          "P50LatencyMs": 125.719,
-          "P95LatencyMs": 222.987,
-          "P99LatencyMs": 232.844,
-          "TotalMessages": 16360,
-          "TotalBytes": 8683699
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.310825975,
-          "TPS": 27.35669002160867,
-          "P50LatencyMs": 128.138,
-          "P95LatencyMs": 222.89,
-          "P99LatencyMs": 228.166,
-          "TotalMessages": 16360,
-          "TotalBytes": 8683047
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.318919668,
-          "TPS": 27.326437380430065,
-          "P50LatencyMs": 128.415,
-          "P95LatencyMs": 223.768,
-          "P99LatencyMs": 231.582,
-          "TotalMessages": 16360,
-          "TotalBytes": 8683508
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.313805364,
-          "TPS": 27.345545861042414,
-          "P50LatencyMs": 126.549,
-          "P95LatencyMs": 221.51,
-          "P99LatencyMs": 233.213,
-          "TotalMessages": 16360,
-          "TotalBytes": 8682879
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 200,
-          "DurationSec": 7.340308872,
-          "TPS": 27.246809839693626,
-          "P50LatencyMs": 125.872,
-          "P95LatencyMs": 222.635,
-          "P99LatencyMs": 235.476,
-          "TotalMessages": 16360,
-          "TotalBytes": 8683328
-        }
-      ]
-    },
-    "40": {
-      "tps_mean": 31.683138801557437,
-      "tps_std": 0.06669010527157344,
-      "tps_ci": [
-        31.600345373943984,
-        31.76593222917089
-      ],
-      "p99_mean": 225.9858,
-      "p99_std": 1.2516424010075742,
-      "p99_ci": [
-        224.43192984034502,
-        227.539670159655
-      ],
-      "raw": [
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.586442493,
-          "TPS": 31.780227035753875,
-          "P50LatencyMs": 124.335,
-          "P95LatencyMs": 222.091,
-          "P99LatencyMs": 223.882,
-          "TotalMessages": 32240,
-          "TotalBytes": 17209863
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.621398027,
-          "TPS": 31.692210256289385,
-          "P50LatencyMs": 124.578,
-          "P95LatencyMs": 221.666,
-          "P99LatencyMs": 227.121,
-          "TotalMessages": 32240,
-          "TotalBytes": 17210346
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.620547651999999,
-          "TPS": 31.694345683692365,
-          "P50LatencyMs": 124.555,
-          "P95LatencyMs": 221.716,
-          "P99LatencyMs": 226.023,
-          "TotalMessages": 32240,
-          "TotalBytes": 17210211
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.658521045,
-          "TPS": 31.599268080215133,
-          "P50LatencyMs": 124.802,
-          "P95LatencyMs": 222.01,
-          "P99LatencyMs": 226.21,
-          "TotalMessages": 32720,
-          "TotalBytes": 17376863
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 400,
-          "DurationSec": 12.638373223,
-          "TPS": 31.649642951836412,
-          "P50LatencyMs": 125.601,
-          "P95LatencyMs": 221.905,
-          "P99LatencyMs": 226.693,
-          "TotalMessages": 32720,
-          "TotalBytes": 17376416
-        }
-      ]
-    },
-    "60": {
-      "tps_mean": 46.49858977876275,
-      "tps_std": 0.0034547245126372943,
-      "tps_ci": [
-        46.494300859399125,
-        46.50287869812637
-      ],
-      "p99_mean": 228.50560000000002,
-      "p99_std": 0.42177932618847364,
-      "p99_ci": [
-        227.98197575365293,
-        229.0292242463471
-      ],
-      "raw": [
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.903864935,
-          "TPS": 46.497696854574215,
-          "P50LatencyMs": 131.47,
-          "P95LatencyMs": 225.886,
-          "P99LatencyMs": 228.643,
-          "TotalMessages": 36600,
-          "TotalBytes": 21731155
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.902529825,
-          "TPS": 46.502508278449184,
-          "P50LatencyMs": 131.492,
-          "P95LatencyMs": 226.208,
-          "P99LatencyMs": 228.816,
-          "TotalMessages": 36600,
-          "TotalBytes": 21731011
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.903857069,
-          "TPS": 46.49772519888099,
-          "P50LatencyMs": 130.952,
-          "P95LatencyMs": 225.629,
-          "P99LatencyMs": 228.175,
-          "TotalMessages": 36600,
-          "TotalBytes": 21731486
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.902869354,
-          "TPS": 46.50128460100969,
-          "P50LatencyMs": 130.995,
-          "P95LatencyMs": 225.423,
-          "P99LatencyMs": 228.937,
-          "TotalMessages": 36600,
-          "TotalBytes": 21730385
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 600,
-          "DurationSec": 12.904964796,
-          "TPS": 46.49373396089968,
-          "P50LatencyMs": 130.931,
-          "P95LatencyMs": 225.82,
-          "P99LatencyMs": 227.957,
-          "TotalMessages": 36600,
-          "TotalBytes": 21730717
-        }
-      ]
-    },
-    "80": {
-      "tps_mean": 59.588389769369186,
-      "tps_std": 0.041261418487775675,
-      "tps_ci": [
-        59.53716516489623,
-        59.63961437384214
-      ],
-      "p99_mean": 230.0652,
-      "p99_std": 0.47516386647135445,
-      "p99_ci": [
-        229.47530071849454,
-        230.65509928150547
-      ],
-      "raw": [
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 13.408839558,
-          "TPS": 59.66213530556437,
-          "P50LatencyMs": 132.466,
-          "P95LatencyMs": 226.681,
-          "P99LatencyMs": 230.686,
-          "TotalMessages": 40960,
-          "TotalBytes": 26252094
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 13.430050523,
-          "TPS": 59.56790695834972,
-          "P50LatencyMs": 131.207,
-          "P95LatencyMs": 225.915,
-          "P99LatencyMs": 229.384,
-          "TotalMessages": 41440,
-          "TotalBytes": 26418934
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 13.429885705,
-          "TPS": 59.56863800428002,
-          "P50LatencyMs": 131.444,
-          "P95LatencyMs": 225.93,
-          "P99LatencyMs": 230.205,
-          "TotalMessages": 41440,
-          "TotalBytes": 26419285
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 13.429103943,
-          "TPS": 59.5721057336074,
-          "P50LatencyMs": 131.763,
-          "P95LatencyMs": 225.92,
-          "P99LatencyMs": 229.901,
-          "TotalMessages": 41440,
-          "TotalBytes": 26420075
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 800,
-          "DurationSec": 13.429316498,
-          "TPS": 59.57116284504445,
-          "P50LatencyMs": 132.208,
-          "P95LatencyMs": 226.261,
-          "P99LatencyMs": 230.15,
-          "TotalMessages": 41440,
-          "TotalBytes": 26418498
-        }
-      ]
-    },
-    "100": {
-      "tps_mean": 74.93063653545148,
-      "tps_std": 0.3738676959052869,
-      "tps_ci": [
-        74.46649289837228,
-        75.39478017253069
-      ],
-      "p99_mean": 235.64000000000001,
-      "p99_std": 0.45660431447808564,
-      "p99_ci": [
-        235.07314175161687,
-        236.20685824838316
-      ],
-      "raw": [
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 13.318373572,
-          "TPS": 75.08424317683645,
-          "P50LatencyMs": 130.025,
-          "P95LatencyMs": 231.593,
-          "P99LatencyMs": 235.845,
-          "TotalMessages": 44360,
-          "TotalBytes": 30439898
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 13.243850686,
-          "TPS": 75.50674072889498,
-          "P50LatencyMs": 131.263,
-          "P95LatencyMs": 232.617,
-          "P99LatencyMs": 235.888,
-          "TotalMessages": 44360,
-          "TotalBytes": 30440106
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 13.381649683,
-          "TPS": 74.7292018315497,
-          "P50LatencyMs": 129.263,
-          "P95LatencyMs": 230.637,
-          "P99LatencyMs": 235.784,
-          "TotalMessages": 44360,
-          "TotalBytes": 30439743
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 13.373470913,
-          "TPS": 74.77490372584774,
-          "P50LatencyMs": 129.367,
-          "P95LatencyMs": 231.734,
-          "P99LatencyMs": 234.826,
-          "TotalMessages": 44360,
-          "TotalBytes": 30439261
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 1000,
-          "DurationSec": 13.412360173,
-          "TPS": 74.5580932141286,
-          "P50LatencyMs": 129.424,
-          "P95LatencyMs": 231.946,
-          "P99LatencyMs": 235.857,
-          "TotalMessages": 44840,
-          "TotalBytes": 30606563
-        }
-      ]
-    },
-    "120": {
-      "tps_mean": 87.16949417001558,
-      "tps_std": 0.6051232429203628,
-      "tps_ci": [
-        86.41825487888045,
-        87.92073346115072
-      ],
-      "p99_mean": 235.5576,
-      "p99_std": 0.3451511263200457,
-      "p99_ci": [
-        235.12910697728978,
-        235.98609302271024
-      ],
-      "raw": [
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 13.879355287,
-          "TPS": 86.4593473678112,
-          "P50LatencyMs": 129.137,
-          "P95LatencyMs": 227.889,
-          "P99LatencyMs": 235.397,
-          "TotalMessages": 49200,
-          "TotalBytes": 35134039
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 13.86168288,
-          "TPS": 86.56957530974768,
-          "P50LatencyMs": 129.231,
-          "P95LatencyMs": 227.681,
-          "P99LatencyMs": 235.334,
-          "TotalMessages": 49200,
-          "TotalBytes": 35135014
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 13.712982958,
-          "TPS": 87.50831264615067,
-          "P50LatencyMs": 129.588,
-          "P95LatencyMs": 228.46,
-          "P99LatencyMs": 235.382,
-          "TotalMessages": 48720,
-          "TotalBytes": 34967547
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 13.676949332,
-          "TPS": 87.7388641919113,
-          "P50LatencyMs": 129.479,
-          "P95LatencyMs": 228.361,
-          "P99LatencyMs": 236.164,
-          "TotalMessages": 48720,
-          "TotalBytes": 34966636
-        },
-        {
-          "EngineType": "cometbft",
-          "NodeCount": 16,
-          "TxCount": 1200,
-          "DurationSec": 13.703108467,
-          "TPS": 87.57137133445708,
-          "P50LatencyMs": 129.413,
-          "P95LatencyMs": 227.341,
-          "P99LatencyMs": 235.511,
-          "TotalMessages": 48720,
-          "TotalBytes": 34966821
+          "params": {
+            "point": "raft_n8_lam20_r1",
+            "engine": "raft",
+            "nodes": 8,
+            "groups": 0,
+            "txs": 40,
+            "target_tps": 20,
+            "db_schema": "lg_exp3_saturation_raft_n8_lam20_r1"
+          },
+          "metrics": {
+            "tps": 18.969400081340787,
+            "loadgen_p99_ms": 1.063,
+            "success_rate": 1.0,
+            "engine_tps": 8.605436889210294,
+            "p50_ms": 154.989,
+            "p95_ms": 208.008,
+            "p99_ms": 208.638,
+            "messages": 500,
+            "bytes": 623456,
+            "accepted_txs": 40,
+            "db_trades": null
+          },
+          "duration_s": 2.151573419570923,
+          "loadgen_exit_code": 0,
+          "loadgen": {
+            "elapsed_s": 2.1086592,
+            "sent": 40,
+            "success": 40,
+            "reject": 0,
+            "actual_tps": 18.969400081340787,
+            "success_rate": 1.0,
+            "reject_rate": 0.0,
+            "latency_avg_ms": 0.334775,
+            "latency_p50_ms": 0.288,
+            "latency_p90_ms": 0.483,
+            "latency_p99_ms": 1.063,
+            "cpu_percent": 10.42,
+            "mem_bytes": 13274402816
+          },
+          "engine_status": {
+            "accepted_txs": 40,
+            "engine": "raft",
+            "groups": 0,
+            "network": {
+              "TotalMessages": 500,
+              "TotalBytes": 623456,
+              "BroadcastCount": 0,
+              "AvgLatencyMs": 5
+            },
+            "node_status": {
+              "node-0": {
+                "NodeID": "node-0",
+                "Height": 10,
+                "View": 0,
+                "IsLeader": true,
+                "LeaderID": "node-0",
+                "PendingTxCount": 0,
+                "CommittedBlocks": 0,
+                "TPS": 8.605436889210294,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 154.989,
+                "P95LatencyMs": 208.008,
+                "P99LatencyMs": 208.638,
+                "CpuPercent": 0
+              },
+              "node-1": {
+                "NodeID": "node-1",
+                "Height": 10,
+                "View": 0,
+                "IsLeader": false,
+                "LeaderID": "node-0",
+                "PendingTxCount": 7,
+                "CommittedBlocks": 0,
+                "TPS": 8.605436889210294,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 306.467,
+                "P95LatencyMs": 398.512,
+                "P99LatencyMs": 398.512,
+                "CpuPercent": 0
+              },
+              "node-2": {
+                "NodeID": "node-2",
+                "Height": 10,
+                "View": 0,
+                "IsLeader": false,
+                "LeaderID": "node-0",
+                "PendingTxCount": 7,
+                "CommittedBlocks": 0,
+                "TPS": 8.605436889210294,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 257.346,
+                "P95LatencyMs": 402.419,
+                "P99LatencyMs": 402.419,
+                "CpuPercent": 0
+              },
+              "node-3": {
+                "NodeID": "node-3",
+                "Height": 10,
+                "View": 0,
+                "IsLeader": false,
+                "LeaderID": "node-0",
+                "PendingTxCount": 3,
+                "CommittedBlocks": 0,
+                "TPS": 8.605436889210294,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 348.813,
+                "P95LatencyMs": 402.193,
+                "P99LatencyMs": 402.193,
+                "CpuPercent": 0
+              },
+              "node-4": {
+                "NodeID": "node-4",
+                "Height": 10,
+                "View": 0,
+                "IsLeader": false,
+                "LeaderID": "node-0",
+                "PendingTxCount": 10,
+                "CommittedBlocks": 0,
+                "TPS": 8.605436889210294,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 351.905,
+                "P95LatencyMs": 402.486,
+                "P99LatencyMs": 402.486,
+                "CpuPercent": 0
+              },
+              "node-5": {
+                "NodeID": "node-5",
+                "Height": 10,
+                "View": 0,
+                "IsLeader": false,
+                "LeaderID": "node-0",
+                "PendingTxCount": 4,
+                "CommittedBlocks": 0,
+                "TPS": 8.605436889210294,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 303.334,
+                "P95LatencyMs": 352.805,
+                "P99LatencyMs": 352.805,
+                "CpuPercent": 0
+              },
+              "node-6": {
+                "NodeID": "node-6",
+                "Height": 10,
+                "View": 0,
+                "IsLeader": false,
+                "LeaderID": "node-0",
+                "PendingTxCount": 4,
+                "CommittedBlocks": 0,
+                "TPS": 8.605436889210294,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 395.782,
+                "P95LatencyMs": 400.12,
+                "P99LatencyMs": 400.12,
+                "CpuPercent": 0
+              },
+              "node-7": {
+                "NodeID": "node-7",
+                "Height": 10,
+                "View": 0,
+                "IsLeader": false,
+                "LeaderID": "node-0",
+                "PendingTxCount": 3,
+                "CommittedBlocks": 0,
+                "TPS": 8.605436889210294,
+                "AvgLatencyMs": 0,
+                "P50LatencyMs": 349.444,
+                "P95LatencyMs": 350.825,
+                "P99LatencyMs": 350.825,
+                "CpuPercent": 0
+              }
+            },
+            "nodes": 8,
+            "sample_status": {
+              "NodeID": "node-0",
+              "Height": 10,
+              "View": 0,
+              "IsLeader": true,
+              "LeaderID": "node-0",
+              "PendingTxCount": 0,
+              "CommittedBlocks": 0,
+              "TPS": 8.605436889210294,
+              "AvgLatencyMs": 0,
+              "P50LatencyMs": 154.989,
+              "P95LatencyMs": 208.008,
+              "P99LatencyMs": 208.638,
+              "CpuPercent": 0
+            },
+            "uptime_s": 4.6482242
+          },
+          "db_counts": {},
+          "intermediate_paths": {
+            "test_root": "F:\\hcp-project-experiment\\tests\\exp3_saturation",
+            "bin_dir": "F:\\hcp-project-experiment\\tests\\exp3_saturation\\bin",
+            "data_dir": "F:\\hcp-project-experiment\\tests\\exp3_saturation\\data\\lg_exp3_saturation_raft_n8_lam20_r1",
+            "log_dir": "F:\\hcp-project-experiment\\tests\\exp3_saturation\\logs",
+            "csv": "F:\\hcp-project-experiment\\tests\\exp3_saturation\\csv\\lg_exp3_saturation_raft_n8_lam20_r1_loadgen.csv"
+          }
         }
       ]
     }

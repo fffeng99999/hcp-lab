@@ -1,111 +1,126 @@
 #!/usr/bin/env python3
-"""实验5：消融实验 (表4-7~4-11)"""
+"""实验5：关键机制消融实验。"""
 import sys
 from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from common_runner import (
-    run_benchmark, avg, stdev, ci95,
-    save_json, save_md, copy_to_report, TESTS_DIR
+from common_engine_runner import (
+    aggregate_runs,
+    clean_report,
+    ensure_dirs,
+    env_int,
+    env_list_int,
+    run_engine_loadgen_point,
+    save_json,
+    save_md,
+    stage_binaries,
 )
 
 
-def main():
-    outdir = TESTS_DIR / "exp5_ablation"
-    outdir.mkdir(parents=True, exist_ok=True)
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPORT_DIR = SCRIPT_DIR / "report"
+EXP_NAME = "exp5_ablation"
+
+
+def pct_delta(new: float, old: float) -> float:
+    return (new - old) / old * 100.0 if old else 0.0
+
+
+def main() -> None:
+    clean_report(REPORT_DIR)
+    paths = ensure_dirs(EXP_NAME, REPORT_DIR)
+    binaries = stage_binaries(paths)
 
     configs = [
-        ("A_Baseline", "pbft"),
-        ("B_tPBFT", "tpbft"),
-        ("C_Hierarchical", "hierarchical_tpbft"),
-        ("D_Lightweight", "hierarchical_lightweight_tpbft"),
-        ("E_HotStuff", "hotstuff"),
-        ("F_Raft", "raft"),
+        ("A_Baseline", "pbft", 0),
+        ("B_tPBFT", "tpbft", 0),
+        ("C_Hierarchical", "hierarchical_tpbft", 4),
+        ("D_Lightweight", "hierarchical_lightweight_tpbft", 4),
+        ("E_HotStuff", "hotstuff", 0),
+        ("F_Raft", "raft", 0),
     ]
-    nodes_list = [16, 32]
-    tx_count = 1000
-    repeat = 5  # 5次重复
+    nodes_list = env_list_int("EXP5_NODES", [16, 32])
+    tx_count = env_int("EXP5_TXS", 1000)
+    target_tps = env_int("EXP5_TARGET_TPS", 100)
+    repeat = env_int("EXP_REPEAT", env_int("EXP5_REPEAT", 5))
 
-    print("[EXP5] 消融实验开始 (repeat=5)")
+    print(f"[EXP5] 消融实验 repeat={repeat}", flush=True)
     results = {}
-    for name, engine in configs:
+    for name, engine, default_groups in configs:
         results[name] = {}
         for nodes in nodes_list:
+            groups = min(default_groups, nodes) if default_groups else 0
             runs = []
             for r in range(1, repeat + 1):
-                print(f"  {name} nodes={nodes} run={r}/{repeat}")
-                res = run_benchmark(engine, nodes, tx_count, outdir, f"_{name}_r{r}")
-                if res:
-                    runs.append(res)
-            if runs:
-                tps_vals = [r["TPS"] for r in runs]
-                p99_vals = [r["P99LatencyMs"] for r in runs]
-                msgs_vals = [r["TotalMessages"] for r in runs]
-                results[name][nodes] = {
-                    "tps_mean": avg(tps_vals),
-                    "tps_std": stdev(tps_vals),
-                    "tps_ci": ci95(tps_vals),
-                    "p99_mean": avg(p99_vals),
-                    "p99_std": stdev(p99_vals),
-                    "p99_ci": ci95(p99_vals),
-                    "msgs_mean": avg(msgs_vals),
-                    "msgs_std": stdev(msgs_vals),
-                    "raw": runs,
-                }
+                point = f"{name}_{engine}_n{nodes}_r{r}"
+                print(f"  {point}", flush=True)
+                runs.append(
+                    run_engine_loadgen_point(
+                        EXP_NAME, REPORT_DIR, point, engine, nodes, tx_count, target_tps,
+                        groups=groups, binaries=binaries, paths=paths,
+                    )
+                )
+            results[name][str(nodes)] = aggregate_runs(runs)
 
-    save_json(results, outdir / "summary.json")
-
-    # 表4-7
-    md7 = ["## 表4-7 消融实验组设计 (n=5, mean±std [95% CI])\n",
-           "| 组 | 配置 | 16节点TPS | 16节点P99 | 32节点TPS | 32节点P99 |",
-           "|----|------|-----------|-----------|-----------|-----------|"]
-    for name, _ in configs:
-        row = [name, name]
+    save_json(results, REPORT_DIR / "summary.json")
+    md7 = [
+        "## 表4-7 消融实验组设计",
+        "",
+        "| 组 | 配置 | 16节点TPS | 16节点P99 | 32节点TPS | 32节点P99 |",
+        "|----|------|-----------|-----------|-----------|-----------|",
+    ]
+    for name, engine, _ in configs:
+        row = [name, engine]
         for nodes in [16, 32]:
-            d = results.get(name, {}).get(nodes, {})
+            d = results.get(name, {}).get(str(nodes), {})
             row.append(f"{d.get('tps_mean', 0):.2f}±{d.get('tps_std', 0):.2f}")
             row.append(f"{d.get('p99_mean', 0):.2f}±{d.get('p99_std', 0):.2f}")
         md7.append("| " + " | ".join(row) + " |")
-    save_md(md7, outdir / "table4_7.md")
+    save_md(md7, REPORT_DIR / "table4_7.md")
 
-    # 表4-8
-    md8 = ["## 表4-8 信任评分筛选贡献 (n=5)\n"]
-    a32 = results.get("A_Baseline", {}).get(32, {})
-    b32 = results.get("B_tPBFT", {}).get(32, {})
+    a32 = results.get("A_Baseline", {}).get("32", {})
+    b32 = results.get("B_tPBFT", {}).get("32", {})
+    c32 = results.get("C_Hierarchical", {}).get("32", {})
+    d32 = results.get("D_Lightweight", {}).get("32", {})
+
+    md8 = ["## 表4-8 信任评分筛选贡献", ""]
     if a32 and b32:
-        md8.append(f"消息压缩: {(a32['msgs_mean']-b32['msgs_mean'])/a32['msgs_mean']*100:.1f}%")
-        md8.append(f"P99下降: {(a32['p99_mean']-b32['p99_mean'])/a32['p99_mean']*100:.1f}%")
-        md8.append(f"TPS提升: {(b32['tps_mean']-a32['tps_mean'])/a32['tps_mean']*100:.1f}%")
-    save_md(md8, outdir / "table4_8.md")
+        md8.extend([
+            f"消息变化: {pct_delta(b32['msgs_mean'], a32['msgs_mean']):.1f}%",
+            f"P99变化: {pct_delta(b32['p99_mean'], a32['p99_mean']):.1f}%",
+            f"TPS变化: {pct_delta(b32['tps_mean'], a32['tps_mean']):.1f}%",
+        ])
+    save_md(md8, REPORT_DIR / "table4_8.md")
 
-    # 表4-9
-    md9 = ["## 表4-9 分层结构贡献 (n=5)\n"]
-    c32 = results.get("C_Hierarchical", {}).get(32, {})
+    md9 = ["## 表4-9 分层结构贡献", ""]
     if b32 and c32:
-        md9.append(f"消息数减少: {(b32['msgs_mean']-c32['msgs_mean'])/b32['msgs_mean']*100:.1f}%")
-        md9.append(f"P99下降: {(b32['p99_mean']-c32['p99_mean'])/b32['p99_mean']*100:.1f}%")
-        md9.append(f"TPS提升: {(c32['tps_mean']-b32['tps_mean'])/b32['tps_mean']*100:.1f}%")
-    save_md(md9, outdir / "table4_9.md")
+        md9.extend([
+            f"消息变化: {pct_delta(c32['msgs_mean'], b32['msgs_mean']):.1f}%",
+            f"P99变化: {pct_delta(c32['p99_mean'], b32['p99_mean']):.1f}%",
+            f"TPS变化: {pct_delta(c32['tps_mean'], b32['tps_mean']):.1f}%",
+        ])
+    save_md(md9, REPORT_DIR / "table4_9.md")
 
-    # 表4-10
-    md10 = ["## 表4-10 并行签名验证贡献 (n=5)\n"]
-    d32 = results.get("D_Lightweight", {}).get(32, {})
+    md10 = ["## 表4-10 轻量子层贡献", ""]
     if c32 and d32:
-        md10.append(f"P99下降: {(c32['p99_mean']-d32['p99_mean'])/c32['p99_mean']*100:.1f}%")
-        md10.append(f"TPS提升: {(d32['tps_mean']-c32['tps_mean'])/c32['tps_mean']*100:.1f}%")
-    save_md(md10, outdir / "table4_10.md")
+        md10.extend([
+            f"消息变化: {pct_delta(d32['msgs_mean'], c32['msgs_mean']):.1f}%",
+            f"P99变化: {pct_delta(d32['p99_mean'], c32['p99_mean']):.1f}%",
+            f"TPS变化: {pct_delta(d32['tps_mean'], c32['tps_mean']):.1f}%",
+        ])
+    save_md(md10, REPORT_DIR / "table4_10.md")
 
-    # 表4-11
-    md11 = ["## 表4-11 瓶颈转移分析\n",
-            "| 优化阶段 | 网络广播层 | CPU签名验证层 | 状态持久化层 |",
-            "|----------|------------|---------------|--------------|",
-            "| A→B (信任评分) | 显著缓解 (消息↓~85%) | 未触及 | 未触及 |",
-            "| B→C (分层架构) | 大幅压缩 (消息↓~86%) | 开始显现 | 未触及 |",
-            "| C→D (轻量子层) | 已非瓶颈 | 成为主瓶颈 | 未触及 |",
-            "| D→联合优化 | 已非瓶颈 | 缓解中 | 趋向瓶颈 |"]
-    save_md(md11, outdir / "table4_11.md")
-
-    copy_to_report(outdir, "exp5_ablation")
-    print("[EXP5] 完成")
+    md11 = [
+        "## 表4-11 瓶颈转移分析",
+        "",
+        "| 优化阶段 | 网络广播层 | CPU签名验证层 | 状态/负载层 |",
+        "|----------|------------|---------------|-------------|",
+        "| A->B | 验证信任筛选对消息量与延迟的影响 | 未单独优化 | loadgen/DB 保持一致 |",
+        "| B->C | 验证分层结构对广播范围的压缩 | 组内/组间阶段分离 | loadgen/DB 保持一致 |",
+        "| C->D | 网络层进一步受限 | 子层采用轻量 Raft 路径 | loadgen/DB 保持一致 |",
+    ]
+    save_md(md11, REPORT_DIR / "table4_11.md")
+    print("[EXP5] 完成", flush=True)
 
 
 if __name__ == "__main__":

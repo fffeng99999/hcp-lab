@@ -1,60 +1,72 @@
 #!/usr/bin/env python3
-"""实验3：饱和边界初探 (表4-4)"""
+"""实验3：负载饱和边界扫描。"""
 import sys
 from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from common_runner import (
-    run_benchmark, avg, stdev, ci95,
-    save_json, save_md, copy_to_report, TESTS_DIR
+from common_engine_runner import (
+    aggregate_runs,
+    clean_report,
+    ensure_dirs,
+    env_int,
+    env_list_int,
+    env_list_str,
+    run_engine_loadgen_point,
+    save_json,
+    save_md,
+    stage_binaries,
 )
 
 
-def main():
-    outdir = TESTS_DIR / "exp3_saturation"
-    outdir.mkdir(parents=True, exist_ok=True)
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPORT_DIR = SCRIPT_DIR / "report"
+EXP_NAME = "exp3_saturation"
 
-    engines = ["pbft", "tpbft", "hotstuff", "raft", "cometbft"]
-    nodes = 16
-    repeat = 5  # 每个lambda点重复5次
+
+def main() -> None:
+    clean_report(REPORT_DIR)
+    paths = ensure_dirs(EXP_NAME, REPORT_DIR)
+    binaries = stage_binaries(paths)
+
+    engines = env_list_str("EXP3_ENGINES", ["pbft", "tpbft", "hotstuff", "raft", "cometbft"])
+    nodes = env_int("EXP3_NODES", 16)
+    lambdas = env_list_int("EXP3_LAMBDAS", [20, 40, 60, 80, 100, 120])
+    duration = env_int("EXP3_DURATION", 10)
+    repeat = env_int("EXP_REPEAT", env_int("EXP3_REPEAT", 5))
+
+    print(f"[EXP3] 饱和边界扫描 nodes={nodes} repeat={repeat}", flush=True)
     results = {}
-
-    print("[EXP3] 饱和边界初探开始 (repeat=5)")
     for engine in engines:
         results[engine] = {}
-        for lam in range(20, 121, 20):
-            tx_count = lam * 10
+        for lam in lambdas:
+            tx_count = lam * duration
             runs = []
             for r in range(1, repeat + 1):
-                print(f"  {engine} lambda={lam} run={r}/{repeat}")
-                res = run_benchmark(engine, nodes, tx_count, outdir, f"_lam{lam}_r{r}")
-                if res:
-                    runs.append(res)
-            if runs:
-                tps_vals = [r["TPS"] for r in runs]
-                p99_vals = [r["P99LatencyMs"] for r in runs]
-                results[engine][lam] = {
-                    "tps_mean": avg(tps_vals),
-                    "tps_std": stdev(tps_vals),
-                    "tps_ci": ci95(tps_vals),
-                    "p99_mean": avg(p99_vals),
-                    "p99_std": stdev(p99_vals),
-                    "p99_ci": ci95(p99_vals),
-                    "raw": runs,
-                }
+                point = f"{engine}_n{nodes}_lam{lam}_r{r}"
+                print(f"  {point}", flush=True)
+                runs.append(
+                    run_engine_loadgen_point(
+                        EXP_NAME, REPORT_DIR, point, engine, nodes, tx_count, lam,
+                        binaries=binaries, paths=paths,
+                    )
+                )
+            results[engine][str(lam)] = aggregate_runs(runs)
 
-    save_json(results, outdir / "summary.json")
-    md = ["## 表4-4 饱和边界初探 (N=16, n=5, mean±std [95% CI])\n",
-          "| 算法 | λ=20 | λ=40 | λ=60 | λ=80 | λ=100 | λ=120 |",
-          "|------|------|------|------|------|-------|-------|"]
+    save_json(results, REPORT_DIR / "summary.json")
+    md = [
+        "## 表4-4 饱和边界初探",
+        "",
+        "| 算法 | " + " | ".join(f"λ={lam}" for lam in lambdas) + " |",
+        "|------|" + "|".join(["------"] * len(lambdas)) + "|",
+    ]
     for engine in engines:
         row = [engine]
-        for lam in range(20, 121, 20):
-            d = results[engine].get(lam, {})
+        for lam in lambdas:
+            d = results.get(engine, {}).get(str(lam), {})
             row.append(f"{d.get('tps_mean', 0):.2f}±{d.get('tps_std', 0):.2f}")
         md.append("| " + " | ".join(row) + " |")
-    save_md(md, outdir / "table4_4.md")
-    copy_to_report(outdir, "exp3_saturation")
-    print("[EXP3] 完成")
+    save_md(md, REPORT_DIR / "table4_4.md")
+    print("[EXP3] 完成", flush=True)
 
 
 if __name__ == "__main__":
