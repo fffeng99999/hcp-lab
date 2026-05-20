@@ -163,6 +163,18 @@ def get_json(url: str) -> Dict[str, Any]:
         return json.loads(resp.read().decode("utf-8"))
 
 
+def wait_engine_complete(endpoint: str, expected_txs: int, timeout_s: float) -> Dict[str, Any]:
+    deadline = time.time() + timeout_s
+    last: Dict[str, Any] = {}
+    url = f"{endpoint}/status?expected={expected_txs}"
+    while time.time() < deadline:
+        last = get_json(url)
+        if int(last.get("committed_txs", 0)) >= expected_txs:
+            return last
+        time.sleep(0.1)
+    return last or get_json(url)
+
+
 def parse_last_json_line(text: str) -> Dict[str, Any]:
     last: Dict[str, Any] = {}
     for line in text.splitlines():
@@ -260,8 +272,11 @@ def run_engine_loadgen_point(
     engine: str,
     nodes: int,
     txs: int,
-    target_tps: int,
+    target_tps: Optional[int] = None,
     groups: int = 0,
+    loadgen_mode: str = "fixed",
+    account_selection_mode: str = "random",
+    zipf_alpha: Optional[float] = None,
     binaries: Optional[Dict[str, Path]] = None,
     paths: Optional[Dict[str, Path]] = None,
 ) -> Dict[str, Any]:
@@ -294,12 +309,13 @@ def run_engine_loadgen_point(
             str(binaries["loadgen"]),
             "--protocol", "http",
             "--http-endpoint", f"{endpoint}/tx",
-            "--target-tps", str(target_tps),
+            "--mode", loadgen_mode,
             "--total-txs", str(txs),
             "--concurrency", os.environ.get("LOADGEN_CONCURRENCY", "64"),
             "--worker-threads", os.environ.get("LOADGEN_WORKERS", "4"),
             "--account-count", os.environ.get("LOADGEN_ACCOUNTS", "1000"),
             "--payload-size", os.environ.get("LOADGEN_PAYLOAD_SIZE", "256"),
+            "--account-selection-mode", account_selection_mode,
             "--database-url", database_url,
             "--db-schema", schema,
             "--reset-schema-on-start", "true",
@@ -307,6 +323,10 @@ def run_engine_loadgen_point(
             "--prometheus-addr", "127.0.0.1:0",
             "--json-interval-ms", "1000",
         ]
+        if target_tps is not None and target_tps > 0:
+            loadgen_cmd.extend(["--target-tps", str(target_tps)])
+        if zipf_alpha is not None:
+            loadgen_cmd.extend(["--zipf-alpha", str(zipf_alpha)])
         started = time.time()
         completed = subprocess.run(
             loadgen_cmd,
@@ -317,18 +337,24 @@ def run_engine_loadgen_point(
         )
         duration_s = time.time() - started
         loadgen_log.write_text(completed.stdout + "\n--- STDERR ---\n" + completed.stderr, encoding="utf-8")
-        time.sleep(float(os.environ.get("ENGINE_DRAIN_SECONDS", "2")))
-        engine_status = get_json(f"{endpoint}/status")
+        engine_status = wait_engine_complete(
+            endpoint,
+            txs,
+            float(os.environ.get("ENGINE_COMPLETE_TIMEOUT", os.environ.get("ENGINE_DRAIN_SECONDS", "30"))),
+        )
         persist_node_statuses(point_data_dir, engine_status)
         loadgen_snapshot = parse_last_json_line(completed.stdout)
         db_counts = optional_db_counts(database_url, schema)
 
         sample = engine_status.get("sample_status", {})
         network = engine_status.get("network", {})
+        committed_txs = int(engine_status.get("committed_txs", sample.get("CommittedTxs", 0)))
+        benchmark_tps = float(engine_status.get("benchmark_tps", 0.0))
         metrics = {
-            "tps": float(loadgen_snapshot.get("actual_tps", 0.0)),
+            "tps": benchmark_tps,
+            "client_send_tps": float(loadgen_snapshot.get("actual_tps", 0.0)),
             "loadgen_p99_ms": float(loadgen_snapshot.get("latency_p99_ms", 0.0)),
-            "success_rate": float(loadgen_snapshot.get("success_rate", 0.0)),
+            "success_rate": float(committed_txs) / float(txs) if txs > 0 else 0.0,
             "engine_tps": float(sample.get("TPS", 0.0)),
             "p50_ms": float(sample.get("P50LatencyMs", 0.0)),
             "p95_ms": float(sample.get("P95LatencyMs", 0.0)),
@@ -336,6 +362,8 @@ def run_engine_loadgen_point(
             "messages": int(network.get("TotalMessages", 0)),
             "bytes": int(network.get("TotalBytes", 0)),
             "accepted_txs": int(engine_status.get("accepted_txs", 0)),
+            "committed_txs": committed_txs,
+            "completion_duration_s": float(engine_status.get("completion_duration_s", 0.0)),
             "db_trades": int(db_counts["trades"]) if "trades" in db_counts else None,
         }
         result = {
@@ -346,6 +374,10 @@ def run_engine_loadgen_point(
                 "groups": groups,
                 "txs": txs,
                 "target_tps": target_tps,
+                "loadgen_mode": loadgen_mode,
+                "account_selection_mode": account_selection_mode,
+                "zipf_alpha": zipf_alpha,
+                "payload_size": int(os.environ.get("LOADGEN_PAYLOAD_SIZE", "256")),
                 "db_schema": schema,
             },
             "metrics": metrics,
@@ -389,6 +421,12 @@ def aggregate_runs(runs: List[Dict[str, Any]]) -> Dict[str, Any]:
         "tps_mean": avg(vals("tps")),
         "tps_std": stdev(vals("tps")),
         "tps_ci": ci95(vals("tps")),
+        "p50_mean": avg(vals("p50_ms")),
+        "p50_std": stdev(vals("p50_ms")),
+        "p50_ci": ci95(vals("p50_ms")),
+        "p95_mean": avg(vals("p95_ms")),
+        "p95_std": stdev(vals("p95_ms")),
+        "p95_ci": ci95(vals("p95_ms")),
         "p99_mean": avg(vals("p99_ms")),
         "p99_std": stdev(vals("p99_ms")),
         "p99_ci": ci95(vals("p99_ms")),
@@ -396,5 +434,6 @@ def aggregate_runs(runs: List[Dict[str, Any]]) -> Dict[str, Any]:
         "msgs_std": stdev(vals("messages")),
         "bytes_mean": avg(vals("bytes")),
         "success_rate_mean": avg(vals("success_rate")),
+        "success_rate_std": stdev(vals("success_rate")),
         "raw": runs,
     }

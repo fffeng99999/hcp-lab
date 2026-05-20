@@ -9,4 +9,4 @@ export TX_COUNT="${TX_COUNT:-1000}"
 export REPEAT="${REPEAT:-3}"
 export OUTDIR="${OUTDIR:-$SCRIPT_DIR/../../../tests/exp1_benchmark}"
 
-bash "$SCRIPT_DIR/test_exp1_benchmark.sh"
+bash "$SCRIPT_DIR/test_exp1_benchmark.sh" "$@"
