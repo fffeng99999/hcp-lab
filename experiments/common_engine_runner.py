@@ -14,6 +14,7 @@ import subprocess
 import time
 import urllib.error
 import urllib.request
+from hashlib import sha256
 from pathlib import Path
 from statistics import stdev as _stdev
 from typing import Any, Dict, Iterable, List, Optional
@@ -25,6 +26,8 @@ DEFAULT_DATABASE_URL = (
     "postgres://user_rbc3B8:password_DfA4Pw@192.168.58.102:5432/"
     "hcp_server?sslmode=disable&search_path=loadgendata,public"
 )
+
+BECH32_CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l"
 
 
 def avg(values: Iterable[float]) -> float:
@@ -167,10 +170,21 @@ def wait_engine_complete(endpoint: str, expected_txs: int, timeout_s: float) -> 
     deadline = time.time() + timeout_s
     last: Dict[str, Any] = {}
     url = f"{endpoint}/status?expected={expected_txs}"
+    stable_since: Optional[float] = None
+    last_committed = -1
+    stable_seconds = float(os.environ.get("ENGINE_STABLE_SECONDS", "2"))
     while time.time() < deadline:
         last = get_json(url)
-        if int(last.get("committed_txs", 0)) >= expected_txs:
+        committed = int(last.get("committed_txs", 0))
+        accepted = int(last.get("accepted_txs", 0))
+        if committed >= expected_txs:
             return last
+        if committed != last_committed:
+            last_committed = committed
+            stable_since = time.time()
+        elif accepted >= expected_txs and committed > 0 and stable_since is not None:
+            if time.time() - stable_since >= stable_seconds:
+                return last
         time.sleep(0.1)
     return last or get_json(url)
 
@@ -197,6 +211,58 @@ def sanitize(value: str) -> str:
     if out[0].isdigit():
         out = f"p_{out}"
     return out[:63]
+
+
+def bech32_polymod(values: List[int]) -> int:
+    generators = [0x3B6A57B2, 0x26508E6D, 0x1EA119FA, 0x3D4233DD, 0x2A1462B3]
+    chk = 1
+    for value in values:
+        top = chk >> 25
+        chk = ((chk & 0x1FFFFFF) << 5) ^ value
+        for i, generator in enumerate(generators):
+            if (top >> i) & 1:
+                chk ^= generator
+    return chk
+
+
+def bech32_hrp_expand(hrp: str) -> List[int]:
+    return [ord(ch) >> 5 for ch in hrp] + [0] + [ord(ch) & 31 for ch in hrp]
+
+
+def convertbits(data: bytes, from_bits: int, to_bits: int, pad: bool = True) -> List[int]:
+    acc = 0
+    bits = 0
+    ret: List[int] = []
+    maxv = (1 << to_bits) - 1
+    max_acc = (1 << (from_bits + to_bits - 1)) - 1
+    for value in data:
+        acc = ((acc << from_bits) | value) & max_acc
+        bits += from_bits
+        while bits >= to_bits:
+            bits -= to_bits
+            ret.append((acc >> bits) & maxv)
+    if pad and bits:
+        ret.append((acc << (to_bits - bits)) & maxv)
+    return ret
+
+
+def bech32_encode(hrp: str, payload: bytes) -> str:
+    data = convertbits(payload, 8, 5)
+    values = bech32_hrp_expand(hrp) + data
+    polymod = bech32_polymod(values + [0, 0, 0, 0, 0, 0]) ^ 1
+    checksum = [(polymod >> 5 * (5 - i)) & 31 for i in range(6)]
+    return hrp + "1" + "".join(BECH32_CHARSET[d] for d in data + checksum)
+
+
+def prepare_sdk_account_file(point_data_dir: Path, schema: str, account_count: int) -> Path:
+    account_file = point_data_dir / "loadgen_sdk_accounts.jsonl"
+    lines = []
+    for i in range(account_count):
+        digest = sha256(f"{schema}:loadgen-account:{i}".encode("utf-8")).digest()
+        address = bech32_encode("hcp", digest[:20])
+        lines.append(json.dumps({"name": f"loadgen{i}", "address": address}, ensure_ascii=False))
+    account_file.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return account_file
 
 
 def optional_db_counts(database_url: str, schema: str) -> Dict[str, int]:
@@ -234,13 +300,15 @@ def stop_process(proc: subprocess.Popen) -> None:
 
 def prepare_node_dirs(paths: Dict[str, Path], schema: str, engine: str, nodes: int, groups: int, endpoint: str) -> Path:
     point_data_dir = paths["data"] / schema
+    if point_data_dir.exists():
+        shutil.rmtree(point_data_dir)
     point_data_dir.mkdir(parents=True, exist_ok=True)
     for i in range(nodes):
         node_dir = point_data_dir / f"node{i}"
         node_dir.mkdir(parents=True, exist_ok=True)
         metadata = {
-            "node_dir_type": "engine_simulated_node",
-            "note": "This records hcp-consensus/engine node state, not a Cosmos SDK/CometBFT home.",
+            "node_dir_type": "engine_sdk_backed_node",
+            "note": "This records hcp-consensus/engine node state and, when HCP_ENGINE_SDK_EXEC=1, a Cosmos SDK-backed application store driven by engine commits.",
             "engine": engine,
             "node_index": i,
             "node_id": f"node-{i}",
@@ -291,17 +359,27 @@ def run_engine_loadgen_point(
         bench_cmd.append(str(groups))
 
     point_data_dir = prepare_node_dirs(paths, schema, engine, nodes, groups, endpoint)
+    account_count = env_int("LOADGEN_ACCOUNTS", 1000)
+    sdk_account_file = prepare_sdk_account_file(point_data_dir, schema, account_count)
     server_log = paths["logs"] / f"{schema}_engine.log"
     loadgen_log = paths["logs"] / f"{schema}_loadgen.log"
     csv_path = paths["csv"] / f"{schema}_loadgen.csv"
 
     with server_log.open("w", encoding="utf-8") as slog:
+        server_env = os.environ.copy()
+        server_env.setdefault("HCP_ENGINE_SDK_EXEC", "1")
+        server_env["HCP_ENGINE_NODE_DATA_DIR"] = str(point_data_dir)
+        server_env.setdefault("HCP_ENGINE_SDK_CHAIN_ID", f"{schema}-chain")
+        server_env["HCP_ENGINE_SDK_ACCOUNT_FILE"] = str(sdk_account_file)
+        server_env["HCP_ENGINE_SDK_ACCOUNT_BALANCE"] = os.environ.get("LOADGEN_INITIAL_BALANCE", "1000000000")
+        server_env["HCP_ENGINE_SDK_DENOM"] = os.environ.get("LOADGEN_DENOM", "uhcp")
         server = subprocess.Popen(
             bench_cmd,
             cwd=point_data_dir,
             stdout=slog,
             stderr=subprocess.STDOUT,
             text=True,
+            env=server_env,
         )
     try:
         wait_http(f"{endpoint}/health")
@@ -313,7 +391,12 @@ def run_engine_loadgen_point(
             "--total-txs", str(txs),
             "--concurrency", os.environ.get("LOADGEN_CONCURRENCY", "64"),
             "--worker-threads", os.environ.get("LOADGEN_WORKERS", "4"),
-            "--account-count", os.environ.get("LOADGEN_ACCOUNTS", "1000"),
+            "--account-count", str(account_count),
+            "--account-file", str(sdk_account_file),
+            "--tx-encoding", os.environ.get("LOADGEN_TX_ENCODING", "proto"),
+            "--initial-balance", os.environ.get("LOADGEN_INITIAL_BALANCE", "1000000000"),
+            "--send-amount", os.environ.get("LOADGEN_SEND_AMOUNT", "1"),
+            "--denom", os.environ.get("LOADGEN_DENOM", "uhcp"),
             "--payload-size", os.environ.get("LOADGEN_PAYLOAD_SIZE", "256"),
             "--account-selection-mode", account_selection_mode,
             "--database-url", database_url,
@@ -333,10 +416,12 @@ def run_engine_loadgen_point(
             cwd=PROJECT_ROOT / "hcp-loadgen",
             capture_output=True,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             timeout=env_int("LOADGEN_TIMEOUT", 240),
         )
         duration_s = time.time() - started
-        loadgen_log.write_text(completed.stdout + "\n--- STDERR ---\n" + completed.stderr, encoding="utf-8")
+        loadgen_log.write_text((completed.stdout or "") + "\n--- STDERR ---\n" + (completed.stderr or ""), encoding="utf-8")
         engine_status = wait_engine_complete(
             endpoint,
             txs,
@@ -378,6 +463,7 @@ def run_engine_loadgen_point(
                 "account_selection_mode": account_selection_mode,
                 "zipf_alpha": zipf_alpha,
                 "payload_size": int(os.environ.get("LOADGEN_PAYLOAD_SIZE", "256")),
+                "tx_encoding": os.environ.get("LOADGEN_TX_ENCODING", "proto"),
                 "db_schema": schema,
             },
             "metrics": metrics,

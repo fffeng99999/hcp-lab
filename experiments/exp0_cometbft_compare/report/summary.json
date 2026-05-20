@@ -1,0 +1,16 @@
+{
+  "cometbft": {
+    "8": {
+      "tps_mean": 17.85871293894814,
+      "tps_std": 0.0,
+      "p50_mean": 0.572,
+      "p50_std": 0.0,
+      "p95_mean": 4.899,
+      "p95_std": 0.0,
+      "p99_mean": 6.567,
+      "p99_std": 0.0,
+      "success_rate_mean": 1.0,
+      "success_rate_std": 0.0
+    }
+  }
+}

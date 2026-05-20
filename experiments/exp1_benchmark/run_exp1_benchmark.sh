@@ -3,10 +3,9 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# 实验特定参数（带默认值）
-export NODES_LIST="${NODES_LIST:-8,16,32}"
-export TX_COUNT="${TX_COUNT:-1000}"
-export REPEAT="${REPEAT:-3}"
-export OUTDIR="${OUTDIR:-$SCRIPT_DIR/../../../tests/exp1_benchmark}"
+# 实验1参数：默认与论文表3-4保持一致。
+export EXP1_NODES="${EXP1_NODES:-8,16,32}"
+export EXP1_TXS="${EXP1_TXS:-1000}"
+export EXP_REPEAT="${EXP_REPEAT:-3}"
 
 bash "$SCRIPT_DIR/test_exp1_benchmark.sh" "$@"

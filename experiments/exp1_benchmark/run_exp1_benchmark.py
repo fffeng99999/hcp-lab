@@ -4,8 +4,8 @@
 Usage:
   python run_exp1_benchmark.py
   python run_exp1_benchmark.py hotstuff
-  python run_exp1_benchmark.py pbft raft cometbft
-  python run_exp1_benchmark.py pbft,raft,cometbft
+  python run_exp1_benchmark.py pbft raft cometbft-light
+  python run_exp1_benchmark.py pbft,raft,cometbft-light
 """
 import argparse
 import sys
@@ -28,14 +28,17 @@ from common_engine_runner import (
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPORT_DIR = SCRIPT_DIR / "report"
 EXP_NAME = "exp1_benchmark"
-DEFAULT_ENGINES = ["pbft", "hotstuff", "raft", "cometbft", "tpbft"]
+DEFAULT_ENGINES = ["pbft", "hotstuff", "raft", "cometbft-light", "tpbft"]
 ENGINE_ALIASES = {
     "pbft": "pbft",
     "hotstuff": "hotstuff",
     "hot": "hotstuff",
     "raft": "raft",
-    "cometbft": "cometbft",
-    "comet": "cometbft",
+    "cometbft-light": "cometbft-light",
+    "cometbft_light": "cometbft-light",
+    "comet-light": "cometbft-light",
+    "cometbft": "cometbft-light",
+    "comet": "cometbft-light",
     "tpbft": "tpbft",
 }
 
@@ -47,7 +50,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "engines",
         nargs="*",
-        help="Optional engine names, separated by spaces or commas: pbft hotstuff raft cometbft tpbft.",
+        help="Optional engine names, separated by spaces or commas: pbft hotstuff raft cometbft-light tpbft.",
     )
     return parser.parse_args()
 
@@ -121,7 +124,7 @@ def main() -> None:
 
     save_json(matrix, REPORT_DIR / "summary.json")
     md = [
-        "## 表4-2 基准对比实验完整矩阵",
+        "## 表3-4 基准对比实验完整矩阵",
         "",
         f"统一负载：Uniform，tx={tx_count}，约250 bytes/tx。",
         "",
@@ -138,7 +141,7 @@ def main() -> None:
                 f"{fmt('p99_mean', 'p99_std', d)} | "
                 f"{d.get('success_rate_mean', 0):.3f} |"
             )
-    save_md(md, REPORT_DIR / "table4_2.md")
+    save_md(md, REPORT_DIR / "table3_4.md")
     print("[EXP1] done", flush=True)
 
 

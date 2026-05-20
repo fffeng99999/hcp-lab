@@ -28,7 +28,7 @@ def main() -> None:
     paths = ensure_dirs(EXP_NAME, REPORT_DIR)
     binaries = stage_binaries(paths)
 
-    engines = env_list_str("EXP3_ENGINES", ["pbft", "tpbft", "hotstuff", "raft", "cometbft"])
+    engines = env_list_str("EXP3_ENGINES", ["pbft", "tpbft", "hotstuff", "raft", "cometbft-light"])
     nodes = env_int("EXP3_NODES", 16)
     lambdas = env_list_int("EXP3_LAMBDAS", [20, 40, 60, 80, 100, 120])
     duration = env_int("EXP3_DURATION", 10)

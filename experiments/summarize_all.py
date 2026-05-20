@@ -32,7 +32,8 @@ def main() -> None:
         "",
         "> 最终实验数据位于 `hcp-lab/experiments/exp*/report/`；二进制、日志、nodeN 状态、loadgen CSV 等中间文件位于项目根目录 `tests/`。",
     ]
-    append_file(lines, EXPERIMENTS_DIR / "exp1_benchmark" / "report" / "table4_2.md", "EXP1 基准对比")
+    append_file(lines, EXPERIMENTS_DIR / "exp0_cometbft_compare" / "report" / "table3_3.md", "EXP0 CometBFT 原版对比")
+    append_file(lines, EXPERIMENTS_DIR / "exp1_benchmark" / "report" / "table3_4.md", "EXP1 基准对比")
     append_file(lines, EXPERIMENTS_DIR / "exp2_degradation" / "report" / "table4_3.md", "EXP2 规模退化")
     append_file(lines, EXPERIMENTS_DIR / "exp3_saturation" / "report" / "table4_4.md", "EXP3 饱和边界")
     append_file(lines, EXPERIMENTS_DIR / "exp4_group_scan" / "report" / "table4_5.md", "EXP4 分组扫描")
