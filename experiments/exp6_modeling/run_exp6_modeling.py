@@ -270,7 +270,7 @@ def main() -> None:
     fit_summary = {"throughput": {}, "p99": {}, "anova": {}, "pb_cpbq": {"algorithm": {}, "optimization": {}}}
 
     table14 = [
-        "## 表3-14 吞吐量饱和边界",
+        "## 表3-15 吞吐量饱和边界",
         "",
         "采用最小二乘线性模型拟合节点规模与吞吐边界之间的关系：",
         "",
@@ -303,10 +303,10 @@ def main() -> None:
             row.extend(["NA", "NA", "待运行", "NA"])
         table14.append("| " + " | ".join(row) + " |")
 
-    save_md(table14, REPORT_DIR / "table3_14.md")
+    save_md(table14, REPORT_DIR / "table3_15.md")
 
     table15 = [
-        "## 表3-15 尾延迟退化模型拟合",
+        "## 表3-16 尾延迟退化模型拟合",
         "",
         "| 算法 | alpha | beta | gamma | R^2 | N*（外推，P99=2000ms） |",
         "|------|-------|------|-------|-----|------------------------|",
@@ -326,12 +326,12 @@ def main() -> None:
                 f"| {ENGINE_LABELS.get(engine, engine)} | {fit['alpha']:.4f} | {fit['beta']:.4f} | "
                 f"{fit['gamma']:.2f} | {fit['r2']:.4f} | {p99_limit_n(fit)} |"
             )
-    save_md(table15, REPORT_DIR / "table3_15.md")
+    save_md(table15, REPORT_DIR / "table3_16.md")
 
     baseline = get_config(ablation, "A", "A_Baseline")
     optimized = get_config(ablation, "C", "C_Hierarchical", "D", "D_Lightweight")
     table16 = [
-        "## 表3-16 ANOVA统计验证",
+        "## 表3-17 ANOVA统计验证",
         "",
         "| 指标 | 组间平方和SS | 组内平方和SS | F值 | p值 | 显著性 |",
         "|------|--------------|--------------|-----|-----|--------|",
@@ -339,7 +339,7 @@ def main() -> None:
     metric_map = [
         ("TPS", "tps"),
         ("P99", "p99_ms"),
-        ("CPU利用率", "loadgen_cpu_percent"),
+        ("通信消息数", "messages"),
     ]
     for label, key in metric_map:
         left = collect_samples(ablation, baseline, 32, key)
@@ -353,10 +353,10 @@ def main() -> None:
             f"| {label} | {stat['ss_between']:.4f} | {stat['ss_within']:.4f} | "
             f"{stat['f']:.4f} | {p_text} | {sig} |"
         )
-    save_md(table16, REPORT_DIR / "table3_16.md")
+    save_md(table16, REPORT_DIR / "table3_17.md")
 
     table17 = [
-        "## 表3-17 PB-CPBQ综合评分权重表",
+        "## 表3-18 PB-CPBQ综合评分权重表",
         "",
         "| 指标 | 含义 | 归一化方向 | 权重 |",
         "|------|------|------------|------|",
@@ -366,7 +366,7 @@ def main() -> None:
         "",
         "归一化规则：S_T=T_sat/max(T_sat)；L_tail≤200ms时S_L=1，200ms<L_tail≤2000ms时S_L=(2000-L_tail)/1800，L_tail>2000ms时S_L=0；S_R=1-R_deg/100。",
     ]
-    save_md(table17, REPORT_DIR / "table3_17.md")
+    save_md(table17, REPORT_DIR / "table3_18.md")
 
     algorithm_points = {}
     for engine in ENGINE_ORDER:
@@ -377,7 +377,7 @@ def main() -> None:
     max_algorithm_t_sat = max((point["t_sat"] for point in algorithm_points.values()), default=0.0)
 
     table18 = [
-        "## 表3-18 算法配置维度PB-CPBQ边界向量与综合评分",
+        "## 表3-19 算法配置维度PB-CPBQ边界向量与综合评分",
         "",
         "| 算法配置A | N | λ取值 | T_sat(A,N)(tx/s) | L_tail(A,N,λ) P99(ms) | R_deg(A,32) | 综合评分S | 边界向量B(A,N,λ) |",
         "|-----------|---|-------|------------------|------------------------|-------------|-----------|------------------|",
@@ -400,10 +400,10 @@ def main() -> None:
             f"{point['l_tail']:.2f} | {r_deg:.2f}% | {score['score']:.3f} | "
             f"{boundary_vector_text(point['t_sat'], point['l_tail'], r_deg)} |"
         )
-    save_md(table18, REPORT_DIR / "table3_18.md")
+    save_md(table18, REPORT_DIR / "table3_19.md")
 
     table19 = [
-        "## 表3-19 优化组件维度PB-CPBQ边界向量与综合评分",
+        "## 表3-20 优化组件维度PB-CPBQ边界向量与综合评分",
         "",
         "| 实验组 | 算法配置A | N | 负载条件 | T_sat近似(tx/s) | L_tail P99(ms) | R_deg(16→32) | 综合评分S | 边界向量B(A,N,λ) |",
         "|--------|-----------|---|----------|-----------------|----------------|-------------|-----------|------------------|",
@@ -441,10 +441,10 @@ def main() -> None:
             f"| {group} | {label} | 32 | fixed_tx=1000,target_tps=10000 | {t32:.2f} | "
             f"{p99:.2f} | {r_deg:.2f}% | {score['score']:.3f} | {boundary_vector_text(t32, p99, r_deg)} |"
         )
-    save_md(table19, REPORT_DIR / "table3_19.md")
+    save_md(table19, REPORT_DIR / "table3_20.md")
 
     save_json(fit_summary, REPORT_DIR / "summary.json")
-    print(f"[EXP6] wrote tables 3-14 through 3-19 in {REPORT_DIR}", flush=True)
+    print(f"[EXP6] wrote tables 3-15 through 3-20 in {REPORT_DIR}", flush=True)
 
 
 if __name__ == "__main__":

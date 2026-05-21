@@ -80,7 +80,7 @@ def main() -> None:
     save_json(results, REPORT_DIR / "summary.json")
 
     md = [
-        "## 表3-6 共识算法吞吐饱和点扫描",
+        "## 表3-7 共识算法吞吐饱和点扫描",
         "",
         "| 算法\\lambda | " + " | ".join(str(lam) for lam in lambdas) + " | 饱和拐点估计 |",
         "|-------------|" + "|".join(["------"] * len(lambdas)) + "|--------------|",
@@ -93,8 +93,8 @@ def main() -> None:
         row.append(saturation_estimate(results.get(engine, {}), lambdas))
         md.append("| " + " | ".join(row) + " |")
 
-    save_md(md, REPORT_DIR / "table3_6.md")
-    print(f"[EXP3] wrote {REPORT_DIR / 'table3_6.md'}", flush=True)
+    save_md(md, REPORT_DIR / "table3_7.md")
+    print(f"[EXP3] wrote {REPORT_DIR / 'table3_7.md'}", flush=True)
 
 
 if __name__ == "__main__":

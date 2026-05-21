@@ -124,7 +124,7 @@ def main() -> None:
 
     save_json(matrix, REPORT_DIR / "summary.json")
     md = [
-        "## 表3-4 基准对比实验完整矩阵",
+        "## 表3-5 基准对比实验完整矩阵",
         "",
         f"统一负载：Uniform，tx={tx_count}，约250 bytes/tx。",
         "",
@@ -141,7 +141,7 @@ def main() -> None:
                 f"{fmt('p99_mean', 'p99_std', d)} | "
                 f"{d.get('success_rate_mean', 0):.3f} |"
             )
-    save_md(md, REPORT_DIR / "table3_4.md")
+    save_md(md, REPORT_DIR / "table3_5.md")
     print("[EXP1] done", flush=True)
 
 

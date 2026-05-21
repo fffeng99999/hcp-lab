@@ -55,7 +55,7 @@ def main() -> None:
     save_json(summary, REPORT_DIR / "summary.json")
 
     md = [
-        "## 表3-5 规模扩展退化率计算",
+        "## 表3-6 规模扩展退化率计算",
         "",
         "| 算法 | TPS8 | TPS32 | Rdeg (%) | 退化主导因素 |",
         "|------|------|-------|----------|--------------|",
@@ -69,8 +69,8 @@ def main() -> None:
             f"{item['r_deg_percent']:.2f}% | {item['dominant_factor']} |"
         )
 
-    save_md(md, REPORT_DIR / "table3_5.md")
-    print(f"[EXP2] wrote {REPORT_DIR / 'table3_5.md'}", flush=True)
+    save_md(md, REPORT_DIR / "table3_6.md")
+    print(f"[EXP2] wrote {REPORT_DIR / 'table3_6.md'}", flush=True)
 
 
 if __name__ == "__main__":

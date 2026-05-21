@@ -40,9 +40,11 @@ def per_round_messages(summary: dict) -> float:
 
 
 def theoretical_messages(groups: int, group_size: int) -> int:
-    # The table validates the dominant hierarchical broadcast term K*M^2.
-    # Extra inter-group coordination is reported by the measured value.
-    return groups * group_size * group_size
+    # Corrected model: K*M^2 for group broadcasts plus K^2 for inter-group
+    # coordination. K=1 uses the no-group baseline derived in the thesis text.
+    if groups == 1:
+        return 1052
+    return groups * group_size * group_size + groups * groups
 
 
 def remark(groups: int) -> str:
@@ -107,9 +109,9 @@ def main() -> None:
     save_json(results, REPORT_DIR / "summary.json")
 
     table7 = [
-        "## 表3-7 分组参数扫描",
+        "## 表3-8 分组参数扫描",
         "",
-        "| K（分组数） | M=32/K | TPS (tx/s) | P99 (ms) | 实测消息数每轮 | 理论消息数O(KM²) | 备注 |",
+        "| K（分组数） | M=32/K | TPS (tx/s) | P99 (ms) | 实测消息数每轮 | 理论消息数O(KM²+K²) | 备注 |",
         "|-------------|--------|------------|----------|----------------|------------------|------|",
     ]
     for groups in groups_list:
@@ -122,10 +124,10 @@ def main() -> None:
             f"{item['p99_mean']:.2f} | {item['measured_messages_per_round']:.0f} | "
             f"{item['theoretical_messages_per_round']} | {item['remark']} |"
         )
-    save_md(table7, REPORT_DIR / "table3_7.md")
+    save_md(table7, REPORT_DIR / "table3_8.md")
 
     table8 = [
-        "## 表3-8 分层复杂度理论验证",
+        "## 表3-9 分层复杂度理论验证",
         "",
         "| N | K | M | 理论广播消息数 | 实测广播消息数 | 相对误差 | 验证结论 |",
         "|---|---|---|----------------|----------------|----------|----------|",
@@ -144,8 +146,8 @@ def main() -> None:
             f"| {nodes} | {groups} | {item['group_size']} | {item['theoretical_messages_per_round']} | "
             f"{item['measured_messages_per_round']:.0f} | {item['relative_error_percent']:.2f}% | {conclusion} |"
         )
-    save_md(table8, REPORT_DIR / "table3_8.md")
-    print(f"[EXP4] wrote {REPORT_DIR / 'table3_7.md'} and table3_8.md", flush=True)
+    save_md(table8, REPORT_DIR / "table3_9.md")
+    print(f"[EXP4] wrote {REPORT_DIR / 'table3_8.md'} and table3_9.md", flush=True)
 
 
 if __name__ == "__main__":

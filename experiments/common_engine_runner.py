@@ -62,6 +62,13 @@ def env_int(name: str, default: int) -> int:
     return int(raw)
 
 
+def env_float(name: str, default: float) -> float:
+    raw = os.environ.get(name, "").strip()
+    if not raw:
+        return default
+    return float(raw)
+
+
 def env_list_int(name: str, default: List[int]) -> List[int]:
     raw = os.environ.get(name, "").strip()
     if not raw:

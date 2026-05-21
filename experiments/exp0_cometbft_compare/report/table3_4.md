@@ -1,4 +1,4 @@
-## 表3-3 CometBFT 与 CometBFT-light 对比
+## 表3-4 CometBFT 与 CometBFT-light 对比
 
 统一负载：Uniform，tx=1000，约250 bytes/tx。CometBFT 为官方 CometBFT/Cosmos SDK 多进程节点；CometBFT-light 为 HCP engine 轻量实现。
 

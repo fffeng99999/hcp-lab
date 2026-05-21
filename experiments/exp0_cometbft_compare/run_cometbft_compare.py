@@ -482,7 +482,7 @@ def main() -> None:
 
     save_json(matrix, REPORT_DIR / "summary.json")
     md = [
-        "## 表3-3 CometBFT 与 CometBFT-light 对比",
+        "## 表3-4 CometBFT 与 CometBFT-light 对比",
         "",
         f"统一负载：Uniform，tx={txs}，约250 bytes/tx。CometBFT 为官方 CometBFT/Cosmos SDK 多进程节点；CometBFT-light 为 HCP engine 轻量实现。",
         "",
@@ -503,8 +503,8 @@ def main() -> None:
                 f"{fmt(light.get('p95_mean', 0), light.get('p95_std', 0))} | "
                 f"{fmt(light.get('p99_mean', 0), light.get('p99_std', 0))} | {light.get('success_rate_mean', 0):.3f} |"
             )
-    save_md(md, REPORT_DIR / "table3_3.md")
-    print(f"[COMETBFT] done: {REPORT_DIR / 'table3_3.md'}", flush=True)
+    save_md(md, REPORT_DIR / "table3_4.md")
+    print(f"[COMETBFT] done: {REPORT_DIR / 'table3_4.md'}", flush=True)
 
 
 if __name__ == "__main__":
