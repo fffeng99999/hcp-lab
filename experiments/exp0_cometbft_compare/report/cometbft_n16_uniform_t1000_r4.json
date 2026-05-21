@@ -1,0 +1,43 @@
+{
+  "params": {
+    "point": "cometbft_n16_uniform_t1000_r4",
+    "engine": "cometbft",
+    "nodes": 16,
+    "txs": 1000,
+    "repeat": 4,
+    "db_schema": "lg_exp0_cometbft_compare_cometbft_n16_uniform_t1000_r4"
+  },
+  "metrics": {
+    "tps": 19.184712211729824,
+    "p50_ms": 0.547,
+    "p95_ms": 6.039,
+    "p99_ms": 8.263,
+    "success_rate": 1.0,
+    "committed_txs": 1000,
+    "loadgen_success": 1000,
+    "duration_s": 52.124837160110474,
+    "start_height": 2,
+    "end_height": 59,
+    "loadgen_exit_code": 0
+  },
+  "loadgen": {
+    "elapsed_s": 52.0012464,
+    "sent": 1000,
+    "success": 1000,
+    "reject": 0,
+    "actual_tps": 19.230308295071943,
+    "success_rate": 1.0,
+    "reject_rate": 0.0,
+    "latency_avg_ms": 1.84158,
+    "latency_p50_ms": 0.547,
+    "latency_p90_ms": 4.675,
+    "latency_p95_ms": 6.039,
+    "latency_p99_ms": 8.263,
+    "cpu_percent": 43.48,
+    "mem_bytes": 14813007872
+  },
+  "intermediate_paths": {
+    "data_dir": "F:\\hcp-project-experiment\\tests\\exp0_cometbft_compare\\data\\cometbft_n16_uniform_t1000_r4",
+    "account_file": "F:\\hcp-project-experiment\\tests\\exp0_cometbft_compare\\data\\cometbft_n16_uniform_t1000_r4\\loadgen_accounts.jsonl"
+  }
+}

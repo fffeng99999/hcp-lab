@@ -17,11 +17,15 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common_engine_runner import (
     DEFAULT_DATABASE_URL,
+    aggregate_runs as aggregate_engine_runs,
+    ensure_dirs,
     env_int,
     env_list_int,
     prepare_sdk_account_file,
+    run_engine_loadgen_point,
     save_json,
     save_md,
+    stage_binaries,
 )
 
 
@@ -182,7 +186,7 @@ def prepare_network(point_dir: Path, hcpd: Path, nodes: int, txs: int, chain_id:
         for gentx in (home / "config" / "gentx").glob("*.json"):
             shutil.copy2(gentx, gentx_dir / gentx.name)
 
-    if bool_env("COMET_SIGNED_TXS", False):
+    if bool_env("COMET_SIGNED_TXS", True):
         with account_file.open("w", encoding="utf-8") as out:
             for i in range(txs):
                 name = f"load{i:04d}"
@@ -328,7 +332,7 @@ def run_point(hcpd: Path, loadgen: Path, nodes: int, txs: int, repeat: int) -> d
             "--json-interval-ms",
             "1000",
         ]
-        if bool_env("COMET_SIGNED_TXS", False):
+        if bool_env("COMET_SIGNED_TXS", True):
             loadgen_cmd.extend(
                 [
                     "--rpc-endpoint",
@@ -412,12 +416,18 @@ def aggregate(results: list[dict[str, Any]]) -> dict[str, float]:
     }
 
 
-def load_cometbft_light(nodes: int) -> dict[str, Any] | None:
-    path = PROJECT_ROOT / "hcp-lab" / "experiments" / "exp1_benchmark" / "report" / "summary.json"
+def load_existing_result(point: str) -> dict[str, Any] | None:
+    if os.environ.get("EXP0_FORCE_RERUN", "").strip().lower() in {"1", "true", "yes"}:
+        return None
+    path = REPORT_DIR / f"{point}.json"
     if not path.exists():
         return None
-    data = json.loads(path.read_text(encoding="utf-8"))
-    return data.get("cometbft-light", {}).get(str(nodes))
+    result = json.loads(path.read_text(encoding="utf-8"))
+    if int(result.get("loadgen_exit_code", 0)) != 0:
+        return None
+    if float(result.get("metrics", {}).get("success_rate", 0.0)) < 0.999:
+        return None
+    return result
 
 
 def main() -> None:
@@ -427,15 +437,48 @@ def main() -> None:
     loadgen = Path(os.environ.get("HCP_LOADGEN_BIN", PROJECT_ROOT / "tests" / "build" / "hcp-loadgen.exe"))
     nodes_list = env_list_int("COMETBFT_ORIGINAL_NODES", [8, 16, 32])
     txs = env_int("COMETBFT_ORIGINAL_TXS", 1000)
-    repeat = env_int("COMETBFT_ORIGINAL_REPEAT", 1)
+    repeat = env_int("COMETBFT_ORIGINAL_REPEAT", 5)
+    target_tps = env_int("COMETBFT_LIGHT_TARGET_TPS", 10000)
+    paths = ensure_dirs("exp0_cometbft_compare", REPORT_DIR)
+    binaries = stage_binaries(paths)
 
-    matrix: dict[str, dict[str, Any]] = {"cometbft": {}}
+    matrix: dict[str, dict[str, Any]] = {"cometbft": {}, "cometbft-light": {}}
     for nodes in nodes_list:
         runs = []
         for r in range(1, repeat + 1):
+            point = f"cometbft_n{nodes}_uniform_t{txs}_r{r}"
+            existing = load_existing_result(point)
+            if existing is not None:
+                print(f"[COMETBFT] reuse {point}", flush=True)
+                runs.append(existing)
+                continue
             print(f"[COMETBFT] nodes={nodes} txs={txs} run={r}", flush=True)
             runs.append(run_point(hcpd, loadgen, nodes, txs, r))
         matrix["cometbft"][str(nodes)] = aggregate(runs)
+
+        light_runs = []
+        for r in range(1, repeat + 1):
+            point = f"cometbft_light_n{nodes}_uniform_t{txs}_r{r}"
+            existing = load_existing_result(point)
+            if existing is not None:
+                print(f"[COMETBFT-light] reuse {point}", flush=True)
+                light_runs.append(existing)
+                continue
+            print(f"[COMETBFT-light] nodes={nodes} txs={txs} run={r}", flush=True)
+            light_runs.append(
+                run_engine_loadgen_point(
+                    "exp0_cometbft_compare",
+                    REPORT_DIR,
+                    point,
+                    "cometbft-light",
+                    nodes,
+                    txs,
+                    target_tps,
+                    binaries=binaries,
+                    paths=paths,
+                )
+            )
+        matrix["cometbft-light"][str(nodes)] = aggregate_engine_runs(light_runs)
 
     save_json(matrix, REPORT_DIR / "summary.json")
     md = [
@@ -452,7 +495,7 @@ def main() -> None:
             f"| CometBFT | {nodes} | {fmt(d['tps_mean'], d['tps_std'])} | {fmt(d['p50_mean'], d['p50_std'])} | "
             f"{fmt(d['p95_mean'], d['p95_std'])} | {fmt(d['p99_mean'], d['p99_std'])} | {d['success_rate_mean']:.3f} |"
         )
-        light = load_cometbft_light(nodes)
+        light = matrix["cometbft-light"].get(str(nodes))
         if light:
             md.append(
                 f"| CometBFT-light | {nodes} | {fmt(light.get('tps_mean', 0), light.get('tps_std', 0))} | "

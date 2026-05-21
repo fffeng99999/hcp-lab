@@ -114,7 +114,13 @@ def resolve_binary(env_name: str, candidates: List[Path]) -> Path:
 def stage_binary(src: Path, dst_dir: Path, name: str) -> Path:
     dst_dir.mkdir(parents=True, exist_ok=True)
     dst = dst_dir / f"{name}{src.suffix}"
-    shutil.copy2(src, dst)
+    try:
+        shutil.copy2(src, dst)
+    except PermissionError:
+        if dst.exists():
+            print(f"[WARN] reuse locked staged binary {dst}", flush=True)
+            return dst
+        raise
     return dst
 
 
@@ -122,6 +128,8 @@ def stage_binaries(paths: Dict[str, Path]) -> Dict[str, Path]:
     bench = resolve_binary(
         "HCP_BENCH_BIN",
         [
+            PROJECT_ROOT / "tests" / "build" / "hcp-bench.exe",
+            PROJECT_ROOT / "tests" / "build" / "hcp-bench",
             PROJECT_ROOT / "hcp-consensus" / "hcp-bench.exe",
             PROJECT_ROOT / "hcp-consensus" / "hcp-bench",
             PROJECT_ROOT / "hcp-consensus-build" / "hcp-bench.exe",
@@ -131,6 +139,8 @@ def stage_binaries(paths: Dict[str, Path]) -> Dict[str, Path]:
     loadgen = resolve_binary(
         "HCP_LOADGEN_BIN",
         [
+            PROJECT_ROOT / "tests" / "build" / "hcp-loadgen.exe",
+            PROJECT_ROOT / "tests" / "build" / "hcp-loadgen",
             PROJECT_ROOT / "hcp-loadgen" / "target" / "release" / "hcp-loadgen.exe",
             PROJECT_ROOT / "hcp-loadgen" / "target" / "release" / "hcp-loadgen",
             PROJECT_ROOT / "hcp-loadgen" / "target" / "debug" / "hcp-loadgen.exe",
@@ -438,6 +448,8 @@ def run_engine_loadgen_point(
         metrics = {
             "tps": benchmark_tps,
             "client_send_tps": float(loadgen_snapshot.get("actual_tps", 0.0)),
+            "loadgen_cpu_percent": float(loadgen_snapshot.get("cpu_percent", 0.0)),
+            "loadgen_mem_bytes": int(loadgen_snapshot.get("mem_bytes", 0)),
             "loadgen_p99_ms": float(loadgen_snapshot.get("latency_p99_ms", 0.0)),
             "success_rate": float(committed_txs) / float(txs) if txs > 0 else 0.0,
             "engine_tps": float(sample.get("TPS", 0.0)),
@@ -519,6 +531,11 @@ def aggregate_runs(runs: List[Dict[str, Any]]) -> Dict[str, Any]:
         "msgs_mean": avg(vals("messages")),
         "msgs_std": stdev(vals("messages")),
         "bytes_mean": avg(vals("bytes")),
+        "bytes_std": stdev(vals("bytes")),
+        "loadgen_cpu_mean": avg(vals("loadgen_cpu_percent")),
+        "loadgen_cpu_std": stdev(vals("loadgen_cpu_percent")),
+        "loadgen_mem_mean": avg(vals("loadgen_mem_bytes")),
+        "loadgen_mem_std": stdev(vals("loadgen_mem_bytes")),
         "success_rate_mean": avg(vals("success_rate")),
         "success_rate_std": stdev(vals("success_rate")),
         "raw": runs,
