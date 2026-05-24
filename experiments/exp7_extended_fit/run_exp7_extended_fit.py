@@ -51,6 +51,7 @@ ENGINE_ALIASES = {
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run extended fitting samples for Section 3.7.")
     parser.add_argument("engines", nargs="*", help="Optional engines, space/comma separated.")
+    parser.add_argument("--render-only", action="store_true", help="Render tables from existing summary.json without rerunning.")
     return parser.parse_args()
 
 
@@ -155,40 +156,43 @@ def fmt(data: dict, key: str) -> str:
 def main() -> None:
     args = parse_args()
     engines = selected_engines(args)
-    clean_report(REPORT_DIR)
-    paths = ensure_dirs(EXP_NAME, REPORT_DIR)
-    binaries = stage_binaries(paths)
 
     nodes_list = env_list_int("EXP7_NODES", DEFAULT_NODES)
     tx_count = env_int("EXP7_TXS", 1000)
-    repeat = env_int("EXP_REPEAT", env_int("EXP7_REPEAT", 1))
+    repeat = env_int("EXP_REPEAT", env_int("EXP7_REPEAT", 10))
 
-    print(f"[EXP7] extended fit engines={','.join(engines)} nodes={nodes_list} repeat={repeat}", flush=True)
-    matrix: dict[str, dict[str, dict]] = {}
-    for engine in engines:
-        matrix[engine] = {}
-        for nodes in nodes_list:
-            runs = []
-            for r in range(1, repeat + 1):
-                point = f"{engine}_n{nodes}_uniform_t{tx_count}_r{r}"
-                print(f"  {point}", flush=True)
-                runs.append(
-                    run_engine_loadgen_point(
-                        EXP_NAME,
-                        REPORT_DIR,
-                        point,
-                        engine,
-                        nodes,
-                        tx_count,
-                        target_tps=None,
-                        loadgen_mode="sustained",
-                        account_selection_mode="random",
-                        binaries=binaries,
-                        paths=paths,
+    if args.render_only:
+        matrix = __import__("json").loads((REPORT_DIR / "summary.json").read_text(encoding="utf-8"))
+    else:
+        clean_report(REPORT_DIR)
+        paths = ensure_dirs(EXP_NAME, REPORT_DIR)
+        binaries = stage_binaries(paths)
+        print(f"[EXP7] extended fit engines={','.join(engines)} nodes={nodes_list} repeat={repeat}", flush=True)
+        matrix: dict[str, dict[str, dict]] = {}
+        for engine in engines:
+            matrix[engine] = {}
+            for nodes in nodes_list:
+                runs = []
+                for r in range(1, repeat + 1):
+                    point = f"{engine}_n{nodes}_uniform_t{tx_count}_r{r}"
+                    print(f"  {point}", flush=True)
+                    runs.append(
+                        run_engine_loadgen_point(
+                            EXP_NAME,
+                            REPORT_DIR,
+                            point,
+                            engine,
+                            nodes,
+                            tx_count,
+                            target_tps=None,
+                            loadgen_mode="sustained",
+                            account_selection_mode="random",
+                            binaries=binaries,
+                            paths=paths,
+                        )
                     )
-                )
-            matrix[engine][str(nodes)] = aggregate_runs(runs)
-    save_json(matrix, REPORT_DIR / "summary.json")
+                matrix[engine][str(nodes)] = aggregate_runs(runs)
+        save_json(matrix, REPORT_DIR / "summary.json")
 
     md = [
         "## 扩展实验：3.7节拟合采样矩阵",
@@ -211,8 +215,8 @@ def main() -> None:
     table_tps = [
         "## 扩展实验：吞吐量边界拟合",
         "",
-        "| 算法 | 采样点数 | α_A | β_A | 拟合公式 | R^2 |",
-        "|------|----------|-----|-----|----------|-----|",
+        "| 算法 | N=8 Tsat | N=16 Tsat | N=32 Tsat | 拟合模型 | R^2 |",
+        "|------|----------|-----------|-----------|----------|-----|",
     ]
     table_p99 = [
         "## 扩展实验：尾延迟退化模型拟合",
@@ -230,7 +234,9 @@ def main() -> None:
         fit_summary["p99"][engine] = pf
         sign = "-" if lf["slope"] < 0 else "+"
         table_tps.append(
-            f"| {ENGINE_LABELS[engine]} | {len(xs)} | {lf['intercept']:.2f} | {lf['slope']:.2f} | "
+            f"| {ENGINE_LABELS[engine]} | {float(matrix[engine]['8'].get('tps_mean', 0.0)):.2f} | "
+            f"{float(matrix[engine]['16'].get('tps_mean', 0.0)):.2f} | "
+            f"{float(matrix[engine]['32'].get('tps_mean', 0.0)):.2f} | "
             f"T_sat(N) = {lf['intercept']:.2f} {sign} {abs(lf['slope']):.2f}N | {lf['r2']:.4f} |"
         )
         table_p99.append(
