@@ -41,9 +41,7 @@ def per_round_messages(summary: dict) -> float:
 
 def theoretical_messages(groups: int, group_size: int) -> int:
     # Corrected model: K*M^2 for group broadcasts plus K^2 for inter-group
-    # coordination. K=1 uses the no-group baseline derived in the thesis text.
-    if groups == 1:
-        return 1052
+    # coordination.
     return groups * group_size * group_size + groups * groups
 
 
@@ -101,7 +99,7 @@ def main() -> None:
             "group_size": group_size,
             "theoretical_messages_per_round": theory,
             "measured_messages_per_round": measured,
-            "relative_error_percent": abs(measured - theory) / measured * 100.0 if measured > 0 else 0.0,
+            "relative_error_percent": abs(measured - theory) / theory * 100.0 if theory > 0 else 0.0,
             "remark": remark(groups),
             **agg,
         }
@@ -136,7 +134,9 @@ def main() -> None:
         item = results.get(str(groups))
         if not item:
             continue
-        if item["relative_error_percent"] <= 8:
+        if groups == 1:
+            conclusion = "未分组基线"
+        elif item["relative_error_percent"] <= 8:
             conclusion = "模型基本吻合"
         elif item["relative_error_percent"] <= 25:
             conclusion = "额外协调开销可见"
