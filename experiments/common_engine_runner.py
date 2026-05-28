@@ -20,32 +20,40 @@ from statistics import stdev as _stdev
 from typing import Any, Dict, Iterable, List, Optional
 
 
+# 项目根目录（hcp-lab/experiments/common_engine_runner.py 的上三级目录）
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+# 中间产物存放目录
 TESTS_DIR = PROJECT_ROOT / "tests"
+# 默认 PostgreSQL 数据库连接字符串
 DEFAULT_DATABASE_URL = (
     "postgres://user_rbc3B8:password_DfA4Pw@192.168.58.102:5432/"
     "hcp_server?sslmode=disable&search_path=loadgendata,public"
 )
 
+# Bech32 编码字符集，用于生成账户地址
 BECH32_CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l"
 
 
 def avg(values: Iterable[float]) -> float:
+    """计算平均值。"""
     vals = list(values)
     return sum(vals) / len(vals) if vals else 0.0
 
 
 def stdev(values: Iterable[float]) -> float:
+    """计算标准差。"""
     vals = list(values)
     return _stdev(vals) if len(vals) > 1 else 0.0
 
 
 def sem(values: Iterable[float]) -> float:
+    """计算标准误（Standard Error of Mean）。"""
     vals = list(values)
     return stdev(vals) / (len(vals) ** 0.5) if len(vals) > 1 else 0.0
 
 
 def ci95(values: Iterable[float]) -> List[float]:
+    """计算 95% 置信区间。"""
     vals = list(values)
     if len(vals) <= 1:
         return [0.0, 0.0]
@@ -56,6 +64,7 @@ def ci95(values: Iterable[float]) -> List[float]:
 
 
 def env_int(name: str, default: int) -> int:
+    """从环境变量读取整数值，若不存在或为空则返回默认值。"""
     raw = os.environ.get(name, "").strip()
     if not raw:
         return default
@@ -63,6 +72,7 @@ def env_int(name: str, default: int) -> int:
 
 
 def env_float(name: str, default: float) -> float:
+    """从环境变量读取浮点数值，若不存在或为空则返回默认值。"""
     raw = os.environ.get(name, "").strip()
     if not raw:
         return default
@@ -70,6 +80,7 @@ def env_float(name: str, default: float) -> float:
 
 
 def env_list_int(name: str, default: List[int]) -> List[int]:
+    """从环境变量读取逗号分隔的整数列表。"""
     raw = os.environ.get(name, "").strip()
     if not raw:
         return default
@@ -77,6 +88,7 @@ def env_list_int(name: str, default: List[int]) -> List[int]:
 
 
 def env_list_str(name: str, default: List[str]) -> List[str]:
+    """从环境变量读取逗号分隔的字符串列表。"""
     raw = os.environ.get(name, "").strip()
     if not raw:
         return default
@@ -84,6 +96,7 @@ def env_list_str(name: str, default: List[str]) -> List[str]:
 
 
 def ensure_dirs(exp_name: str, report_dir: Path) -> Dict[str, Path]:
+    """创建实验所需的目录结构，返回各目录路径字典。"""
     root = TESTS_DIR / exp_name
     paths = {
         "root": root,
@@ -99,6 +112,7 @@ def ensure_dirs(exp_name: str, report_dir: Path) -> Dict[str, Path]:
 
 
 def clean_report(report_dir: Path) -> None:
+    """清空报告目录中的已有文件。"""
     report_dir.mkdir(parents=True, exist_ok=True)
     for item in report_dir.iterdir():
         if item.is_file():
@@ -106,6 +120,7 @@ def clean_report(report_dir: Path) -> None:
 
 
 def resolve_binary(env_name: str, candidates: List[Path]) -> Path:
+    """解析二进制文件路径：优先从环境变量获取，否则按候选列表查找。"""
     override = os.environ.get(env_name, "").strip()
     if override:
         path = Path(override)
@@ -119,6 +134,7 @@ def resolve_binary(env_name: str, candidates: List[Path]) -> Path:
 
 
 def stage_binary(src: Path, dst_dir: Path, name: str) -> Path:
+    """将二进制文件复制到目标目录，若被占用则复用已存在的文件。"""
     dst_dir.mkdir(parents=True, exist_ok=True)
     dst = dst_dir / f"{name}{src.suffix}"
     try:
@@ -132,6 +148,7 @@ def stage_binary(src: Path, dst_dir: Path, name: str) -> Path:
 
 
 def stage_binaries(paths: Dict[str, Path]) -> Dict[str, Path]:
+    """定位并复制 hcp-bench 和 hcp-loadgen 二进制到实验目录。"""
     bench = resolve_binary(
         "HCP_BENCH_BIN",
         [
@@ -161,12 +178,14 @@ def stage_binaries(paths: Dict[str, Path]) -> Dict[str, Path]:
 
 
 def find_free_port() -> int:
+    """查找一个可用的本地 TCP 端口。"""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.bind(("127.0.0.1", 0))
         return int(sock.getsockname()[1])
 
 
 def wait_http(url: str, timeout_s: int = 30) -> None:
+    """轮询等待 HTTP 端点可用（状态码 < 500）。"""
     deadline = time.time() + timeout_s
     while time.time() < deadline:
         try:
@@ -179,11 +198,17 @@ def wait_http(url: str, timeout_s: int = 30) -> None:
 
 
 def get_json(url: str) -> Dict[str, Any]:
+    """发送 GET 请求并返回 JSON 响应。"""
     with urllib.request.urlopen(url, timeout=5) as resp:
         return json.loads(resp.read().decode("utf-8"))
 
 
 def wait_engine_complete(endpoint: str, expected_txs: int, timeout_s: float) -> Dict[str, Any]:
+    """等待共识引擎完成指定数量的交易提交。
+
+    通过轮询 /status 接口判断 committed_txs 是否达到预期，
+    或在 accepted_txs 已达预期且 committed_txs 稳定一段时间后返回。
+    """
     deadline = time.time() + timeout_s
     last: Dict[str, Any] = {}
     url = f"{endpoint}/status?expected={expected_txs}"
@@ -207,6 +232,7 @@ def wait_engine_complete(endpoint: str, expected_txs: int, timeout_s: float) -> 
 
 
 def parse_last_json_line(text: str) -> Dict[str, Any]:
+    """从文本中提取最后一行包含 actual_tps 或 sent 的 JSON 对象。"""
     last: Dict[str, Any] = {}
     for line in text.splitlines():
         line = line.strip()
@@ -222,6 +248,7 @@ def parse_last_json_line(text: str) -> Dict[str, Any]:
 
 
 def sanitize(value: str) -> str:
+    """将字符串清理为适合用作文件名或标识符的格式（小写、下划线、限制长度）。"""
     out = re.sub(r"[^a-z0-9_]+", "_", value.lower()).strip("_")
     if not out:
         out = "point"
@@ -231,6 +258,7 @@ def sanitize(value: str) -> str:
 
 
 def bech32_polymod(values: List[int]) -> int:
+    """Bech32 校验多项式计算。"""
     generators = [0x3B6A57B2, 0x26508E6D, 0x1EA119FA, 0x3D4233DD, 0x2A1462B3]
     chk = 1
     for value in values:
@@ -243,10 +271,12 @@ def bech32_polymod(values: List[int]) -> int:
 
 
 def bech32_hrp_expand(hrp: str) -> List[int]:
+    """扩展 Bech32 人类可读部分（HRP）为整数列表。"""
     return [ord(ch) >> 5 for ch in hrp] + [0] + [ord(ch) & 31 for ch in hrp]
 
 
 def convertbits(data: bytes, from_bits: int, to_bits: int, pad: bool = True) -> List[int]:
+    """将字节数据按位宽转换（如 8 位转 5 位）。"""
     acc = 0
     bits = 0
     ret: List[int] = []
@@ -264,6 +294,7 @@ def convertbits(data: bytes, from_bits: int, to_bits: int, pad: bool = True) -> 
 
 
 def bech32_encode(hrp: str, payload: bytes) -> str:
+    """将 payload 编码为 Bech32 格式字符串（如 hcp1...）。"""
     data = convertbits(payload, 8, 5)
     values = bech32_hrp_expand(hrp) + data
     polymod = bech32_polymod(values + [0, 0, 0, 0, 0, 0]) ^ 1
@@ -272,6 +303,7 @@ def bech32_encode(hrp: str, payload: bytes) -> str:
 
 
 def prepare_sdk_account_file(point_data_dir: Path, schema: str, account_count: int) -> Path:
+    """生成负载生成器使用的 SDK 账户文件（JSON Lines 格式）。"""
     account_file = point_data_dir / "loadgen_sdk_accounts.jsonl"
     lines = []
     for i in range(account_count):
@@ -283,6 +315,7 @@ def prepare_sdk_account_file(point_data_dir: Path, schema: str, account_count: i
 
 
 def optional_db_counts(database_url: str, schema: str) -> Dict[str, int]:
+    """可选地查询数据库中各表的行数，若 psycopg2 不可用则返回空字典。"""
     try:
         import psycopg2  # type: ignore
     except Exception:
@@ -302,6 +335,7 @@ def optional_db_counts(database_url: str, schema: str) -> Dict[str, int]:
 
 
 def stop_process(proc: subprocess.Popen) -> None:
+    """优雅地停止子进程：先发送终止信号，超时后强制杀死。"""
     if proc.poll() is not None:
         return
     if os.name == "nt":
@@ -316,6 +350,7 @@ def stop_process(proc: subprocess.Popen) -> None:
 
 
 def prepare_node_dirs(paths: Dict[str, Path], schema: str, engine: str, nodes: int, groups: int, endpoint: str) -> Path:
+    """为每个节点创建数据目录并写入 metadata.json，返回数据根目录。"""
     point_data_dir = paths["data"] / schema
     if point_data_dir.exists():
         shutil.rmtree(point_data_dir)
@@ -337,6 +372,7 @@ def prepare_node_dirs(paths: Dict[str, Path], schema: str, engine: str, nodes: i
 
 
 def persist_node_statuses(point_data_dir: Path, engine_status: Dict[str, Any]) -> None:
+    """将引擎返回的节点状态持久化到各节点目录，并保存集群状态。"""
     node_status = engine_status.get("node_status", {})
     for node_id, status in node_status.items():
         match = re.search(r"(\d+)$", node_id)
@@ -365,6 +401,25 @@ def run_engine_loadgen_point(
     binaries: Optional[Dict[str, Path]] = None,
     paths: Optional[Dict[str, Path]] = None,
 ) -> Dict[str, Any]:
+    """执行单个实验点：启动共识引擎、运行负载生成器、收集指标并保存结果。
+
+    参数:
+        exp_name: 实验名称
+        report_dir: 报告输出目录
+        point_name: 实验点标识
+        engine: 共识引擎类型
+        nodes: 节点数量
+        txs: 交易数量
+        target_tps: 目标 TPS（可选）
+        groups: 分组数量（分层共识使用）
+        loadgen_mode: 负载生成模式
+        account_selection_mode: 账户选择策略
+        zipf_alpha: Zipf 分布参数（可选）
+        binaries: 预置的二进制路径字典（可选）
+        paths: 预置的目录路径字典（可选）
+    返回:
+        包含参数、指标、路径等信息的字典
+    """
     paths = paths or ensure_dirs(exp_name, report_dir)
     binaries = binaries or stage_binaries(paths)
     database_url = os.environ.get("LOADGEN_DATABASE_URL", DEFAULT_DATABASE_URL)
@@ -511,16 +566,19 @@ def run_engine_loadgen_point(
 
 
 def save_json(data: Any, path: Path) -> None:
+    """将数据保存为 JSON 文件。"""
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def save_md(lines: List[str], path: Path) -> None:
+    """将文本行列表保存为 Markdown 文件。"""
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines), encoding="utf-8")
 
 
 def aggregate_runs(runs: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """聚合多次运行的实验结果，计算各指标的均值、标准差和 95% 置信区间。"""
     vals = lambda key: [float(r["metrics"].get(key, 0.0)) for r in runs]
     return {
         "tps_mean": avg(vals("tps")),
