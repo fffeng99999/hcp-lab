@@ -455,10 +455,10 @@ def run_engine_loadgen_point(
         )
     try:
         wait_http(f"{endpoint}/health")
+        loadgen_protocol = os.environ.get("LOADGEN_PROTOCOL", "http").strip().lower()
         loadgen_cmd = [
             str(binaries["loadgen"]),
-            "--protocol", "http",
-            "--http-endpoint", f"{endpoint}/tx",
+            "--protocol", loadgen_protocol,
             "--mode", loadgen_mode,
             "--total-txs", str(txs),
             "--concurrency", os.environ.get("LOADGEN_CONCURRENCY", "64"),
@@ -478,6 +478,10 @@ def run_engine_loadgen_point(
             "--prometheus-addr", "127.0.0.1:0",
             "--json-interval-ms", "1000",
         ]
+        if loadgen_protocol == "quic":
+            loadgen_cmd.extend(["--quic-endpoint", f"127.0.0.1:{port}"])
+        else:
+            loadgen_cmd.extend(["--http-endpoint", f"{endpoint}/tx"])
         if target_tps is not None and target_tps > 0:
             loadgen_cmd.extend(["--target-tps", str(target_tps)])
         if zipf_alpha is not None:
