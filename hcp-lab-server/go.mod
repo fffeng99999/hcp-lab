@@ -1,4 +1,4 @@
-module hcp-lab-server
+module hcap-lab-server
 
 go 1.22
 
