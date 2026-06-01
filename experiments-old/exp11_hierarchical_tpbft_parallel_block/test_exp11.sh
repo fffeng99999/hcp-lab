@@ -12,9 +12,9 @@ NODE_COUNT="${NODE_COUNT:-16,32,64,128,256}"
 TX_COUNT="${TX_COUNT:-100}"
 REPEAT="${REPEAT:-5}"
 PORT_OFFSET="${PORT_OFFSET:-11000}"
-CHAIN_ID="${CHAIN_ID:-hcp-exp11}"
-HCPD_BINARY="../$EXP_DIR/bin/hcpd"
-CLI_BINARY="$EXP_DIR/bin/hcpd"
+CHAIN_ID="${CHAIN_ID:-hcap-exp11}"
+HCPD_BINARY="../$EXP_DIR/bin/hcapd"
+CLI_BINARY="$EXP_DIR/bin/hcapd"
 GRPC_PORT=$((9090 + PORT_OFFSET))
 RPC_PORT=$((26657 + PORT_OFFSET))
 LOADGEN_DB_ISOLATION="${LOADGEN_DB_ISOLATION:-true}"
@@ -44,17 +44,17 @@ echo "链ID: $CHAIN_ID"
 echo "端口偏移: $PORT_OFFSET (gRPC=$GRPC_PORT, RPC=$RPC_PORT)"
 echo "数据库隔离: ENABLED=$LOADGEN_DB_ISOLATION RESET=$LOADGEN_DB_RESET PREFIX=$LOADGEN_DB_SCHEMA_PREFIX DB_URL_OVERRIDE=${LOADGEN_DATABASE_URL:-<default>}"
 echo "实验目录: $EXP_DIR"
-echo "hcpd: $HCPD_BINARY (loadgen cli: $CLI_BINARY)"
+echo "hcapd: $HCPD_BINARY (loadgen cli: $CLI_BINARY)"
 echo "报告输出目录: $REPORT_OUT"
 echo "========================================"
 
-cd "$PROJECT_ROOT/hcp-loadgen"
-echo "构建 hcp-loadgen..."
+cd "$PROJECT_ROOT/hcap-loadgen"
+echo "构建 hcap-loadgen..."
 cargo build --release
 
-cd "$PROJECT_ROOT/hcp-lab"
+cd "$PROJECT_ROOT/hcap-lab"
 export EXP_ARTIFACT_ROOT="$EXP_DIR"
-export PYTHONPATH="$PROJECT_ROOT/hcp-lab:${PYTHONPATH}"
+export PYTHONPATH="$PROJECT_ROOT/hcap-lab:${PYTHONPATH}"
 python3 experiments/exp11_hierarchical_tpbft_parallel_block/run_exp11.py \
   --groups "$GROUP_LIST" \
   --k "$K_LIST" \

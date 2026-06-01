@@ -55,7 +55,7 @@ tests/exp12_hotspot_tpbft/
 ├── algo_<algo>/g_<g>/strategy_<strategy>/alpha_<alpha>/run_<i>/data/
 └── algo_<algo>/g_<g>/strategy_<strategy>/alpha_<alpha>/run_<i>/logs/
 
-hcp-lab/experiments/exp12_hotspot_tpbft/report/
+hcap-lab/experiments/exp12_hotspot_tpbft/report/
 ├── result.json
 ├── exp12_summary.csv
 ├── figures/
@@ -70,11 +70,11 @@ hcp-lab/experiments/exp12_hotspot_tpbft/report/
 ## 运行方式
 
 ```bash
-cd hcp-lab/experiments/exp12_hotspot_tpbft
+cd hcap-lab/experiments/exp12_hotspot_tpbft
 bash run_exp12.sh
 ```
 
-或通过 hcp-lab-server UI 选择实验十二执行。
+或通过 hcap-lab-server UI 选择实验十二执行。
 
 ## 共识引擎
 

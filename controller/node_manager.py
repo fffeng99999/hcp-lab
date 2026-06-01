@@ -11,7 +11,7 @@ from typing import Optional
 class NodeManager:
     def __init__(self, project_root: Path) -> None:
         self.project_root = project_root
-        self.hcp_dir = project_root / "hcp"
+        self.hcap_dir = project_root / "hcap"
         self.process: Optional[subprocess.Popen] = None
 
     def start_nodes(
@@ -36,7 +36,7 @@ class NodeManager:
         cmd = ["bash", "start_nodes.sh", str(num_nodes)]
         self.process = subprocess.Popen(
             cmd,
-            cwd=str(self.hcp_dir),
+            cwd=str(self.hcap_dir),
             env=env,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
@@ -55,10 +55,10 @@ class NodeManager:
             except subprocess.TimeoutExpired:
                 self.process.kill()
         binary = os.environ.get("HCPD_BINARY")
-        pattern = f"{binary} start" if binary else "hcpd start"
+        pattern = f"{binary} start" if binary else "hcapd start"
         subprocess.run(
             ["pkill", "-f", pattern],
-            cwd=str(self.hcp_dir),
+            cwd=str(self.hcap_dir),
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
         )

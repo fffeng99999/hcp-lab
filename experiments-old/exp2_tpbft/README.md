@@ -72,23 +72,23 @@ tPBFT 通过信任评分机制降低了主节点作恶或故障导致视图变�
 - 若主节点信任分骤降，系统可在不触发完整视图变更的情况下，通过 ValidatorSelector 的下一轮选择自然轮换主节点。
 
 ## 如何运行
-- 入口脚本：[run_exp2_tpbft.sh](file:///home/hcp-dev/hcp-project-experiment/hcp-lab/experiments/exp2_tpbft/run_exp2_tpbft.sh)
+- 入口脚本：[run_exp2_tpbft.sh](file:///home/hcap-dev/hcap-project-experiment/hcap-lab/experiments/exp2_tpbft/run_exp2_tpbft.sh)
 
 ```bash
-bash hcp-lab/experiments/exp2_tpbft/run_exp2_tpbft.sh
+bash hcap-lab/experiments/exp2_tpbft/run_exp2_tpbft.sh
 ```
 
 可通过环境变量覆盖默认参数：
 
 ```bash
-NODES_LIST="4,8,16" TX_LIST="100,1000" REPEAT=5 PORT_OFFSET=2100 CHAIN_ID="hcp-exp2" \
+NODES_LIST="4,8,16" TX_LIST="100,1000" REPEAT=5 PORT_OFFSET=2100 CHAIN_ID="hcap-exp2" \
   TPBFT_MIN_TRUST=0.5 TPBFT_MAX_VALIDATORS=50 \
-  bash hcp-lab/experiments/exp2_tpbft/run_exp2_tpbft.sh
+  bash hcap-lab/experiments/exp2_tpbft/run_exp2_tpbft.sh
 ```
 
 ## 实验文件夹用途说明
 - `run_exp2_tpbft.sh`：设置默认参数并转调测试脚本。
-- `test_exp2_tpbft.sh`：构建 `hcp-loadgen`，设置实验产物目录，启动实验执行器（Python）。
+- `test_exp2_tpbft.sh`：构建 `hcap-loadgen`，设置实验产物目录，启动实验执行器（Python）。
 - `run_exp2.py`：实验编排与聚合逻辑（对每个节点数×交易量组合重复运行并做均值聚合，输出图表与报告）。
 - `report/`：实验输出目录（由脚本参数 `--out` 决定），包含：
   - `result.json`：结构化实验结果
@@ -108,7 +108,7 @@ NODES_LIST="4,8,16" TX_LIST="100,1000" REPEAT=5 PORT_OFFSET=2100 CHAIN_ID="hcp-e
 - 节点日志目录：
   - `.../logs/nodes_<nodes>/node<j>.log`
   - `.../logs/nodes_<nodes>/*gentx*` 等过程日志
-- 节点二进制（启动脚本构建输出）：`tests/exp2_tpbft/bin/hcpd`
+- 节点二进制（启动脚本构建输出）：`tests/exp2_tpbft/bin/hcapd`
 
 端口说明：
 - `PORT_OFFSET` 用于避免端口冲突；常用端口为：

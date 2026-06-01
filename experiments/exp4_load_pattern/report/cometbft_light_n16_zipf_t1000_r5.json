@@ -376,10 +376,10 @@
   },
   "db_counts": {},
   "intermediate_paths": {
-    "test_root": "F:\\hcp-project-experiment\\tests\\exp4_load_pattern",
-    "bin_dir": "F:\\hcp-project-experiment\\tests\\exp4_load_pattern\\bin",
-    "data_dir": "F:\\hcp-project-experiment\\tests\\exp4_load_pattern\\data\\lg_exp4_load_pattern_cometbft_light_n16_zipf_t1000_r5",
-    "log_dir": "F:\\hcp-project-experiment\\tests\\exp4_load_pattern\\logs",
-    "csv": "F:\\hcp-project-experiment\\tests\\exp4_load_pattern\\csv\\lg_exp4_load_pattern_cometbft_light_n16_zipf_t1000_r5_loadgen.csv"
+    "test_root": "F:\\hcap-project-experiment\\tests\\exp4_load_pattern",
+    "bin_dir": "F:\\hcap-project-experiment\\tests\\exp4_load_pattern\\bin",
+    "data_dir": "F:\\hcap-project-experiment\\tests\\exp4_load_pattern\\data\\lg_exp4_load_pattern_cometbft_light_n16_zipf_t1000_r5",
+    "log_dir": "F:\\hcap-project-experiment\\tests\\exp4_load_pattern\\logs",
+    "csv": "F:\\hcap-project-experiment\\tests\\exp4_load_pattern\\csv\\lg_exp4_load_pattern_cometbft_light_n16_zipf_t1000_r5_loadgen.csv"
   }
 }

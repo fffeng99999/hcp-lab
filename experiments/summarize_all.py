@@ -31,7 +31,7 @@ def main() -> None:
         "",
         f"项目根目录：`{PROJECT_ROOT}`",
         "",
-        "> 最终实验数据位于 `hcp-lab/experiments/exp*/report/`；二进制、日志、nodeN 数据、loadgen CSV 等中间文件位于项目根目录 `tests/`。",
+        "> 最终实验数据位于 `hcap-lab/experiments/exp*/report/`；二进制、日志、nodeN 数据、loadgen CSV 等中间文件位于项目根目录 `tests/`。",
     ]
     append_file(lines, EXPERIMENTS_DIR / "exp4_load_pattern" / "report" / "table3_3.md", "EXP4 Uniform与Zipf负载模式敏感性对比")
     append_file(lines, EXPERIMENTS_DIR / "exp0_cometbft_compare" / "report" / "table3_4.md", "EXP0 CometBFT 与 CometBFT-light 对比")

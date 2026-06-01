@@ -56,7 +56,7 @@ tests/exp13_lightweight_tpbft/
 ├── algo_<algo>/g_<g>/sub_<sub>/run_<i>/data/
 └── algo_<algo>/g_<g>/sub_<sub>/run_<i>/logs/
 
-hcp-lab/experiments/exp13_lightweight_tpbft/report/
+hcap-lab/experiments/exp13_lightweight_tpbft/report/
 ├── result.json
 ├── exp13_summary.csv
 ├── figures/
@@ -71,11 +71,11 @@ hcp-lab/experiments/exp13_lightweight_tpbft/report/
 ## 运行方式
 
 ```bash
-cd hcp-lab/experiments/exp13_lightweight_tpbft
+cd hcap-lab/experiments/exp13_lightweight_tpbft
 bash run_exp13.sh
 ```
 
-或通过 hcp-lab-server UI 选择实验十三执行。
+或通过 hcap-lab-server UI 选择实验十三执行。
 
 ## 共识引擎
 

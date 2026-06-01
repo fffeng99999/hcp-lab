@@ -3,7 +3,7 @@
 ## 📋 文档信息
 
 - **任务名称**: 实验列表页面渲染修复与代码质量整顿
-- **关联模块**: `hcp-ui-lab` (Vue 3 + Vite + Pinia)
+- **关联模块**: `hcap-ui-lab` (Vue 3 + Vite + Pinia)
 - **排除范围**: AI 实验生成功能（`Generate.vue`、`/api/ai/*` 接口、`experiments/generate` 路由）
 - **文档版本**: v1.0
 - **最后更新**: 2026-04-24
@@ -233,8 +233,8 @@ return axiosInstance.get<ApiResponse<Experiment[]>>('/api/experiments').then(r =
 
 ### 5.1 实验列表渲染验证
 
-1. 启动后端：`cd hcp-lab/hcp-lab-server && go run main.go`
-2. 启动前端：`cd hcp-ui-lab && npm run dev`
+1. 启动后端：`cd hcap-lab/hcap-lab-server && go run main.go`
+2. 启动前端：`cd hcap-ui-lab && npm run dev`
 3. 浏览器访问 `http://localhost:5174/experiments`
 4. 预期：页面展示 8 个实验卡片，无 "暂无实验数据" 提示
 5. 断网测试：关闭后端，刷新页面，预期展示错误提示（非空状态）

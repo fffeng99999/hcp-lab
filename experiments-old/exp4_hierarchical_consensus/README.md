@@ -10,27 +10,27 @@
   - 其他模型参数：`message_bytes`、`base_latency_ms`、`phase_weight_inner/outer`
 - 分组关系：
   - `s = nodes / g`（每组节点数）
-- 共识模式：运行过程中会设置环境变量启用分层共识（见 [run_exp4.py](file:///home/hcp-dev/hcp-project-experiment/hcp-lab/experiments/exp4_hierarchical_consensus/run_exp4.py#L142-L150)）：
+- 共识模式：运行过程中会设置环境变量启用分层共识（见 [run_exp4.py](file:///home/hcap-dev/hcap-project-experiment/hcap-lab/experiments/exp4_hierarchical_consensus/run_exp4.py#L142-L150)）：
   - `CONSENSUS_ENGINE=hierarchical`
   - `HIERARCHICAL_GROUP_COUNT=g`、`HIERARCHICAL_GROUP_SIZE=s`、`HIERARCHICAL_NODE_COUNT=nodes` 等
 
 ## 如何运行
-- 入口脚本：[run_exp4_hierarchical.sh](file:///home/hcp-dev/hcp-project-experiment/hcp-lab/experiments/exp4_hierarchical_consensus/run_exp4_hierarchical.sh)
+- 入口脚本：[run_exp4_hierarchical.sh](file:///home/hcap-dev/hcap-project-experiment/hcap-lab/experiments/exp4_hierarchical_consensus/run_exp4_hierarchical.sh)
 
 ```bash
-bash hcp-lab/experiments/exp4_hierarchical_consensus/run_exp4_hierarchical.sh
+bash hcap-lab/experiments/exp4_hierarchical_consensus/run_exp4_hierarchical.sh
 ```
 
 可通过环境变量覆盖默认参数：
 
 ```bash
-GROUP_LIST="32,16,8" NODE_COUNT=32 TX_COUNT=20000 REPEAT=3 PORT_OFFSET=4100 CHAIN_ID="hcp-exp4" \
-  bash hcp-lab/experiments/exp4_hierarchical_consensus/run_exp4_hierarchical.sh
+GROUP_LIST="32,16,8" NODE_COUNT=32 TX_COUNT=20000 REPEAT=3 PORT_OFFSET=4100 CHAIN_ID="hcap-exp4" \
+  bash hcap-lab/experiments/exp4_hierarchical_consensus/run_exp4_hierarchical.sh
 ```
 
 ## 实验文件夹用途说明
 - `run_exp4_hierarchical.sh`：设置默认参数并转调测试脚本。
-- `test_exp4_hierarchical.sh`：构建 `hcp-loadgen`，设置实验产物目录，调用 Python 驱动脚本。
+- `test_exp4_hierarchical.sh`：构建 `hcap-loadgen`，设置实验产物目录，调用 Python 驱动脚本。
 - `run_exp4.py`：实验主逻辑（对每个 g 重复运行，汇总均值/方差；输出 CSV、SVG、报告与 summary.json）。
 - `report/`：实验输出目录（由脚本参数 `--out` 决定），包含：
   - `result.json`：结构化结果（每个 g 的聚合指标）
@@ -52,7 +52,7 @@ GROUP_LIST="32,16,8" NODE_COUNT=32 TX_COUNT=20000 REPEAT=3 PORT_OFFSET=4100 CHAI
 - 节点日志目录：
   - `.../g_<g>/run_<i>/logs/nodes_<nodes>/node<j>.log`
   - `.../g_<g>/run_<i>/logs/nodes_<nodes>/*gentx*` 等过程日志
-- 节点二进制（启动脚本构建输出）：`tests/exp4_hierarchical_consensus/bin/hcpd`
+- 节点二进制（启动脚本构建输出）：`tests/exp4_hierarchical_consensus/bin/hcapd`
 
 端口说明：
 - `PORT_OFFSET` 用于避免端口冲突；常用端口为：

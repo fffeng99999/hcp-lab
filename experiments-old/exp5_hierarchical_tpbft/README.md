@@ -11,29 +11,29 @@
   - 其他参数：消息大小、阶段权重、签名耗时模型、批量验签开关/加速比/并行度、batch_size 等
 - 分组关系：
   - `s = nodes / g`（每组节点数）
-- 共识模式：运行过程中会设置环境变量启用分层 TPBFT（见 [run_exp5.py](file:///home/hcp-dev/hcp-project-experiment/hcp-lab/experiments/exp5_hierarchical_tpbft/run_exp5.py#L162-L199)）：
+- 共识模式：运行过程中会设置环境变量启用分层 TPBFT（见 [run_exp5.py](file:///home/hcap-dev/hcap-project-experiment/hcap-lab/experiments/exp5_hierarchical_tpbft/run_exp5.py#L162-L199)）：
   - `CONSENSUS_ENGINE=hierarchical-tpbft`
   - `HIERARCHICAL_GROUP_COUNT=g`、`HIERARCHICAL_GROUP_SIZE=s`、`HIERARCHICAL_SIG_ALGO=<algo>` 等
 
 ## 如何运行
-- 入口脚本：[run_exp5_hierarchical_tpbft.sh](file:///home/hcp-dev/hcp-project-experiment/hcp-lab/experiments/exp5_hierarchical_tpbft/run_exp5_hierarchical_tpbft.sh)
+- 入口脚本：[run_exp5_hierarchical_tpbft.sh](file:///home/hcap-dev/hcap-project-experiment/hcap-lab/experiments/exp5_hierarchical_tpbft/run_exp5_hierarchical_tpbft.sh)
 
 ```bash
-bash hcp-lab/experiments/exp5_hierarchical_tpbft/run_exp5_hierarchical_tpbft.sh
+bash hcap-lab/experiments/exp5_hierarchical_tpbft/run_exp5_hierarchical_tpbft.sh
 ```
 
 可通过环境变量覆盖默认参数：
 
 ```bash
-GROUP_LIST="32,16,8" SIG_ALGO_LIST="bls,ed25519" NODE_COUNT=32 TX_COUNT=2000 REPEAT=3 PORT_OFFSET=5100 CHAIN_ID="hcp-exp5" \
-  bash hcp-lab/experiments/exp5_hierarchical_tpbft/run_exp5_hierarchical_tpbft.sh
+GROUP_LIST="32,16,8" SIG_ALGO_LIST="bls,ed25519" NODE_COUNT=32 TX_COUNT=2000 REPEAT=3 PORT_OFFSET=5100 CHAIN_ID="hcap-exp5" \
+  bash hcap-lab/experiments/exp5_hierarchical_tpbft/run_exp5_hierarchical_tpbft.sh
 ```
 
-也可以直接运行 Python 并覆写更细粒度参数（例如 batch verify、签名耗时模型等），见 [run_exp5.py](file:///home/hcp-dev/hcp-project-experiment/hcp-lab/experiments/exp5_hierarchical_tpbft/run_exp5.py) 的参数列表。
+也可以直接运行 Python 并覆写更细粒度参数（例如 batch verify、签名耗时模型等），见 [run_exp5.py](file:///home/hcap-dev/hcap-project-experiment/hcap-lab/experiments/exp5_hierarchical_tpbft/run_exp5.py) 的参数列表。
 
 ## 实验文件夹用途说明
 - `run_exp5_hierarchical_tpbft.sh`：设置默认参数并转调测试脚本。
-- `test_exp5_hierarchical_tpbft.sh`：构建 `hcp-loadgen`，设置实验产物目录，调用 Python 驱动脚本。
+- `test_exp5_hierarchical_tpbft.sh`：构建 `hcap-loadgen`，设置实验产物目录，调用 Python 驱动脚本。
 - `run_exp5.py`：实验主逻辑（按 algo×g×repeat 运行，汇总均值/方差；输出 CSV、SVG、报告与 summary.json）。
 - `report/`：实验输出目录（由脚本参数 `--out` 决定），包含：
   - `result.json`：结构化结果
@@ -54,7 +54,7 @@ GROUP_LIST="32,16,8" SIG_ALGO_LIST="bls,ed25519" NODE_COUNT=32 TX_COUNT=2000 REP
 - 节点日志目录：
   - `.../algo_<algo>/g_<g>/run_<i>/logs/nodes_<nodes>/node<j>.log`
   - `.../algo_<algo>/g_<g>/run_<i>/logs/nodes_<nodes>/*gentx*` 等过程日志
-- 节点二进制（启动脚本构建输出）：`tests/exp5_hierarchical_tpbft/bin/hcpd`
+- 节点二进制（启动脚本构建输出）：`tests/exp5_hierarchical_tpbft/bin/hcapd`
 
 端口说明：
 - `PORT_OFFSET` 用于避免端口冲突；常用端口为：

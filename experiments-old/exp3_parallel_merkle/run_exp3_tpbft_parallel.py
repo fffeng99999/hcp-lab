@@ -56,10 +56,10 @@ def main() -> None:
     args = parser.parse_args()
 
     project_root = Path(__file__).resolve().parents[3]
-    lab_root = project_root / "hcp-lab"
+    lab_root = project_root / "hcap-lab"
     out_path = Path(args.out)
     if not out_path.is_absolute():
-        if out_path.parts and out_path.parts[0] == "hcp-lab":
+        if out_path.parts and out_path.parts[0] == "hcap-lab":
             out_path = Path(*out_path.parts[1:])
         output_dir = lab_root / out_path
     else:

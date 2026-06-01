@@ -79,10 +79,10 @@ def main() -> None:
     args = parser.parse_args()
 
     project_root = Path(__file__).resolve().parents[3]
-    lab_root = project_root / "hcp-lab"
+    lab_root = project_root / "hcap-lab"
     out_path = Path(args.out)
     if not out_path.is_absolute():
-        if out_path.parts and out_path.parts[0] == "hcp-lab":
+        if out_path.parts and out_path.parts[0] == "hcap-lab":
             out_path = Path(*out_path.parts[1:])
         output_dir = lab_root / out_path
     else:
@@ -103,8 +103,8 @@ def main() -> None:
     port_offset = int(os.environ.get("PORT_OFFSET", "0"))
     grpc_port = 9090 + port_offset
     rpc_port = 26657 + port_offset
-    chain_id = os.environ.get("CHAIN_ID", "hcp-exp7")
-    cli_binary_env = os.environ.get("HCPD_BINARY", "hcpd")
+    chain_id = os.environ.get("CHAIN_ID", "hcap-exp7")
+    cli_binary_env = os.environ.get("HCPD_BINARY", "hcapd")
     if os.path.isabs(cli_binary_env):
         cli_binary = cli_binary_env
     elif "/" in cli_binary_env or cli_binary_env.startswith("."):

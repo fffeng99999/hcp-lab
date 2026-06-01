@@ -50,7 +50,7 @@ class ExperimentRunner:
     ) -> None:
         self.project_root = project_root
         self.node_manager = NodeManager(project_root)
-        self.loadgen_bin = loadgen_bin or project_root / "hcp-loadgen" / "target" / "release" / "hcp-loadgen"
+        self.loadgen_bin = loadgen_bin or project_root / "hcap-loadgen" / "target" / "release" / "hcap-loadgen"
         self.db_isolation_enabled = self._env_bool("LOADGEN_DB_ISOLATION", True)
         self.db_reset_on_start = self._env_bool("LOADGEN_DB_RESET", True)
         self.db_schema_prefix = self._normalize_prefix(os.environ.get("LOADGEN_DB_SCHEMA_PREFIX", "lg"))

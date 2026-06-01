@@ -1,8 +1,8 @@
 # HCP 第三章实验汇总报告
 
-项目根目录：`F:\hcp-project-experiment`
+项目根目录：`F:\hcap-project-experiment`
 
-> 最终实验数据位于 `hcp-lab/experiments/exp*/report/`；二进制、日志、nodeN 数据、loadgen CSV 等中间文件位于项目根目录 `tests/`。
+> 最终实验数据位于 `hcap-lab/experiments/exp*/report/`；二进制、日志、nodeN 数据、loadgen CSV 等中间文件位于项目根目录 `tests/`。
 
 ## EXP4 Uniform与Zipf负载模式敏感性对比
 

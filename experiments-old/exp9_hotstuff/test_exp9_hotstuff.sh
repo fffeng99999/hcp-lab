@@ -12,7 +12,7 @@ REPEAT="${REPEAT:-5}"
 FAULTY_RATIO_LIST="${FAULTY_RATIO_LIST:-0,0.1,0.2}"
 
 PORT_OFFSET="${PORT_OFFSET:-9000}"
-CHAIN_ID="${CHAIN_ID:-hcp-exp9}"
+CHAIN_ID="${CHAIN_ID:-hcap-exp9}"
 
 HOTSTUFF_NODE_COUNT="${HOTSTUFF_NODE_COUNT:-4}"
 HOTSTUFF_FAULTY_RATIO="${HOTSTUFF_FAULTY_RATIO:-0}"
@@ -51,8 +51,8 @@ echo "共识引擎: hotstuff (数学模型)"
 
 mkdir -p "$REPORT_OUT"
 
-cd "$PROJECT_ROOT/hcp-lab"
-export PYTHONPATH="$PROJECT_ROOT/hcp-lab:${PYTHONPATH}"
+cd "$PROJECT_ROOT/hcap-lab"
+export PYTHONPATH="$PROJECT_ROOT/hcap-lab:${PYTHONPATH}"
 
 python3 "$SCRIPT_DIR/run_exp9.py" \
   --nodes "$NODES_LIST" \

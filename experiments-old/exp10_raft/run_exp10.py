@@ -34,7 +34,7 @@ def main():
     if out_path.is_absolute():
         output_dir = out_path
     else:
-        output_dir = project_root / "hcp-lab" / out_path
+        output_dir = project_root / "hcap-lab" / out_path
     output_dir.mkdir(parents=True, exist_ok=True)
 
     node_list = parse_int_list(args.nodes)

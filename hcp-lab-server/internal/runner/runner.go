@@ -12,9 +12,9 @@ import (
 	"strconv"
 	"strings"
 
-	"hcp-lab-server/internal/experiments"
-	"hcp-lab-server/internal/store"
-	"hcp-lab-server/internal/ws"
+	"hcap-lab-server/internal/experiments"
+	"hcap-lab-server/internal/store"
+	"hcap-lab-server/internal/ws"
 )
 
 // Runner manages experiment execution.
@@ -64,7 +64,7 @@ func (r *Runner) Start(task *store.Task, exp experiments.Experiment) error {
 		return fmt.Errorf("script not found: %s", scriptPath)
 	}
 
-	outputDir := filepath.Join(r.projectRoot, "hcp-lab", "hcp-lab-server", "data", "results", task.ID)
+	outputDir := filepath.Join(r.projectRoot, "hcap-lab", "hcap-lab-server", "data", "results", task.ID)
 	if err := os.MkdirAll(outputDir, 0755); err != nil {
 		return fmt.Errorf("mkdir output dir: %w", err)
 	}

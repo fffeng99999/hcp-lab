@@ -33,9 +33,9 @@ def main() -> None:
     parser.add_argument("--loadgen-args", type=str, default="", help="传递给负载生成器的额外参数")
     args = parser.parse_args()
 
-    # 定位项目根目录（hcp-lab 的父目录）
+    # 定位项目根目录（hcap-lab 的父目录）
     project_root = Path(__file__).resolve().parents[1]
-    lab_root = project_root / "hcp-lab"
+    lab_root = project_root / "hcap-lab"
 
     # 确定输出目录
     out_path = Path(args.out)

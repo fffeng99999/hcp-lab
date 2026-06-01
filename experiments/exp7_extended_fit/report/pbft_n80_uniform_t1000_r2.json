@@ -1528,10 +1528,10 @@
   },
   "db_counts": {},
   "intermediate_paths": {
-    "test_root": "F:\\hcp-project-experiment\\tests\\exp7_extended_fit",
-    "bin_dir": "F:\\hcp-project-experiment\\tests\\exp7_extended_fit\\bin",
-    "data_dir": "F:\\hcp-project-experiment\\tests\\exp7_extended_fit\\data\\lg_exp7_extended_fit_pbft_n80_uniform_t1000_r2",
-    "log_dir": "F:\\hcp-project-experiment\\tests\\exp7_extended_fit\\logs",
-    "csv": "F:\\hcp-project-experiment\\tests\\exp7_extended_fit\\csv\\lg_exp7_extended_fit_pbft_n80_uniform_t1000_r2_loadgen.csv"
+    "test_root": "F:\\hcap-project-experiment\\tests\\exp7_extended_fit",
+    "bin_dir": "F:\\hcap-project-experiment\\tests\\exp7_extended_fit\\bin",
+    "data_dir": "F:\\hcap-project-experiment\\tests\\exp7_extended_fit\\data\\lg_exp7_extended_fit_pbft_n80_uniform_t1000_r2",
+    "log_dir": "F:\\hcap-project-experiment\\tests\\exp7_extended_fit\\logs",
+    "csv": "F:\\hcap-project-experiment\\tests\\exp7_extended_fit\\csv\\lg_exp7_extended_fit_pbft_n80_uniform_t1000_r2_loadgen.csv"
   }
 }

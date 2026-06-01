@@ -12,11 +12,11 @@ import (
 	"strings"
 	"time"
 
-	"hcp-lab-server/internal/ai"
-	"hcp-lab-server/internal/experiments"
-	"hcp-lab-server/internal/runner"
-	"hcp-lab-server/internal/store"
-	"hcp-lab-server/internal/ws"
+	"hcap-lab-server/internal/ai"
+	"hcap-lab-server/internal/experiments"
+	"hcap-lab-server/internal/runner"
+	"hcap-lab-server/internal/store"
+	"hcap-lab-server/internal/ws"
 )
 
 type apiResponse struct {
@@ -53,7 +53,7 @@ func enableCORS(next http.Handler) http.Handler {
 func main() {
 	var (
 		port        = flag.String("port", "9090", "server port")
-		projectRoot = flag.String("root", ".", "project root directory (parent of hcp-lab)")
+		projectRoot = flag.String("root", ".", "project root directory (parent of hcap-lab)")
 		aiAPIURL    = flag.String("ai-url", "https://api.openai.com/v1/chat/completions", "AI API URL")
 		aiAPIKey    = flag.String("ai-key", "", "AI API key")
 		aiModel     = flag.String("ai-model", "gpt-4", "AI model name")
@@ -66,7 +66,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	dataDir := filepath.Join(absRoot, "hcp-lab", "hcp-lab-server", "data")
+	dataDir := filepath.Join(absRoot, "hcap-lab", "hcap-lab-server", "data")
 	st, err := store.New(dataDir)
 	if err != nil {
 		log.Fatal("store init:", err)
@@ -136,7 +136,7 @@ func main() {
 			return
 		}
 
-		outputDir := filepath.Join("hcp-lab", "hcp-lab-server", "data", "results", id+"_"+strconv.FormatInt(time.Now().UnixNano(), 10))
+		outputDir := filepath.Join("hcap-lab", "hcap-lab-server", "data", "results", id+"_"+strconv.FormatInt(time.Now().UnixNano(), 10))
 		task, err := st.CreateTask(id, exp.Name, params, outputDir)
 		if err != nil {
 			respError(w, 500, "create task: "+err.Error())
@@ -333,7 +333,7 @@ func main() {
 	})
 
 	addr := ":" + *port
-	log.Printf("hcp-lab-server listening on %s, project root: %s", addr, absRoot)
+	log.Printf("hcap-lab-server listening on %s, project root: %s", addr, absRoot)
 	if err := http.ListenAndServe(addr, enableCORS(mux)); err != nil {
 		log.Fatal(err)
 	}

@@ -37,7 +37,7 @@
     "mem_bytes": 13657845760
   },
   "intermediate_paths": {
-    "data_dir": "F:\\hcp-project-experiment\\tests\\exp0_cometbft_compare\\data\\cometbft_n8_uniform_t1000_r3",
-    "account_file": "F:\\hcp-project-experiment\\tests\\exp0_cometbft_compare\\data\\cometbft_n8_uniform_t1000_r3\\loadgen_accounts.jsonl"
+    "data_dir": "F:\\hcap-project-experiment\\tests\\exp0_cometbft_compare\\data\\cometbft_n8_uniform_t1000_r3",
+    "account_file": "F:\\hcap-project-experiment\\tests\\exp0_cometbft_compare\\data\\cometbft_n8_uniform_t1000_r3\\loadgen_accounts.jsonl"
   }
 }

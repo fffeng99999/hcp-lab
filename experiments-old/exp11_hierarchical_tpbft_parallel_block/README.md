@@ -47,7 +47,7 @@ tests/exp11_hierarchical_tpbft_parallel_block/
 ├── algo_<algo>/g_<g>/k_<k>/run_<i>/data/   # 节点数据
 └── algo_<algo>/g_<g>/k_<k>/run_<i>/logs/   # 节点日志
 
-hcp-lab/experiments/exp11_hierarchical_tpbft_parallel_block/report/
+hcap-lab/experiments/exp11_hierarchical_tpbft_parallel_block/report/
 ├── result.json
 ├── exp11_summary.csv
 ├── figures/
@@ -62,11 +62,11 @@ hcp-lab/experiments/exp11_hierarchical_tpbft_parallel_block/report/
 ## 运行方式
 
 ```bash
-cd hcp-lab/experiments/exp11_hierarchical_tpbft_parallel_block
+cd hcap-lab/experiments/exp11_hierarchical_tpbft_parallel_block
 bash run_exp11.sh
 ```
 
-或通过 hcp-lab-server UI 选择实验十一执行。
+或通过 hcap-lab-server UI 选择实验十一执行。
 
 ## 引擎
 

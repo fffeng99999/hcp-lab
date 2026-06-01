@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Shared runner for HCP engine + loadgen experiments.
 
-Final experiment data is written to hcp-lab/experiments/<exp>/report.
+Final experiment data is written to hcap-lab/experiments/<exp>/report.
 Intermediate artifacts are written to project-root tests/<exp>.
 """
 import json
@@ -20,14 +20,14 @@ from statistics import stdev as _stdev
 from typing import Any, Dict, Iterable, List, Optional
 
 
-# 项目根目录（hcp-lab/experiments/common_engine_runner.py 的上三级目录）
+# 项目根目录（hcap-lab/experiments/common_engine_runner.py 的上三级目录）
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 # 中间产物存放目录
 TESTS_DIR = PROJECT_ROOT / "tests"
 # 默认 PostgreSQL 数据库连接字符串
 DEFAULT_DATABASE_URL = (
     "postgres://user_rbc3B8:password_DfA4Pw@192.168.58.102:5432/"
-    "hcp_server?sslmode=disable&search_path=loadgendata,public"
+    "hcap_server?sslmode=disable&search_path=loadgendata,public"
 )
 
 # Bech32 编码字符集，用于生成账户地址
@@ -148,32 +148,32 @@ def stage_binary(src: Path, dst_dir: Path, name: str) -> Path:
 
 
 def stage_binaries(paths: Dict[str, Path]) -> Dict[str, Path]:
-    """定位并复制 hcp-bench 和 hcp-loadgen 二进制到实验目录。"""
+    """定位并复制 hcap-bench 和 hcap-loadgen 二进制到实验目录。"""
     bench = resolve_binary(
         "HCP_BENCH_BIN",
         [
-            PROJECT_ROOT / "tests" / "build" / "hcp-bench.exe",
-            PROJECT_ROOT / "tests" / "build" / "hcp-bench",
-            PROJECT_ROOT / "hcp-consensus" / "hcp-bench.exe",
-            PROJECT_ROOT / "hcp-consensus" / "hcp-bench",
-            PROJECT_ROOT / "hcp-consensus-build" / "hcp-bench.exe",
-            PROJECT_ROOT / "hcp-consensus-build" / "hcp-bench",
+            PROJECT_ROOT / "tests" / "build" / "hcap-bench.exe",
+            PROJECT_ROOT / "tests" / "build" / "hcap-bench",
+            PROJECT_ROOT / "hcap-consensus" / "hcap-bench.exe",
+            PROJECT_ROOT / "hcap-consensus" / "hcap-bench",
+            PROJECT_ROOT / "hcap-consensus-build" / "hcap-bench.exe",
+            PROJECT_ROOT / "hcap-consensus-build" / "hcap-bench",
         ],
     )
     loadgen = resolve_binary(
         "HCP_LOADGEN_BIN",
         [
-            PROJECT_ROOT / "tests" / "build" / "hcp-loadgen.exe",
-            PROJECT_ROOT / "tests" / "build" / "hcp-loadgen",
-            PROJECT_ROOT / "hcp-loadgen" / "target" / "release" / "hcp-loadgen.exe",
-            PROJECT_ROOT / "hcp-loadgen" / "target" / "release" / "hcp-loadgen",
-            PROJECT_ROOT / "hcp-loadgen" / "target" / "debug" / "hcp-loadgen.exe",
-            PROJECT_ROOT / "hcp-loadgen" / "target" / "debug" / "hcp-loadgen",
+            PROJECT_ROOT / "tests" / "build" / "hcap-loadgen.exe",
+            PROJECT_ROOT / "tests" / "build" / "hcap-loadgen",
+            PROJECT_ROOT / "hcap-loadgen" / "target" / "release" / "hcap-loadgen.exe",
+            PROJECT_ROOT / "hcap-loadgen" / "target" / "release" / "hcap-loadgen",
+            PROJECT_ROOT / "hcap-loadgen" / "target" / "debug" / "hcap-loadgen.exe",
+            PROJECT_ROOT / "hcap-loadgen" / "target" / "debug" / "hcap-loadgen",
         ],
     )
     return {
-        "bench": stage_binary(bench, paths["bin"], "hcp-bench"),
-        "loadgen": stage_binary(loadgen, paths["bin"], "hcp-loadgen"),
+        "bench": stage_binary(bench, paths["bin"], "hcap-bench"),
+        "loadgen": stage_binary(loadgen, paths["bin"], "hcap-loadgen"),
     }
 
 
@@ -294,7 +294,7 @@ def convertbits(data: bytes, from_bits: int, to_bits: int, pad: bool = True) -> 
 
 
 def bech32_encode(hrp: str, payload: bytes) -> str:
-    """将 payload 编码为 Bech32 格式字符串（如 hcp1...）。"""
+    """将 payload 编码为 Bech32 格式字符串（如 hcap1...）。"""
     data = convertbits(payload, 8, 5)
     values = bech32_hrp_expand(hrp) + data
     polymod = bech32_polymod(values + [0, 0, 0, 0, 0, 0]) ^ 1
@@ -308,7 +308,7 @@ def prepare_sdk_account_file(point_data_dir: Path, schema: str, account_count: i
     lines = []
     for i in range(account_count):
         digest = sha256(f"{schema}:loadgen-account:{i}".encode("utf-8")).digest()
-        address = bech32_encode("hcp", digest[:20])
+        address = bech32_encode("hcap", digest[:20])
         lines.append(json.dumps({"name": f"loadgen{i}", "address": address}, ensure_ascii=False))
     account_file.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return account_file
@@ -360,7 +360,7 @@ def prepare_node_dirs(paths: Dict[str, Path], schema: str, engine: str, nodes: i
         node_dir.mkdir(parents=True, exist_ok=True)
         metadata = {
             "node_dir_type": "engine_sdk_backed_node",
-            "note": "This records hcp-consensus/engine node state and, when HCP_ENGINE_SDK_EXEC=1, a Cosmos SDK-backed application store driven by engine commits.",
+            "note": "This records hcap-consensus/engine node state and, when HCP_ENGINE_SDK_EXEC=1, a Cosmos SDK-backed application store driven by engine commits.",
             "engine": engine,
             "node_index": i,
             "node_id": f"node-{i}",
@@ -444,7 +444,7 @@ def run_engine_loadgen_point(
         server_env.setdefault("HCP_ENGINE_SDK_CHAIN_ID", f"{schema}-chain")
         server_env["HCP_ENGINE_SDK_ACCOUNT_FILE"] = str(sdk_account_file)
         server_env["HCP_ENGINE_SDK_ACCOUNT_BALANCE"] = os.environ.get("LOADGEN_INITIAL_BALANCE", "1000000000")
-        server_env["HCP_ENGINE_SDK_DENOM"] = os.environ.get("LOADGEN_DENOM", "uhcp")
+        server_env["HCP_ENGINE_SDK_DENOM"] = os.environ.get("LOADGEN_DENOM", "uhcap")
         server = subprocess.Popen(
             bench_cmd,
             cwd=point_data_dir,
@@ -468,7 +468,7 @@ def run_engine_loadgen_point(
             "--tx-encoding", os.environ.get("LOADGEN_TX_ENCODING", "proto"),
             "--initial-balance", os.environ.get("LOADGEN_INITIAL_BALANCE", "1000000000"),
             "--send-amount", os.environ.get("LOADGEN_SEND_AMOUNT", "1"),
-            "--denom", os.environ.get("LOADGEN_DENOM", "uhcp"),
+            "--denom", os.environ.get("LOADGEN_DENOM", "uhcap"),
             "--payload-size", os.environ.get("LOADGEN_PAYLOAD_SIZE", "256"),
             "--account-selection-mode", account_selection_mode,
             "--database-url", database_url,
@@ -489,7 +489,7 @@ def run_engine_loadgen_point(
         started = time.time()
         completed = subprocess.run(
             loadgen_cmd,
-            cwd=PROJECT_ROOT / "hcp-loadgen",
+            cwd=PROJECT_ROOT / "hcap-loadgen",
             capture_output=True,
             text=True,
             encoding="utf-8",
@@ -563,7 +563,7 @@ def run_engine_loadgen_point(
             encoding="utf-8",
         )
         if completed.returncode != 0:
-            raise RuntimeError(f"hcp-loadgen failed, see {loadgen_log}")
+            raise RuntimeError(f"hcap-loadgen failed, see {loadgen_log}")
         return result
     finally:
         stop_process(server)

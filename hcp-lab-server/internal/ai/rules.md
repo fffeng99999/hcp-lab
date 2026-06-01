@@ -20,7 +20,7 @@ HCP Lab是一个分布式共识算法实验平台，支持多种共识算法的�
 | NODE_COUNT | int | 节点数量 | 32 |
 | TX_COUNT | int | 交易数量 | 10000 |
 | PORT_OFFSET | int | 端口偏移量 | 1000 |
-| CHAIN_ID | string | 链ID | hcp-exp |
+| CHAIN_ID | string | 链ID | hcap-exp |
 | REPEAT | int | 重复次数 | 3 |
 | LOADGEN_DB_ISOLATION | bool | 数据库隔离 | true |
 | LOADGEN_DB_RESET | bool | 数据库重置 | true |
@@ -57,7 +57,7 @@ experiments/expX_name/
 - 所有参数必须有默认值
 
 #### test_expX_name.sh
-- 构建项目（hcp-loadgen）
+- 构建项目（hcap-loadgen）
 - 设置实验路径
 - 调用Python实验脚本
 - 传递参数和loadgen参数
@@ -120,7 +120,7 @@ AI必须输出符合以下JSON格式的实验配置：
     "NODE_COUNT": 32,
     "TX_COUNT": 10000,
     "PORT_OFFSET": 1000,
-    "CHAIN_ID": "hcp-expX",
+    "CHAIN_ID": "hcap-expX",
     "REPEAT": 3
   },
   "metrics": [

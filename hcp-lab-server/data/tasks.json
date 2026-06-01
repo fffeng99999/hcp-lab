@@ -6,7 +6,7 @@
     "status": "completed",
     "params": {
       "BATCH_SIZE": 8,
-      "CHAIN_ID": "hcp-exp1",
+      "CHAIN_ID": "hcap-exp1",
       "COMET_MEMPOOL_RECHECK": false,
       "COMET_SKIP_TIMEOUT_COMMIT": true,
       "COMET_TIMEOUT_COMMIT": "500ms",
@@ -22,7 +22,7 @@
       "TARGET_TPS": 300,
       "TX_LIST": "1000"
     },
-    "output_dir": "hcp-lab/hcp-lab-server/data/results/exp1_tx_nodes_1777207940679367989",
+    "output_dir": "hcap-lab/hcap-lab-server/data/results/exp1_tx_nodes_1777207940679367989",
     "result_files": [
       "exp1_tps_vs_nodes_by_tx.csv",
       "exp1_tps_vs_tx_by_nodes.csv",

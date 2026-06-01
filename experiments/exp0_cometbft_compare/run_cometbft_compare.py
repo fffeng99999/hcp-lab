@@ -165,7 +165,7 @@ def configure_node(home: Path, rpc_port: int, p2p_port: int, grpc_port: int, pee
     )
 
 
-def prepare_network(point_dir: Path, hcpd: Path, nodes: int, txs: int, chain_id: str) -> tuple[Path, int, int, Path]:
+def prepare_network(point_dir: Path, hcapd: Path, nodes: int, txs: int, chain_id: str) -> tuple[Path, int, int, Path]:
     if point_dir.exists():
         shutil.rmtree(point_dir)
     point_dir.mkdir(parents=True, exist_ok=True)
@@ -173,14 +173,14 @@ def prepare_network(point_dir: Path, hcpd: Path, nodes: int, txs: int, chain_id:
     homes = [point_dir / f"node{i}" for i in range(nodes)]
 
     for i, home in enumerate(homes):
-        run([str(hcpd), "init", f"node{i}", "--chain-id", chain_id, "--home", str(home)])
-        key = read_json(run([str(hcpd), "keys", "add", f"validator{i}", "--keyring-backend", "test", "--home", str(home), "--output", "json"]).stdout)
-        run([str(hcpd), "genesis", "add-genesis-account", key["address"], "100000000000stake", "--home", str(home)])
-        run([str(hcpd), "genesis", "gentx", f"validator{i}", "1000000stake", "--chain-id", chain_id, "--keyring-backend", "test", "--home", str(home)])
+        run([str(hcapd), "init", f"node{i}", "--chain-id", chain_id, "--home", str(home)])
+        key = read_json(run([str(hcapd), "keys", "add", f"validator{i}", "--keyring-backend", "test", "--home", str(home), "--output", "json"]).stdout)
+        run([str(hcapd), "genesis", "add-genesis-account", key["address"], "100000000000stake", "--home", str(home)])
+        run([str(hcapd), "genesis", "gentx", f"validator{i}", "1000000stake", "--chain-id", chain_id, "--keyring-backend", "test", "--home", str(home)])
 
     for i, home in enumerate(homes[1:], start=1):
-        addr = run([str(hcpd), "keys", "show", f"validator{i}", "-a", "--keyring-backend", "test", "--home", str(home)]).stdout.strip()
-        run([str(hcpd), "genesis", "add-genesis-account", addr, "100000000000stake", "--home", str(homes[0])])
+        addr = run([str(hcapd), "keys", "show", f"validator{i}", "-a", "--keyring-backend", "test", "--home", str(home)]).stdout.strip()
+        run([str(hcapd), "genesis", "add-genesis-account", addr, "100000000000stake", "--home", str(homes[0])])
         gentx_dir = homes[0] / "config" / "gentx"
         gentx_dir.mkdir(parents=True, exist_ok=True)
         for gentx in (home / "config" / "gentx").glob("*.json"):
@@ -190,25 +190,25 @@ def prepare_network(point_dir: Path, hcpd: Path, nodes: int, txs: int, chain_id:
         with account_file.open("w", encoding="utf-8") as out:
             for i in range(txs):
                 name = f"load{i:04d}"
-                key = read_json(run([str(hcpd), "keys", "add", name, "--keyring-backend", "test", "--home", str(homes[0]), "--output", "json"]).stdout)
+                key = read_json(run([str(hcapd), "keys", "add", name, "--keyring-backend", "test", "--home", str(homes[0]), "--output", "json"]).stdout)
                 out.write(json.dumps({"name": name, "address": key["address"]}) + "\n")
-                run([str(hcpd), "genesis", "add-genesis-account", key["address"], "100000000000stake", "--home", str(homes[0])])
+                run([str(hcapd), "genesis", "add-genesis-account", key["address"], "100000000000stake", "--home", str(homes[0])])
     else:
         account_file = prepare_sdk_account_file(point_dir, point_dir.name, txs)
         for line in account_file.read_text(encoding="utf-8").splitlines():
             if not line.strip():
                 continue
             address = json.loads(line)["address"]
-            run([str(hcpd), "genesis", "add-genesis-account", address, "100000000000stake", "--home", str(homes[0])])
+            run([str(hcapd), "genesis", "add-genesis-account", address, "100000000000stake", "--home", str(homes[0])])
 
-    run([str(hcpd), "genesis", "collect-gentxs", "--home", str(homes[0])])
+    run([str(hcapd), "genesis", "collect-gentxs", "--home", str(homes[0])])
     for home in homes[1:]:
         shutil.copy2(homes[0] / "config" / "genesis.json", home / "config" / "genesis.json")
 
     base_port = find_port_window(nodes)
     peer_parts = []
     for i, home in enumerate(homes):
-        node_id = run([str(hcpd), "comet", "show-node-id", "--home", str(home)]).stdout.strip()
+        node_id = run([str(hcapd), "comet", "show-node-id", "--home", str(home)]).stdout.strip()
         peer_parts.append(f"{node_id}@127.0.0.1:{base_port + i * 10 + 1}")
     peers = ",".join(peer_parts)
     for i, home in enumerate(homes):
@@ -243,7 +243,7 @@ def bool_env(name: str, default: bool = False) -> bool:
     return raw.strip().lower() in {"1", "true", "yes", "on"}
 
 
-def run_point(hcpd: Path, loadgen: Path, nodes: int, txs: int, repeat: int) -> dict[str, Any]:
+def run_point(hcapd: Path, loadgen: Path, nodes: int, txs: int, repeat: int) -> dict[str, Any]:
     point = f"cometbft_n{nodes}_uniform_t{txs}_r{repeat}"
     point_dir = TEST_DIR / "data" / point
     log_dir = TEST_DIR / "logs"
@@ -251,7 +251,7 @@ def run_point(hcpd: Path, loadgen: Path, nodes: int, txs: int, repeat: int) -> d
     log_dir.mkdir(parents=True, exist_ok=True)
     csv_dir.mkdir(parents=True, exist_ok=True)
     chain_id = f"{point}-chain"
-    node0_home, rpc_port, grpc_port, account_file = prepare_network(point_dir, hcpd, nodes, txs, chain_id)
+    node0_home, rpc_port, grpc_port, account_file = prepare_network(point_dir, hcapd, nodes, txs, chain_id)
 
     procs: list[subprocess.Popen] = []
     try:
@@ -260,7 +260,7 @@ def run_point(hcpd: Path, loadgen: Path, nodes: int, txs: int, repeat: int) -> d
             log_file = (log_dir / f"{point}_node{i}.log").open("w", encoding="utf-8", errors="replace")
             proc = subprocess.Popen(
                 [
-                    str(hcpd),
+                    str(hcapd),
                     "start",
                     "--home",
                     str(home),
@@ -342,13 +342,13 @@ def run_point(hcpd: Path, loadgen: Path, nodes: int, txs: int, repeat: int) -> d
                     "--keyring-home",
                     str(node0_home),
                     "--cli-binary",
-                    str(hcpd),
+                    str(hcapd),
                 ]
             )
         started = time.time()
         completed = subprocess.run(
             loadgen_cmd,
-            cwd=PROJECT_ROOT / "hcp-loadgen",
+            cwd=PROJECT_ROOT / "hcap-loadgen",
             capture_output=True,
             text=True,
             encoding="utf-8",
@@ -433,8 +433,8 @@ def load_existing_result(point: str) -> dict[str, Any] | None:
 def main() -> None:
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     TEST_DIR.mkdir(parents=True, exist_ok=True)
-    hcpd = Path(os.environ.get("HCPD_BIN", PROJECT_ROOT / "tests" / "build" / "hcpd.exe"))
-    loadgen = Path(os.environ.get("HCP_LOADGEN_BIN", PROJECT_ROOT / "tests" / "build" / "hcp-loadgen.exe"))
+    hcapd = Path(os.environ.get("HCPD_BIN", PROJECT_ROOT / "tests" / "build" / "hcapd.exe"))
+    loadgen = Path(os.environ.get("HCP_LOADGEN_BIN", PROJECT_ROOT / "tests" / "build" / "hcap-loadgen.exe"))
     nodes_list = env_list_int("COMETBFT_ORIGINAL_NODES", [8, 16, 32])
     txs = env_int("COMETBFT_ORIGINAL_TXS", 1000)
     repeat = env_int("COMETBFT_ORIGINAL_REPEAT", 5)
@@ -453,7 +453,7 @@ def main() -> None:
                 runs.append(existing)
                 continue
             print(f"[COMETBFT] nodes={nodes} txs={txs} run={r}", flush=True)
-            runs.append(run_point(hcpd, loadgen, nodes, txs, r))
+            runs.append(run_point(hcapd, loadgen, nodes, txs, r))
         matrix["cometbft"][str(nodes)] = aggregate(runs)
 
         light_runs = []

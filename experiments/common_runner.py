@@ -9,7 +9,7 @@ from typing import Dict, List
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-BENCH_BIN = PROJECT_ROOT / "hcp-consensus-build" / "hcp-bench"
+BENCH_BIN = PROJECT_ROOT / "hcap-consensus-build" / "hcap-bench"
 TESTS_DIR = PROJECT_ROOT / "tests"
 
 
@@ -72,7 +72,7 @@ def format_stat(values: List[float]) -> str:
 
 
 def copy_to_report(src_dir: Path, exp_name: str):
-    dst_dir = PROJECT_ROOT / "hcp-lab" / "experiments" / exp_name / "report"
+    dst_dir = PROJECT_ROOT / "hcap-lab" / "experiments" / exp_name / "report"
     dst_dir.mkdir(parents=True, exist_ok=True)
     for f in src_dir.iterdir():
         if f.is_file():

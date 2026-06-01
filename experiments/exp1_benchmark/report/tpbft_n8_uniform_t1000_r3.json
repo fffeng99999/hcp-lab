@@ -232,10 +232,10 @@
   },
   "db_counts": {},
   "intermediate_paths": {
-    "test_root": "F:\\hcp-project-experiment\\tests\\exp1_benchmark",
-    "bin_dir": "F:\\hcp-project-experiment\\tests\\exp1_benchmark\\bin",
-    "data_dir": "F:\\hcp-project-experiment\\tests\\exp1_benchmark\\data\\lg_exp1_benchmark_tpbft_n8_uniform_t1000_r3",
-    "log_dir": "F:\\hcp-project-experiment\\tests\\exp1_benchmark\\logs",
-    "csv": "F:\\hcp-project-experiment\\tests\\exp1_benchmark\\csv\\lg_exp1_benchmark_tpbft_n8_uniform_t1000_r3_loadgen.csv"
+    "test_root": "F:\\hcap-project-experiment\\tests\\exp1_benchmark",
+    "bin_dir": "F:\\hcap-project-experiment\\tests\\exp1_benchmark\\bin",
+    "data_dir": "F:\\hcap-project-experiment\\tests\\exp1_benchmark\\data\\lg_exp1_benchmark_tpbft_n8_uniform_t1000_r3",
+    "log_dir": "F:\\hcap-project-experiment\\tests\\exp1_benchmark\\logs",
+    "csv": "F:\\hcap-project-experiment\\tests\\exp1_benchmark\\csv\\lg_exp1_benchmark_tpbft_n8_uniform_t1000_r3_loadgen.csv"
   }
 }

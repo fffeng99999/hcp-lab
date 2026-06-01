@@ -10,9 +10,9 @@ TX_LIST="${TX_LIST:-100,1000,10000}"
 REPEAT="${REPEAT:-5}"
 NODE_COUNT="${NODE_COUNT:-16,32,64,128,256}"
 PORT_OFFSET="${PORT_OFFSET:-3000}"
-CHAIN_ID="${CHAIN_ID:-hcp-exp3}"
-HCPD_BINARY="../$EXP_DIR/bin/hcpd"
-CLI_BINARY="$EXP_DIR/bin/hcpd"
+CHAIN_ID="${CHAIN_ID:-hcap-exp3}"
+HCPD_BINARY="../$EXP_DIR/bin/hcapd"
+CLI_BINARY="$EXP_DIR/bin/hcapd"
 GRPC_PORT=$((9090 + PORT_OFFSET))
 RPC_PORT=$((26657 + PORT_OFFSET))
 LOADGEN_DB_ISOLATION="${LOADGEN_DB_ISOLATION:-true}"
@@ -40,13 +40,13 @@ echo "数据库隔离: ENABLED=$LOADGEN_DB_ISOLATION RESET=$LOADGEN_DB_RESET PRE
 echo "实验数据目录: $EXP_DIR"
 echo "报告输出目录: $REPORT_OUT"
 
-cd "$PROJECT_ROOT/hcp-loadgen"
-echo "构建 hcp-loadgen..."
+cd "$PROJECT_ROOT/hcap-loadgen"
+echo "构建 hcap-loadgen..."
 cargo build --release
 
-cd "$PROJECT_ROOT/hcp-lab"
+cd "$PROJECT_ROOT/hcap-lab"
 export EXP_ARTIFACT_ROOT="$EXP_DIR"
-export PYTHONPATH="$PROJECT_ROOT/hcp-lab:${PYTHONPATH}"
+export PYTHONPATH="$PROJECT_ROOT/hcap-lab:${PYTHONPATH}"
 python3 experiments/exp3_parallel_merkle/run_exp3_tpbft_parallel_block.py \
   --k "$K_LIST" \
   --tx "$TX_LIST" \

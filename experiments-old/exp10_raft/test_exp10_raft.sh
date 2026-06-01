@@ -11,7 +11,7 @@ TX_TOTAL="${TX_TOTAL:-100,1000,10000}"
 REPEAT="${REPEAT:-5}"
 
 PORT_OFFSET="${PORT_OFFSET:-10000}"
-CHAIN_ID="${CHAIN_ID:-hcp-exp10}"
+CHAIN_ID="${CHAIN_ID:-hcap-exp10}"
 
 RAFT_NODE_COUNT="${RAFT_NODE_COUNT:-4}"
 RAFT_ELECTION_TIMEOUT_MS="${RAFT_ELECTION_TIMEOUT_MS:-150}"
@@ -52,8 +52,8 @@ echo "共识引擎: raft (数学模型)"
 
 mkdir -p "$REPORT_OUT"
 
-cd "$PROJECT_ROOT/hcp-lab"
-export PYTHONPATH="$PROJECT_ROOT/hcp-lab:${PYTHONPATH}"
+cd "$PROJECT_ROOT/hcap-lab"
+export PYTHONPATH="$PROJECT_ROOT/hcap-lab:${PYTHONPATH}"
 
 python3 "$SCRIPT_DIR/run_exp10.py" \
   --nodes "$NODES_LIST" \
